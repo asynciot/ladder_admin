@@ -264,11 +264,11 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                角色管理
+                添加出厂信息
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#">用户管理</a></li>
-                <li class="active">添加用户</li>
+                <li><a href="#">制造厂商管理</a></li>
+                <li class="active">添加出厂信息</li>
             </ol>
         </section>
 
@@ -277,54 +277,84 @@
 
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">用户信息</h3>
+                    <h3 class="box-title">电梯信息</h3>
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
                 <form class="form-horizontal">
                     <div class="box-body">
                         <div class="form-group">
-                            <label for="" class="col-sm-2 control-label">用户名</label>
+                            <label for="" class="col-sm-2 control-label">电梯工号</label>
 
                             <div class=" col-sm-8 col-md-6">
                                 <input type="text" class="form-control" id="" placeholder="请输入">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="" class="col-sm-2 control-label">密码</label>
-
+                            <label for="" class="col-sm-2 control-label">电梯服务编码</label>
                             <div class=" col-sm-8 col-md-6">
-                                <input type="password" class="form-control" id="" placeholder="请输入">
+                                <input type="text" class="form-control" id="" placeholder="请输入">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="" class="col-sm-2 control-label">密码确认</label>
+                            <label for="" class="col-sm-2 control-label">电梯类型</label>
 
                             <div class=" col-sm-8 col-md-6">
-                                <input type="password" class="form-control" id="" placeholder="请输入">
+                                <div class="checkbox">
+                                    <label class="ml10">
+                                        <input type="radio" name="type"> 直梯
+                                    </label>
+                                    <label class="ml10">
+                                        <input type="radio" name="type"> 扶梯
+                                    </label>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="" class="col-sm-2 control-label">员工姓名</label>
+                            <label for="" class="col-sm-2 control-label">层/站/门</label>
 
                             <div class=" col-sm-8 col-md-6">
                                 <input type="text" class="form-control" id="" placeholder="请输入">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="" class="col-sm-2 control-label">手机号码</label>
+                            <label for="" class="col-sm-2 control-label">额定载重</label>
 
                             <div class=" col-sm-8 col-md-6">
-                                <input type="tel" class="form-control" id="" placeholder="请输入">
+                                <input type="text" class="form-control" id="" placeholder="请输入">
+                            </div>
+                            <div class="col-sm-1 mt10 pl0">kg</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">额定速度</label>
+
+                            <div class=" col-sm-8 col-md-6">
+                                <input type="text" class="form-control" id="" placeholder="请输入">
+                            </div>
+                            <div class="col-sm-1 mt10 pl0">m/s</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">电梯出厂编号</label>
+
+                            <div class=" col-sm-8 col-md-6">
+                                <input type="text" class="form-control" id="" placeholder="请输入">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="" class="col-sm-2 control-label">E-Mail</label>
+                            <label for="" class="col-sm-2 control-label">出场日期</label>
 
                             <div class=" col-sm-8 col-md-6">
-                                <input type="email" class="form-control" id="" placeholder="请输入">
+                                <input type="text" class="form-control" id="" placeholder="请输入">
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">三年包限</label>
+
+                            <div class=" col-sm-8 col-md-6">
+                                <input type="text" class="form-control" id="" placeholder="请输入">
+                            </div>
+                        </div>
+
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
@@ -365,7 +395,43 @@
 
 <script>
     $(document).ready(function () {
+        $('#dataTable').DataTable({
 
+            "searching": false,
+//            禁用最后一列排序
+            "columns": [
+                null,
+                null,
+                null,
+                null,
+                {"orderable": false}
+            ],
+//            中文配置，可存为配置文件单独调用
+            language: {
+                "sProcessing": "处理中...",
+                "sLengthMenu": "显示 _MENU_ 项结果",
+                "sZeroRecords": "没有匹配结果",
+                "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                "sInfoPostFix": "",
+                "sSearch": "搜索:",
+                "sUrl": "",
+                "sEmptyTable": "表中数据为空",
+                "sLoadingRecords": "载入中...",
+                "sInfoThousands": ",",
+                "oPaginate": {
+                    "sFirst": "首页",
+                    "sPrevious": "上页",
+                    "sNext": "下页",
+                    "sLast": "末页"
+                },
+                "oAria": {
+                    "sSortAscending": ": 以升序排列此列",
+                    "sSortDescending": ": 以降序排列此列"
+                }
+            }
+        });
     });
 </script>
 </body>

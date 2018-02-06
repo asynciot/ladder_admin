@@ -286,22 +286,24 @@
                         <div class="form-group">
                             <label for="" class="col-sm-2 control-label">角色名称</label>
 
-                            <div class="col-sm-8">
+                            <div class=" col-sm-8 col-md-6">
                                 <input type="text" class="form-control" id="" placeholder="请输入角色名称">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="" class="col-sm-2 control-label">角色描述</label>
 
-                            <div class="col-sm-8">
+                            <div class=" col-sm-8 col-md-6">
                                 <textarea class="form-control" rows="3" placeholder="请输入"></textarea>
                             </div>
                         </div>
 
                     </div>
                     <!-- /.box-body -->
-                    <div class="box-footer text-center">
-                        <button type="submit" class="btn btn-success">提交</button>
+                    <div class="box-footer">
+                        <div class="col-sm-offset-2">
+                            <button type="submit" class="btn btn-success">提交</button>
+                        </div>
                     </div>
                     <!-- /.box-footer -->
                 </form>
@@ -313,7 +315,8 @@
     <!-- /.content-wrapper -->
 
     <footer class="main-footer">
-        <div class="pull-right hidden-xs">        详细地址：陕西省西安市    </div>    <strong>Copyright &copy; 2014-2018 <a href="#">xxx Studio</a>.</strong> 某某管理有限公司
+        <div class="pull-right hidden-xs"> 详细地址：陕西省西安市</div>
+        <strong>Copyright &copy; 2014-2018 <a href="#">xxx Studio</a>.</strong> 某某管理有限公司
     </footer>
 </div>
 <!-- ./wrapper -->
@@ -334,7 +337,7 @@
 
 
 <script>
-    $(document).ready( function () {
+    $(document).ready(function () {
         $('#dataTable').DataTable({
 
             "searching": false,
@@ -344,7 +347,7 @@
                 null,
                 null,
                 null,
-                { "orderable": false }
+                {"orderable": false}
             ],
 //            中文配置，可存为配置文件单独调用
             language: {
@@ -372,7 +375,7 @@
                 }
             }
         });
-    } );
+    });
 </script>
 </body>
 </html>

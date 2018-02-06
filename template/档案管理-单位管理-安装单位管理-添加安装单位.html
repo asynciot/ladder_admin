@@ -264,11 +264,11 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                角色管理
+                添加安装单位
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#">用户管理</a></li>
-                <li class="active">添加用户</li>
+                <li><a href="#">安装单位管理</a></li>
+                <li class="active">添加安装单位</li>
             </ol>
         </section>
 
@@ -276,53 +276,127 @@
         <section class="content">
 
             <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">用户信息</h3>
-                </div>
-                <!-- /.box-header -->
+
                 <!-- form start -->
                 <form class="form-horizontal">
+                    <div class="box-header with-border">
+                        <h4 class="box-title">单位信息</h4>
+                    </div>
                     <div class="box-body">
                         <div class="form-group">
-                            <label for="" class="col-sm-2 control-label">用户名</label>
+                            <label for="" class="col-sm-2 control-label">单位名称</label>
 
                             <div class=" col-sm-8 col-md-6">
                                 <input type="text" class="form-control" id="" placeholder="请输入">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="" class="col-sm-2 control-label">密码</label>
-
+                            <label for="" class="col-sm-2 control-label">所在区域</label>
                             <div class=" col-sm-8 col-md-6">
-                                <input type="password" class="form-control" id="" placeholder="请输入">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <select name="" id="" class="form-control">
+                                            <option value="">
+                                                请选择
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <select name="" id="" class="form-control">
+                                            <option value="">
+                                                请选择
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <select name="" id="" class="form-control">
+                                            <option value="">
+                                                请选择
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="" class="col-sm-2 control-label">密码确认</label>
-
-                            <div class=" col-sm-8 col-md-6">
-                                <input type="password" class="form-control" id="" placeholder="请输入">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="col-sm-2 control-label">员工姓名</label>
+                            <label for="" class="col-sm-2 control-label">详细地址</label>
 
                             <div class=" col-sm-8 col-md-6">
                                 <input type="text" class="form-control" id="" placeholder="请输入">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="" class="col-sm-2 control-label">手机号码</label>
+                            <label for="" class="col-sm-2 control-label">负责人</label>
+
+                            <div class=" col-sm-8 col-md-6">
+                                <input type="text" class="form-control" id="" placeholder="请输入">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">负责人电话</label>
+
+                            <div class=" col-sm-8 col-md-6">
+                                <input type="tel" class="form-control" id="" placeholder="请输入">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-header with-border">
+                        <h4 class="box-title">联系方式</h4>
+                    </div>
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">公司电话（1）</label>
 
                             <div class=" col-sm-8 col-md-6">
                                 <input type="tel" class="form-control" id="" placeholder="请输入">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="" class="col-sm-2 control-label">E-Mail</label>
+                            <label for="" class="col-sm-2 control-label">公司电话（2）</label>
 
                             <div class=" col-sm-8 col-md-6">
-                                <input type="email" class="form-control" id="" placeholder="请输入">
+                                <input type="tel" class="form-control" id="" placeholder="请输入">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-header with-border">
+                        <h4 class="box-title">用户信息</h4>
+                    </div>
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">公司帐号</label>
+
+                            <div class=" col-sm-8 col-md-6">
+                                <input type="text" class="form-control" id="" placeholder="请输入">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">登录密码</label>
+
+                            <div class=" col-sm-8 col-md-6">
+                                <input type="password" class="form-control" id="" placeholder="请输入">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-header with-border">
+                        <h4 class="box-title">用户对应角色信息</h4>
+                    </div>
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">角色名称</label>
+
+                            <div class=" col-sm-8 col-md-6">
+                                <div class="checkbox">
+                                    <label class="ml10">
+                                        <input type="checkbox"> 系统操作员
+                                    </label>
+                                    <label class="ml10">
+                                        <input type="checkbox">使用用户权限
+                                    </label>
+                                    <label class="ml10">
+                                        <input type="checkbox">安装单位用户权限
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -365,7 +439,43 @@
 
 <script>
     $(document).ready(function () {
+        $('#dataTable').DataTable({
 
+            "searching": false,
+//            禁用最后一列排序
+            "columns": [
+                null,
+                null,
+                null,
+                null,
+                {"orderable": false}
+            ],
+//            中文配置，可存为配置文件单独调用
+            language: {
+                "sProcessing": "处理中...",
+                "sLengthMenu": "显示 _MENU_ 项结果",
+                "sZeroRecords": "没有匹配结果",
+                "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                "sInfoPostFix": "",
+                "sSearch": "搜索:",
+                "sUrl": "",
+                "sEmptyTable": "表中数据为空",
+                "sLoadingRecords": "载入中...",
+                "sInfoThousands": ",",
+                "oPaginate": {
+                    "sFirst": "首页",
+                    "sPrevious": "上页",
+                    "sNext": "下页",
+                    "sLast": "末页"
+                },
+                "oAria": {
+                    "sSortAscending": ": 以升序排列此列",
+                    "sSortDescending": ": 以降序排列此列"
+                }
+            }
+        });
     });
 </script>
 </body>

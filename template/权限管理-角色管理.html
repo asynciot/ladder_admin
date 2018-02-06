@@ -24,7 +24,6 @@
     <link rel="stylesheet" href="plugins/layer/theme/default/layer.css">
 
 
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -331,7 +330,8 @@
     <!-- /.content-wrapper -->
 
     <footer class="main-footer">
-        <div class="pull-right hidden-xs">        详细地址：陕西省西安市    </div>    <strong>Copyright &copy; 2014-2018 <a href="#">xxx Studio</a>.</strong> 某某管理有限公司
+        <div class="pull-right hidden-xs"> 详细地址：陕西省西安市</div>
+        <strong>Copyright &copy; 2014-2018 <a href="#">xxx Studio</a>.</strong> 某某管理有限公司
     </footer>
 </div>
 <!-- ./wrapper -->
@@ -354,9 +354,9 @@
 <script src="plugins/layer/layer.js"></script>
 
 <script>
-    $(document).ready( function () {
-        $('body').on('click','.remove-btn',function () {
-            layer.confirm('您确定要删除吗？',function (e) {
+    $(document).ready(function () {
+        $('body').on('click', '.remove-btn', function () {
+            layer.confirm('您确定要删除吗？', function (e) {
 //                删除回调
 
                 layer.close(e)
@@ -364,7 +364,7 @@
         });
 //        datatable初始化
         $('#dataTable').DataTable({
-            "dom":'rtip',
+            "dom": 'rtip',
             "searching": false,
 //            禁用最后一列排序
             "columns": [
@@ -372,7 +372,7 @@
                 null,
                 null,
                 null,
-                { "orderable": false }
+                {"orderable": false}
             ],
 //            中文配置，可存为配置文件单独调用
             language: {
@@ -400,7 +400,7 @@
                 }
             }
         });
-    } );
+    });
 </script>
 </body>
 </html>

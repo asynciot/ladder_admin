@@ -23,6 +23,17 @@ body {
 .ml15 {
   margin-left: 15px;
 }
+.pl0 {
+  padding-left: 0;
+}
+.box-header .box-title {
+  font-size: 16px;
+  font-weight: normal;
+  margin: 0 5px;
+}
+.form-horizontal .control-label {
+  font-weight: normal;
+}
 .login-footer {
   background-color: #e0e4ec;
   padding: 10px 15px;
