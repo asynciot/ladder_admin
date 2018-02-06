@@ -267,7 +267,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                安装信息管理
+                维保信息管理
             </h1>
             <ol class="breadcrumb">
                 <li class="active">档案管理</li>
@@ -280,35 +280,38 @@
             <div class="box">
                 <div class="box-body">
                     <div class="row">
-                        <div class="col-xs-3">
-                            <input type="text" class="form-control input-sm" placeholder="请输入电梯工号">
+                        <div class="col-xs-2">
+                            <input type="text" class="form-control input-sm" placeholder="电梯工号">
                         </div>
-                        <div class="col-xs-3">
-                            <input type="text" class="form-control input-sm" placeholder="请输入具体位置别名">
+                        <div class="col-xs-2">
+                            <input type="text" class="form-control input-sm" placeholder="具体位置别名">
                         </div>
-                        <div class="col-xs-3">
-                            <input type="text" class="form-control input-sm" placeholder="请输入详细地址">
+                        <div class="col-xs-2">
+                            <input type="text" class="form-control input-sm" placeholder="注册代码">
                         </div>
-                        <div class="col-xs-3">
+                        <div class="col-xs-2">
+                            <input type="text" class="form-control input-sm" placeholder="采集设备注册码">
+                        </div>
+                        <div class="col-xs-2">
                             <button class="btn btn-primary btn-sm">搜索</button>
                         </div>
                     </div>
                     <hr class="mt10 mb10">
                     <div class="row">
                         <div class="col-xs-12 text-right">
-                            <button class="btn btn-success">添加安装信息</button>
+                            <button class="btn btn-success">添加维保信息</button>
                         </div>
                     </div>
                     <table id="dataTable" class="table table-bordered">
                         <thead>
                         <tr>
                             <th>电梯工号</th>
-                            <th>电梯服务编码</th>
-                            <th>电梯型号</th>
-                            <th>电梯类型</th>
-                            <th>层/站/门</th>
-                            <th>额定载重</th>
-                            <th>楼盘地址</th>
+                            <th>具体位置别名</th>
+                            <th>使用状态</th>
+                            <th>产权单位</th>
+                            <th>物业单位</th>
+                            <th>使用单位</th>
+                            <th>维保单位</th>
                             <th>最后更新时间</th>
                             <th>操作</th>
                         </tr>
@@ -317,14 +320,14 @@
                         <tr>
                             <td>某制造商</td>
                             <td>北京朝阳区</td>
-                            <td>010000099999</td>
+                            <td><span class="label label-success">正常</span></td>
                             <td>010000099999</td>
                             <td>张三/18899998888</td>
                             <td>张三/18899998888</td>
                             <td>张三</td>
                             <td>2018-09-09</td>
                             <td>
-                                <button class="btn btn-xs btn-warning">编辑</button>
+                                <button class="btn btn-xs btn-default">详请</button>
                                 <button class="btn btn-xs btn-danger remove-btn">删除</button>
                             </td>
                         </tr>
@@ -378,8 +381,8 @@
 //        datatable初始化
         $('#dataTable').DataTable({
             "dom": 'rtip',
-//            "scrollX": true, //表格太长可加此项进行横向滚动
             "searching": false,
+//            "scrollX": true, //表格太长可加此项进行横向滚动
 //            禁用最后一列排序
             "columns": [
                 null,

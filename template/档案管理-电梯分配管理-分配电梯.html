@@ -22,6 +22,8 @@
 
     <!--本页引入-->
     <link rel="stylesheet" href="plugins/layer/theme/default/layer.css">
+    <link rel="stylesheet" href="plugins/jquery-treetable/css/jquery.treetable.css">
+    <link rel="stylesheet" href="plugins/jquery-treetable/css/jquery.treetable.theme.default.css">
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -267,74 +269,107 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                安装信息管理
+                分配电梯
             </h1>
             <ol class="breadcrumb">
-                <li class="active">档案管理</li>
+                <li class="active">电梯分配管理</li>
             </ol>
         </section>
 
         <!-- Main content -->
         <section class="content">
-
-            <div class="box">
-                <div class="box-body">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <input type="text" class="form-control input-sm" placeholder="请输入电梯工号">
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h4 class="box-title">已选的单位</h4>
                         </div>
-                        <div class="col-xs-3">
-                            <input type="text" class="form-control input-sm" placeholder="请输入具体位置别名">
-                        </div>
-                        <div class="col-xs-3">
-                            <input type="text" class="form-control input-sm" placeholder="请输入详细地址">
-                        </div>
-                        <div class="col-xs-3">
-                            <button class="btn btn-primary btn-sm">搜索</button>
+                        <div class="box-body">
+                            <div class="select-tag">
+                                <span style="color: #ccc">请从右边列表选择</span>
+                            </div>
                         </div>
                     </div>
-                    <hr class="mt10 mb10">
-                    <div class="row">
-                        <div class="col-xs-12 text-right">
-                            <button class="btn btn-success">添加安装信息</button>
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h4 class="box-title">电梯信息</h4>
+                        </div>
+                        <div class="box-body">
+                            <div class="content">
+                            <div class="row mb10">
+                                <div class="col-sm-4">
+                                    目标设备：巴拉巴拉
+                                </div>
+                                <div class="col-sm-4">
+                                    设备类型：控制器
+                                </div>
+                                <div class="col-sm-4">
+                                    地址码：目标设备序列号
+                                </div>
+                            </div>
+                            <div class="row mb10">
+                                <div class="col-sm-4">
+                                    电梯工号：123123
+                                </div>
+                                <div class="col-sm-4">
+                                    具体别名：电梯1
+                                </div>
+                                <div class="col-sm-4">
+                                    状态：<span class="label label-success">已连接</span>
+                                </div>
+                            </div>
+                            </div>
                         </div>
                     </div>
-                    <table id="dataTable" class="table table-bordered">
-                        <thead>
-                        <tr>
-                            <th>电梯工号</th>
-                            <th>电梯服务编码</th>
-                            <th>电梯型号</th>
-                            <th>电梯类型</th>
-                            <th>层/站/门</th>
-                            <th>额定载重</th>
-                            <th>楼盘地址</th>
-                            <th>最后更新时间</th>
-                            <th>操作</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>某制造商</td>
-                            <td>北京朝阳区</td>
-                            <td>010000099999</td>
-                            <td>010000099999</td>
-                            <td>张三/18899998888</td>
-                            <td>张三/18899998888</td>
-                            <td>张三</td>
-                            <td>2018-09-09</td>
-                            <td>
-                                <button class="btn btn-xs btn-warning">编辑</button>
-                                <button class="btn btn-xs btn-danger remove-btn">删除</button>
-                            </td>
-                        </tr>
-
-                        </tbody>
-                    </table>
                 </div>
-                <!-- /.box-body -->
+                <div class="col-sm-4">
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h4 class="box-title">请从下面列表选择单位</h4>
+                        </div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control input-sm" placeholder="电梯工号">
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control input-sm" placeholder="具体别名">
+                                </div>
+                                <div class="col-sm-4">
+                                    <button class="btn btn-primary btn-sm">搜索</button>
+                                </div>
+                            </div>
+                            <hr class="mt10 mb10">
+                            <table id="dataTable" class="table table-bordered select-table">
+                                <thead>
+                                <tr>
+                                    <th>单位名称</th>
+                                    <th>单位类型</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>哇哈哈</td>
+                                    <td>北京朝阳区</td>
+                                </tr>
+                                <tr>
+                                    <td>选择单位</td>
+                                    <td>北京朝阳区</td>
+                                </tr>
+                                <tr>
+                                    <td>选择单位</td>
+                                    <td>北京朝阳区</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
 
+                    </div>
+                </div>
             </div>
+
+
             <!-- /.box -->
 
         </section>
@@ -366,6 +401,8 @@
 <!--本页引入-->
 <script src="plugins/layer/layer.js"></script>
 
+<script src="plugins/jquery-treetable/jquery.treetable.js"></script>
+
 <script>
     $(document).ready(function () {
         $('body').on('click', '.remove-btn', function () {
@@ -375,8 +412,7 @@
                 layer.close(e)
             })
         });
-//        datatable初始化
-        $('#dataTable').DataTable({
+        table=$('#dataTable').DataTable({
             "dom": 'rtip',
 //            "scrollX": true, //表格太长可加此项进行横向滚动
             "searching": false,
@@ -384,13 +420,6 @@
             "columns": [
                 null,
                 null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                {"orderable": false}
             ],
 //            中文配置，可存为配置文件单独调用
             language: {
@@ -418,7 +447,24 @@
                 }
             }
         });
+//        点击表格添加
+        $('#dataTable tbody').on( 'click', 'tr', function () {
+            $(this).toggleClass('selected');
+            var data=table.rows('.selected').data();
+            var str='';
+            $.each(data,function (i) {
+                str+='<span id="'+data[i][0]+'" class="label label-success">\n' +
+                         data[i][0]+
+                    '</span>'
+            });
+            if(str==''){
+                str='<span style="color: #ccc">请从右边列表选择</span>'
+            }
+            $('.select-tag').html(str)
+        });
+
     });
+
 </script>
 </body>
 </html>
