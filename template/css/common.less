@@ -1,4 +1,5 @@
-//登录
+@charset "utf-8";
+// /登录
 body{
   font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Arial,sans-serif;
   background: #eee;
@@ -27,6 +28,12 @@ body{
 }
 .pl0{
   padding-left: 0;
+}
+.text-nowrap {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: block;
 }
 .table{
   font-size:12px;
@@ -189,5 +196,32 @@ div.dataTables_wrapper {
   }
   a{
     color: #fff;
+  }
+}
+
+
+.follow-btn{
+  color: inherit;
+  i:before{
+    color: #d22d72;
+    content: "\f08a 关注";
+  }
+  &.on{
+    i:before{
+      content: "\f004 取消关注";
+    }
+  }
+}
+
+.state-table{
+  td{
+    text-align: center;
+    color: #bbb;
+    .icon{
+      font-size: 32px;
+    }
+    &.on{
+      color: #ca3f2d;
+    }
   }
 }
