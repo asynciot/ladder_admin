@@ -267,10 +267,10 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                楼盘管理
+                保养类型管理
             </h1>
             <ol class="breadcrumb">
-                <li class="active">档案管理</li>
+                <li class="active">维保管理</li>
             </ol>
         </section>
 
@@ -278,49 +278,56 @@
         <section class="content">
 
             <div class="box">
-                <div class="box-body">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <input type="text" class="form-control input-sm" placeholder="请输入楼盘名称">
-                        </div>
-                        <div class="col-xs-3">
-                            <button class="btn btn-primary btn-sm">搜索</button>
-                        </div>
+                <form class="form-horizontal">
+                    <div class="box-header with-border">
+                        <h4 class="box-title">添加保养类型</h4>
                     </div>
-                    <hr class="mt10 mb10">
-                    <div class="row">
-                        <div class="col-xs-12 text-right">
-                            <button class="btn btn-success">添加楼盘信息</button>
-                        </div>
-                    </div>
-                    <table id="dataTable" class="table table-bordered">
-                        <thead>
-                        <tr>
-                            <th>楼盘名称</th>
-                            <th>详细地址</th>
-                            <th>使用场合</th>
-                            <th>最后更新人</th>
-                            <th>最后更新时间</th>
-                            <th>操作</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>某制造商</td>
-                            <td>北京朝阳区</td>
-                            <td>010000099999</td>
-                            <td>张三</td>
-                            <td>2018-09-09</td>
-                            <td>
-                                <button class="btn btn-xs btn-default relate-btn">关联电梯</button>
-                                <button class="btn btn-xs btn-warning">编辑</button>
-                                <button class="btn btn-xs btn-danger remove-btn">删除</button>
-                            </td>
-                        </tr>
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">保养类型名称</label>
 
-                        </tbody>
-                    </table>
-                </div>
+                            <div class=" col-sm-8 col-md-6">
+                                <input type="text" class="form-control" id="" placeholder="请输入">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">保养周期</label>
+
+                            <div class=" col-sm-8 col-md-6">
+                                <input type="text" class="form-control" id="" placeholder="请输入">
+                            </div>
+                            <div class="pl0 mt10 col-sm-1">
+                                天
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">保养类型分类</label>
+                            <div class=" col-sm-8 col-md-6">
+                                <select name="" class="form-control" id="">
+                                    <option value="">请选择</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">保养项要求</label>
+
+                            <div class=" col-sm-8 col-md-6">
+                                <textarea class="form-control" placeholder="请输入" rows="4"></textarea>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <div class="col-sm-offset-2">
+                            <button type="submit" class="btn btn-success">提交</button>
+                        </div>
+                    </div>
+                    <!-- /.box-footer -->
+                </form>
                 <!-- /.box-body -->
 
             </div>
@@ -336,32 +343,6 @@
         <strong>Copyright &copy; 2014-2018 <a href="#">xxx Studio</a>.</strong> 某某管理有限公司
     </footer>
 
-
-    <div class="table-layer hide">
-        <div class="content">
-            <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th>楼盘名称</th>
-                    <th>详细地址</th>
-                    <th>使用场合</th>
-                    <th>最后更新人</th>
-                    <th>最后更新时间</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>某制造商</td>
-                    <td>北京朝阳区</td>
-                    <td>010000099999</td>
-                    <td>张三</td>
-                    <td>2018-09-09</td>
-                </tr>
-
-                </tbody>
-            </table>
-        </div>
-    </div>
 </div>
 <!-- ./wrapper -->
 
@@ -384,20 +365,6 @@
 
 <script>
     $(document).ready(function () {
-        $('body').on('click', '.relate-btn', function () {
-            layer.open({
-                type: 1,
-                area: ['700px', '80%'], //宽高
-                btn: ['确定', '取消'],
-                yes: function(index) {
-//                    确定按钮回调
-                    layer.close(index);
-
-                },
-                content: $('.table-layer').html()
-            });
-        });
-
         $('body').on('click', '.remove-btn', function () {
             layer.confirm('您确定要删除吗？', function (e) {
 //                删除回调
@@ -405,12 +372,16 @@
                 layer.close(e)
             })
         });
+
+
 //        datatable初始化
         $('#dataTable').DataTable({
             "dom": 'rtip',
             "searching": false,
+//            "scrollX": true, //表格太长可加此项进行横向滚动
 //            禁用最后一列排序
             "columns": [
+                null,
                 null,
                 null,
                 null,

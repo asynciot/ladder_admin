@@ -267,10 +267,10 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                楼盘管理
+                维保班组管理
             </h1>
             <ol class="breadcrumb">
-                <li class="active">档案管理</li>
+                <li class="active">维保管理</li>
             </ol>
         </section>
 
@@ -280,25 +280,27 @@
             <div class="box">
                 <div class="box-body">
                     <div class="row">
-                        <div class="col-xs-3">
-                            <input type="text" class="form-control input-sm" placeholder="请输入楼盘名称">
+                        <div class="col-xs-4">
+                            <input type="text" class="form-control input-sm" placeholder="班组名称">
                         </div>
-                        <div class="col-xs-3">
+                        <div class="col-xs-2">
                             <button class="btn btn-primary btn-sm">搜索</button>
                         </div>
                     </div>
                     <hr class="mt10 mb10">
                     <div class="row">
                         <div class="col-xs-12 text-right">
-                            <button class="btn btn-success">添加楼盘信息</button>
+                            <a href="weibaoguanli-weibaobanzuguanli-tianjia.html" class="btn btn-success">添加维保班组</a>
+                            <button class="btn btn-success open-layer">批量倒入维保班组</button>
                         </div>
                     </div>
                     <table id="dataTable" class="table table-bordered">
                         <thead>
                         <tr>
-                            <th>楼盘名称</th>
-                            <th>详细地址</th>
-                            <th>使用场合</th>
+                            <th>班组名称</th>
+                            <th>维保单位</th>
+                            <th>班组详细地址</th>
+                            <th>联系人电话</th>
                             <th>最后更新人</th>
                             <th>最后更新时间</th>
                             <th>操作</th>
@@ -309,12 +311,14 @@
                             <td>某制造商</td>
                             <td>北京朝阳区</td>
                             <td>010000099999</td>
+                            <td>张三/18899998888</td>
+                            <td>张三/18899998888</td>
                             <td>张三</td>
                             <td>2018-09-09</td>
                             <td>
-                                <button class="btn btn-xs btn-default relate-btn">关联电梯</button>
-                                <button class="btn btn-xs btn-warning">编辑</button>
-                                <button class="btn btn-xs btn-danger remove-btn">删除</button>
+                                <a href="weibaoguanli-weibaobanzuguanli-tianjia.html" class="btn btn-xs btn-default">查看</a>
+                                <a href="weibaoguanli-weibaobanzuguanli-tianjia.html" class="btn btn-xs btn-warning">编辑</a>
+                                <a href="javascript:;" class="btn btn-xs btn-danger remove-btn">删除</a>
                             </td>
                         </tr>
 
@@ -336,26 +340,17 @@
         <strong>Copyright &copy; 2014-2018 <a href="#">xxx Studio</a>.</strong> 某某管理有限公司
     </footer>
 
-
     <div class="table-layer hide">
         <div class="content">
-            <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th>楼盘名称</th>
-                    <th>详细地址</th>
-                    <th>使用场合</th>
-                    <th>最后更新人</th>
-                    <th>最后更新时间</th>
-                </tr>
-                </thead>
+            <table class="table">
                 <tbody>
                 <tr>
-                    <td>某制造商</td>
-                    <td>北京朝阳区</td>
-                    <td>010000099999</td>
-                    <td>张三</td>
-                    <td>2018-09-09</td>
+                    <td width="100" class="text-right">文件导入</td>
+                    <td><input type="file"></td>
+                </tr>
+                <tr>
+                    <td width="100" class="text-right">下载模板</td>
+                    <td><a href="#">模板下载</a></td>
                 </tr>
 
                 </tbody>
@@ -384,10 +379,19 @@
 
 <script>
     $(document).ready(function () {
-        $('body').on('click', '.relate-btn', function () {
+        $('body').on('click', '.remove-btn', function () {
+            layer.confirm('您确定要删除吗？', function (e) {
+//                删除回调
+
+                layer.close(e)
+            })
+        });
+
+        $('body').on('click', '.open-layer', function () {
             layer.open({
                 type: 1,
-                area: ['700px', '80%'], //宽高
+                title:"批量导入维保班组",
+                area: ['350px', '200px'], //宽高
                 btn: ['确定', '取消'],
                 yes: function(index) {
 //                    确定按钮回调
@@ -397,20 +401,15 @@
                 content: $('.table-layer').html()
             });
         });
-
-        $('body').on('click', '.remove-btn', function () {
-            layer.confirm('您确定要删除吗？', function (e) {
-//                删除回调
-
-                layer.close(e)
-            })
-        });
 //        datatable初始化
         $('#dataTable').DataTable({
             "dom": 'rtip',
             "searching": false,
+//            "scrollX": true, //表格太长可加此项进行横向滚动
 //            禁用最后一列排序
             "columns": [
+                null,
+                null,
                 null,
                 null,
                 null,
