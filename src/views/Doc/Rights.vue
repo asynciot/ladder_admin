@@ -15,7 +15,7 @@
                     <hr class="mt10 mb10">
                     <div class="row">
                         <div class="col-xs-12 text-right">
-                            <a href="档案管理-单位管理-产权单位管理-添加产权单位.html" class="btn btn-success">添加产权单位</a>
+                            <router-link :to="{name:'addrights'}" class="btn btn-success">添加产权单位</router-link>
                         </div>
                     </div>
                     <table id="dataTable" class="table table-bordered">

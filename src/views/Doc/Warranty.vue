@@ -21,8 +21,7 @@
 	                    <hr class="mt10 mb10">
 	                    <div class="row">
 	                        <div class="col-xs-12 text-right">
-	                            <a href="danganguanli-diantixinxiguanli-weibaoxinxiguanli-bianjiweibaoxinxi.html"
-	                               class="btn btn-success">添加维保信息</a>
+	                            <router-link :to="{name:'addwarranty'}"class="btn btn-success">添加维保信息</router-link>
 	                        </div>
 	                    </div>
 	                    <table id="dataTable" class="table table-bordered">

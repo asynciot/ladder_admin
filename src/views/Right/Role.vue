@@ -14,16 +14,16 @@
             <hr class="mt10 mb10">
             <div class="row">
                 <div class="col-xs-12 text-right">
-                    <router-link :to="{ name: 'addrole'}" href="quanxianguanli-jueseguanli-tianjiajuese.html" class="btn btn-success">添加角色</router-link>
+                    <router-link :to="{ name: 'addrole'}" class="btn btn-success">添加角色</router-link>
                 </div>
             </div>
-						<v-table
+						<!-- <v-table
 								is-vertical-resize
 								is-horizontal-resize
 								style="width:100%"
 		            :columns="columns"
 		            :table-data="tableData"
-				    ></v-table>
+				    ></v-table> -->
             <table id="dataTable" class="table table-bordered">
                 <thead>
                 <tr>
@@ -41,7 +41,7 @@
                     <td>admin</td>
                     <td>2018-09-08</td>
                     <td>
-                        <a href="quanxianguanli-jueseguanli-duiyingcaidan.html" class="btn btn-default btn-xs">对应菜单</a>
+                        <router-link :to="{name:'editrole',params:{id:'12121'}}" class="btn btn-default btn-xs">对应菜单</router-link>
                         <button class="btn btn-xs btn-warning">编辑</button>
                         <button class="btn btn-xs btn-danger remove-btn">删除</button>
                     </td>

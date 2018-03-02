@@ -15,7 +15,7 @@
                     <hr class="mt10 mb10">
                     <div class="row">
                         <div class="col-xs-12 text-right">
-                            <a href="quanxianguanli-yonghuguanli-tianjiayonghu.html" class="btn btn-success">添加用户</a>
+														<router-link :to="{ name: 'adduser'}"  class="btn btn-success">添加用户</router-link>
                         </div>
                     </div>
                     <table id="dataTable" class="table table-bordered">
@@ -39,7 +39,7 @@
                             <td>admin</td>
                             <td>2018-09-08</td>
                             <td>
-                                <a href="quanxianguanli-yonghuguanli-duiyingjuese.html" class="btn btn-default btn-xs">对应角色</a>
+                                <router-link :to="{name:'editrole',params:{id:'12121'}}" class="btn btn-default btn-xs">对应菜单</router-link>
                                 <button class="btn btn-xs btn-warning">编辑</button>
                                 <button class="btn btn-xs btn-danger remove-btn">删除</button>
                             </td>

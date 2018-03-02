@@ -15,7 +15,7 @@
                     <hr class="mt10 mb10">
                     <div class="row">
                         <div class="col-xs-12 text-right">
-                            <a href="weibaoguanli-weibaobanzuguanli-tianjia.html" class="btn btn-success">添加维保班组</a>
+														<router-link :to="{name:'addteam'}" class="btn btn-success">添加维保班组</router-link>
                             <button class="btn btn-success open-layer">批量倒入维保班组</button>
                         </div>
                     </div>

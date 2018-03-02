@@ -15,8 +15,7 @@
                     <hr class="mt10 mb10">
                     <div class="row">
                         <div class="col-xs-12 text-right">
-                            <a href="danganguanli-loupanguanli-tianjialoupanxinxi.html"
-                               class="btn btn-success">添加楼盘信息</a>
+														<router-link :to="{name:'addbuilding'}" class="btn btn-success">添加楼盘信息</router-link>
                         </div>
                     </div>
                     <table id="dataTable" class="table table-bordered">

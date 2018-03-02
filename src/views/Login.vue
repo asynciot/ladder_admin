@@ -58,11 +58,11 @@
 		},
 		methods:{
 			async login(){
-				let res = await this.$api.login(this.form)
-				if (0 === res.data.code){
-					this.$cookie.set('userId', res.data.id, 3)
+				// let res = await this.$api.login(this.form)
+				// if (0 === res.data.code){
+				// 	this.$cookie.set('userId', res.data.id, 3)
 					window.location.href = window.location.href+'index'
-				}
+				// }
 			}
 		}
 	}

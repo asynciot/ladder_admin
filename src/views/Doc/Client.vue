@@ -42,10 +42,8 @@
                                 <span class="label label-success">上线</span>
                             </td>
                             <td>
-                                <a href="danganguanli-zhinengzhongduanguanli-bangdingdianti.html"
-                                   class="btn btn-xs btn-default">绑定电梯</a>
-                                <a href="danganguanli-zhinengzhongduanguanli-bangdingdianti.html"
-                                   class="btn btn-xs btn-default">解绑电梯</a>
+															<router-link :to="{name:'bindlift',params:{id:'1213'}}" class="btn btn-xs btn-default">绑定电梯</router-link>
+															<router-link :to="{name:'bindlift',params:{id:'1213'}}" class="btn btn-xs btn-default">解绑电梯</router-link>
                             </td>
                         </tr>
                         <tr data-tt-id="1.1" data-tt-parent-id="1">
@@ -69,10 +67,8 @@
                                 <span class="label label-success">上线</span>
                             </td>
                             <td>
-                                <a href="danganguanli-zhinengzhongduanguanli-bangdingdianti.html"
-                                   class="btn btn-xs btn-default">绑定电梯</a>
-                                <a href="danganguanli-zhinengzhongduanguanli-bangdingdianti.html"
-                                   class="btn btn-xs btn-default">解绑电梯</a>
+															<router-link :to="{name:'bindlift',params:{id:'1213'}}" class="btn btn-xs btn-default">绑定电梯</router-link>
+															<router-link :to="{name:'bindlift',params:{id:'1213'}}" class="btn btn-xs btn-default">解绑电梯</router-link>
                             </td>
                         </tr>
                         <tr data-tt-id="2.1" data-tt-parent-id="2">

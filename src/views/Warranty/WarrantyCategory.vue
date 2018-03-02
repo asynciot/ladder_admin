@@ -15,7 +15,7 @@
                     <hr class="mt10 mb10">
                     <div class="row">
                         <div class="col-xs-12 text-right">
-                            <a href="weibaoguanli-baoyangleixingguanli-tianjia.html" class="btn btn-success">添加保养类型</a>
+														<router-link :to="{name:'addcategory'}" class="btn btn-success">添加保养类别</router-link>
                         </div>
                     </div>
                     <table id="dataTable" class="table table-bordered">

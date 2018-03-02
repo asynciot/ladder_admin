@@ -21,8 +21,7 @@
 	                    <hr class="mt10 mb10">
 	                    <div class="row">
 	                        <div class="col-xs-12 text-right">
-	                            <a href="danganguanli-diantixinxiguanli-anzhuangxinxiguanli-bianjianzhuangxinxi.html"
-	                               class="btn btn-success">添加安装信息</a>
+	                            <router-link :to="{name:'addinstall'}" class="btn btn-success">添加安装信息</router-link>
 	                        </div>
 	                    </div>
 	                    <table id="dataTable" class="table table-bordered">

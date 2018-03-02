@@ -15,8 +15,7 @@
                     <hr class="mt10 mb10">
                     <div class="row">
                         <div class="col-xs-12 text-right">
-                            <a href="danganguanli-danweiguanli-weibaodanweiguanli-tianjiaweibaodanwei.html"
-                               class="btn btn-success">添加维保单位</a>
+                            <router-link :to="{name:'addwarrantydep'}" class="btn btn-success">添加维保单位</router-link>
                         </div>
                     </div>
                     <table id="dataTable" class="table table-bordered">

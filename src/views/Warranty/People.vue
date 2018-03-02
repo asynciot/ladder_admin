@@ -18,7 +18,7 @@
                     <hr class="mt10 mb10">
                     <div class="row">
                         <div class="col-xs-12 text-right">
-                            <a href="weibaoguanli-weibaorenyuanguanli-tianjia.html" class="btn btn-success">添加维保人员</a>
+														<router-link :to="{name:'addpeople'}" class="btn btn-success">添加维保人员</router-link>
                         </div>
                     </div>
                     <table id="dataTable" class="table table-bordered">

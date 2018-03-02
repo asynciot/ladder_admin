@@ -39,8 +39,7 @@
                             <td>张三</td>
                             <td>2018-09-09</td>
                             <td>
-                                <a href="danganguanli-diantifenpeiguanli-fenpeidianti.html"
-                                   class="btn btn-xs btn-default">分配</a>
+                                <router-link :to="{name:'distribution',params:{id:'2212'}}" class="btn btn-xs btn-default">分配</router-link>
                             </td>
                         </tr>
 

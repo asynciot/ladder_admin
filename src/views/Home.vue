@@ -20,16 +20,21 @@
                     </a>
                     <div class="navbar-custom-menu">
                         <ul class="nav navbar-nav">
-                            <li class="dropdown messages-menu"><a href="danganguanli-diantixinxiguanli-diantixinxichakan.html" class="dropdown-toggle"> 全部 <span
-                                        class="label label-info">4</span> </a></li>
-                            <li class="dropdown messages-menu"><a href="danganguanli-diantixinxiguanli-diantixinxichakan.html" class="dropdown-toggle"> 离线 <span
-                                        class="label label-default">4</span> </a></li>
-                            <li class="dropdown messages-menu"><a href="danganguanli-diantixinxiguanli-diantixinxichakan.html" class="dropdown-toggle"> 故障 <span
-                                        class="label label-danger">4</span> </a></li>
-                            <li class="dropdown messages-menu"><a href="danganguanli-diantixinxiguanli-diantixinxichakan.html" class="dropdown-toggle"> 检修 <span
-                                        class="label label-warning">4</span> </a></li>
-                            <li class="dropdown messages-menu"><a href="danganguanli-diantixinxiguanli-diantixinxichakan.html" class="dropdown-toggle"> 正常 <span
-                                        class="label label-success">4</span> </a></li>
+                            <li class="dropdown messages-menu"><router-link
+															:to="{name:'lift'}" class="dropdown-toggle"> 全部 <span
+                                        class="label label-info">4</span> </router-link></li>
+                            <li class="dropdown messages-menu"><router-link
+															:to="{name:'lift'}" class="dropdown-toggle"> 离线 <span
+                                        class="label label-default">4</span> </router-link ></li>
+                            <li class="dropdown messages-menu"><router-link
+															:to="{name:'lift'}" class="dropdown-toggle"> 故障 <span
+                                        class="label label-danger">4</span> </router-link ></li>
+                            <li class="dropdown messages-menu"><router-link
+															:to="{name:'lift'}" class="dropdown-toggle"> 检修 <span
+                                        class="label label-warning">4</span> </router-link ></li>
+                            <li class="dropdown messages-menu"><router-link
+															:to="{name:'lift'}" class="dropdown-toggle"> 正常 <span
+                                        class="label label-success">4</span> </router-link ></li>
                             <!-- User Account: style can be found in dropdown.less -->
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -39,7 +44,8 @@
                                 <ul class="dropdown-menu">
                                     <li class="user-footer">
                                         <div class="pull-left">
-                                            <a href="quanxianguanli-yonghuguanli-tianjiayonghu.html" class="btn btn-default btn-flat btn-sm">个人信息修改</a> <a href="quanxianguanli-yonghuguanli-tianjiayonghu.html" class="btn btn-default btn-flat btn-sm">密码修改</a>
+																						<router-link class="btn btn-default btn-flat btn-sm" :to="{name:'EditUser'}">个人信息修改</router-link>
+                                            <!-- <a href="quanxianguanli-yonghuguanli-tianjiayonghu.html" class="btn btn-default btn-flat btn-sm"></a> <a href="quanxianguanli-yonghuguanli-tianjiayonghu.html" class="btn btn-default btn-flat btn-sm">密码修改</a> -->
                                         </div>
                                         <div class="pull-right">
                                             <span @click="logout()" class="btn btn-danger btn-flat btn-sm">退出登录</span>

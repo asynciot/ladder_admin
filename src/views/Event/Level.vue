@@ -41,8 +41,8 @@
                             <td>一级故障</td>
                             <td>一级故障</td>
                             <td>
-                                <a href="shijianguanli-guzhangjibieguanli-chulicelue.html"
-                                   class="btn btn-xs btn-default">处理策略</a>
+                                <router-link :to="{name:'strategy', params:{id:'123'}}"
+                                   class="btn btn-xs btn-default">处理策略</router-link>
                                 <button class="btn btn-xs btn-danger remove-btn">删除</button>
                             </td>
                         </tr>

@@ -15,8 +15,7 @@
 	                    <hr class="mt10 mb10">
 	                    <div class="row">
 	                        <div class="col-xs-12 text-right">
-	                            <a href="danganguanli-zhizaochangshangguanli-tianjiazhizaoshang.html"
-	                               class="btn btn-success">添加制造厂商</a>
+															<router-link :to="{name:'addmanufacture'}" class="btn btn-success">添加制造厂商</router-link>
 	                        </div>
 	                    </div>
 	                    <table id="dataTable" class="table table-bordered">
