@@ -4,6 +4,13 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import VueCookie from 'vue-cookie'
+import VueLocalStorage from 'vue-localstorage'
+import VeeValidate from 'vee-validate';
+import VModal from 'vue-js-modal'
+import Notifications from 'vue-notification'
+import VueDatepickerLocal from 'vue-datepicker-local'
+
+import moment from 'moment'
 
 import 'vue-easytable/libs/themes-base/index.css'
 import '@/libs/bootstrap/dist/css/bootstrap.min.css'
@@ -32,11 +39,16 @@ import '@/libs/zTree/js/jquery.ztree.all.min.js'
 import { VTable, VPagination } from 'vue-easytable'
 import api from './api'
 
+window.Vue = Vue
+window.moment = moment
+window.VueDatepickerLocal = VueDatepickerLocal
 window.$cookie = VueCookie
 Vue.prototype.$api = api
 Vue.config.productionTip = false
-
-Vue.use(VueCookie)
+Vue.use(VeeValidate).use(VueCookie).use(VModal, { dialog: true }).use(Notifications).use(VueLocalStorage, {
+	name: 'storage',
+	bind: true
+});
 Vue.component(VTable.name, VTable)
 Vue.component(VPagination.name, VPagination)
 

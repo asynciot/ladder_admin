@@ -6,20 +6,19 @@
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form class="form-horizontal">
+        <form class="form-horizontal" @submit.prevent="submit" data-vv-scope="form">
             <div class="box-body">
                 <div class="form-group">
                     <label for="" class="col-sm-2 control-label">角色名称</label>
-
                     <div class=" col-sm-8 col-md-6">
-                        <input type="text" v-model="form.name" class="form-control" id="" placeholder="请输入角色名称">
+                        <input type="text" name="name" v-validate="'required'" :class="{'form-control': true, 'is-error': errors.has('form.name') }" v-model="form.name" class="form-control"  placeholder="请输入角色名称">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="" class="col-sm-2 control-label">角色描述</label>
 
                     <div class=" col-sm-8 col-md-6">
-                        <textarea  v-model="form.description" class="form-control" rows="3" placeholder="请输入"></textarea>
+                        <textarea name="description" :class="{'form-control': true, 'is-error': errors.has('form.description') }" v-model="form.description" class="form-control" rows="3" placeholder="请输入"></textarea>
                     </div>
                 </div>
 
@@ -40,15 +39,42 @@
 export default {
 	data(){
 		return {
+
 			form: {
 				name: '',
 				description: ''
 			}
 		}
 	},
-	methods: {
-		async submit(){
-			let res = await this.$api.role(this.form)
+	created(){
+		if(this.$route.params.id){
+			this.getData()
+		}
+	},
+	methods:{
+		async getData(){
+			let res = await this.$api.role({ id: this.$route.params.id})
+			this.form = res.data.data.list[0]
+		},
+		submit(){
+			this.$validator.validateAll('form').then(async (result) => {
+        if (result) {
+          let res = null
+					if(this.$route.params.id){
+						res = await this.$api.updateRole(this.form)
+					}else {
+						res = await this.$api.addRole(this.form)
+					}
+					if(res.data.code == 0){
+						this.$notify({
+							group: 'ok',
+							title: '提示',
+							text: '操作成功'
+						});
+						this.$router.back()
+					}
+        }
+      });
 		}
 	}
 }

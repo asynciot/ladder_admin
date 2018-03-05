@@ -1,118 +1,209 @@
 <template lang="html">
-	        <!-- Main content -->
-	        <section class="content">
+  <!-- Main content -->
+  <section class="content">
 
-	            <div class="box">
-	                <div class="box-body">
-	                    <div class="row">
-	                        <div class="col-xs-3">
-	                            <input type="text" class="form-control input-sm" placeholder="请输入电梯工号">
-	                        </div>
-	                        <div class="col-xs-3">
-	                            <input type="text" class="form-control input-sm" placeholder="请输入具体位置别名">
-	                        </div>
-	                        <div class="col-xs-3">
-	                            <input type="text" class="form-control input-sm" placeholder="请输入详细地址">
-	                        </div>
-	                        <div class="col-xs-3">
-	                            <button class="btn btn-primary btn-sm">搜索</button>
-	                        </div>
-	                    </div>
-	                    <hr class="mt10 mb10">
-	                    <div class="row">
-	                        <div class="col-xs-12 text-right">
-	                            <router-link :to="{name:'addwarranty'}"class="btn btn-success">添加维保信息</router-link>
-	                        </div>
-	                    </div>
-	                    <table id="dataTable" class="table table-bordered">
-	                        <thead>
-	                        <tr>
-	                            <th>电梯工号</th>
-	                            <th>具体位置别名</th>
-	                            <th>使用状态</th>
-	                            <th>产权单位</th>
-	                            <th>物业单位</th>
-	                            <th>使用单位</th>
-	                            <th>维保单位</th>
-	                            <th>最后更新时间</th>
-	                            <th>操作</th>
-	                        </tr>
-	                        </thead>
-	                        <tbody>
-	                        <tr>
-	                            <td>某制造商</td>
-	                            <td>北京朝阳区</td>
-	                            <td><span class="label label-success">正常</span></td>
-	                            <td>010000099999</td>
-	                            <td>张三/18899998888</td>
-	                            <td>张三/18899998888</td>
-	                            <td>张三</td>
-	                            <td>2018-09-09</td>
-	                            <td>
-	                                <a href="danganguanli-diantixinxiguanli-weibaoxinxiguanli-bianjiweibaoxinxi.html"
-	                                   class="btn btn-xs btn-warning">编辑</a>
-	                                <button class="btn btn-xs btn-danger remove-btn">删除</button>
-	                            </td>
-	                        </tr>
+      <div class="box">
+          <div class="box-body">
+              <div class="row">
+                  <div class="col-xs-3">
+                      <input type="text" class="form-control input-sm" placeholder="请输入电梯工号">
+                  </div>
+                  <div class="col-xs-3">
+                      <input type="text" class="form-control input-sm" placeholder="请输入具体位置别名">
+                  </div>
+                  <div class="col-xs-3">
+                      <input type="text" class="form-control input-sm" placeholder="请输入详细地址">
+                  </div>
+                  <div class="col-xs-3">
+                      <button class="btn btn-primary btn-sm">搜索</button>
+                  </div>
+              </div>
+              <hr class="mt10 mb10">
+              <div class="row mb10">
+                  <div class="col-xs-12 text-right">
+                      <router-link :to="{name:'addwarranty'}"class="btn btn-success">添加维保信息</router-link>
+                  </div>
+              </div>
+							<v-table
+									class="mb10"
+									row-hover-color="#eaeaea"
+									is-vertical-resize
+									is-horizontal-resize
+									style="width:100%"
+									:is-loading="loading"
+									:columns="columns"
+									:table-data="list"
+									@on-custom-comp="getList"
+							/>
+							<div class="tr">
+								<v-pagination
+									size="small"
+									@page-change="pageChange"
+									:total="options.total"
+									:layout="['total', 'prev', 'pager', 'next', 'jumper']" />
+							</div>
+          </div>
+          <!-- /.box-body -->
 
-	                        </tbody>
-	                    </table>
-	                </div>
-	                <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
 
-	            </div>
-	            <!-- /.box -->
-
-	        </section>
-	        <!-- /.content -->
+  </section>
+<!-- /.content -->
 </template>
 
 <script>
-export default {
-	mounted(){
-		$('#dataTable').DataTable({
-            "dom": 'rtip',
-            "searching": false,
-//            "scrollX": true, //表格太长可加此项进行横向滚动
-//            禁用最后一列排序
-            "columns": [
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                {"orderable": false}
-            ],
-//            中文配置，可存为配置文件单独调用
-            language: {
-                "sProcessing": "处理中...",
-                "sLengthMenu": "显示 _MENU_ 项结果",
-                "sZeroRecords": "没有匹配结果",
-                "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
-                "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
-                "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
-                "sInfoPostFix": "",
-                "sSearch": "搜索:",
-                "sUrl": "",
-                "sEmptyTable": "表中数据为空",
-                "sLoadingRecords": "载入中...",
-                "sInfoThousands": ",",
-                "oPaginate": {
-                    "sFirst": "首页",
-                    "sPrevious": "上页",
-                    "sNext": "下页",
-                    "sLast": "末页"
-                },
-                "oAria": {
-                    "sSortAscending": ": 以升序排列此列",
-                    "sSortDescending": ": 以降序排列此列"
-                }
+Vue.component('warranty-operation', {
+  template: `<span>
+        <button @click.stop.prevent="update()" class="btn btn-xs btn-danger btn-warning">编辑</button>
+				<button @click.stop.prevent="deleteRow()" class="btn btn-xs btn-danger remove-btn">删除</button>
+        </span>`,
+  props: {
+    rowData: {
+      type: Object
+    },
+    field: {
+      type: String
+    },
+    index: {
+      type: Number
+    }
+  },
+  methods: {
+    update() {
+			this.$router.push({
+				name:'editwarranty',
+				params:{
+					id:this.rowData.id
+				}
+			})
+    },
+    deleteRow() {
+      this.$modal.show('dialog', {
+        title: '警告!',
+        text: '是否删除此项 ？',
+        buttons: [{
+            title: '取消',
+          },
+          {
+            title: '删除',
+						handler: async () => {
+							this.$modal.hide('dialog')
+							let res = await this.$api.reomveMaintenance({id:this.rowData.id})
+							this.$emit('on-custom-comp');
+							if (0 === res.data.code) {
+								this.$notify({
+									group: 'ok',
+									title: '提示',
+									text: '操作成功'
+								});
+							}else {
+								this.$notify({
+									group: 'error',
+									title: '提示',
+									text: '操作失败'
+								});
+							}
             }
-        });
-	}
+          }
+        ]
+      })
+    }
+  }
+})
+export default {
+  data: () => ({
+    loading: false,
+    columns: [{
+      field: 'ladderNumber',
+      title: '电梯工号',
+      width: 100,
+      titleAlign: 'center',
+      columnAlign: 'center',
+      isResize: true
+    }, {
+      field: 'alias',
+      title: '具体位置别名',
+      width: 100,
+      titleAlign: 'center',
+      columnAlign: 'center',
+      isResize: true
+    }, {
+      field: 'ownerCompanyName',
+      title: '产权单位',
+      width: 100,
+      titleAlign: 'center',
+      columnAlign: 'center',
+      isResize: true
+    }, {
+      field: 'userCompanyName',
+      title: '使用单位',
+      width: 100,
+      titleAlign: 'center',
+      columnAlign: 'center',
+      isResize: true
+    }, {
+      field: 'propertyCompanyName',
+      title: '物业单位',
+      width: 100,
+      titleAlign: 'center',
+      columnAlign: 'center',
+      isResize: true
+    }, {
+      field: 'maintenanceCompanyName',
+      title: '维保单位',
+      width: 100,
+      titleAlign: 'center',
+      columnAlign: 'center',
+      isResize: true
+    }, {
+      field: 'contactor',
+      title: '负责人',
+      width: 100,
+      titleAlign: 'center',
+      columnAlign: 'center',
+      isResize: true
+    }, {
+      field: 'mobile',
+      title: '负责人电话',
+      width: 100,
+      titleAlign: 'center',
+      columnAlign: 'center',
+      isResize: true
+    }, {
+      field: 'operation',
+      title: '操作',
+      width: 150,
+      titleAlign: 'center',
+      columnAlign: 'center',
+      componentName: 'warranty-operation',
+      isResize: true
+    }],
+    list: [],
+    options: {
+      page: 1,
+      num: 15,
+      total: 0
+    }
+  }),
+  created() {
+    this.getList()
+  },
+  methods: {
+    pageChange(val) {
+      this.options.page = val
+      this.getList()
+    },
+    async getList() {
+      this.loading = true
+      let res = await this.$api.maintenance(this.options)
+      this.loading = false
+      if (0 === res.data.code) {
+        this.list = res.data.data.list
+        this.options.total = res.data.data.totalNumber
+      }
+    }
+  }
 }
 </script>
 

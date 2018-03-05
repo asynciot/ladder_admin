@@ -1,14 +1,14 @@
 <template lang="html">
-    <div class="">
+    <div>
         <div class="wrapper">
             <header class="main-header">
                 <!-- Logo -->
-                <a href="index.html" class="logo">
+                <router-link :to="{name:'index'}" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <span class="logo-mini">电梯管理</span>
                     <!-- logo for regular state and mobile devices -->
                     <span class="logo-lg">电梯管理系统</span>
-                </a>
+                </router-link>
                 <!-- Header Navbar: style can be found in header.less -->
                 <nav class="navbar navbar-static-top">
                     <!-- Sidebar toggle button-->
@@ -44,8 +44,8 @@
                                 <ul class="dropdown-menu">
                                     <li class="user-footer">
                                         <div class="pull-left">
-																						<router-link class="btn btn-default btn-flat btn-sm" :to="{name:'EditUser'}">个人信息修改</router-link>
-                                            <!-- <a href="quanxianguanli-yonghuguanli-tianjiayonghu.html" class="btn btn-default btn-flat btn-sm"></a> <a href="quanxianguanli-yonghuguanli-tianjiayonghu.html" class="btn btn-default btn-flat btn-sm">密码修改</a> -->
+																						<router-link class="btn btn-default btn-flat btn-sm" :to="{name:'edituser',params:{id:$cookie.get('userId')}}">个人信息修改</router-link>
+																						<router-link class="btn btn-default btn-flat btn-sm" :to="{name:'edituser',params:{id:$cookie.get('userId')}}">密码修改</router-link>
                                         </div>
                                         <div class="pull-right">
                                             <span @click="logout()" class="btn btn-danger btn-flat btn-sm">退出登录</span>
@@ -57,7 +57,6 @@
                     </div>
                 </nav>
             </header>
-            <!-- =============================================== -->
             <!-- Left side column. contains the sidebar -->
             <aside class="main-sidebar">
                 <!-- sidebar: style can be found in sidebar.less -->
@@ -74,18 +73,22 @@
                     </div>
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu" data-widget="tree">
-                        <li class="treeview active">
-                            <a href="#">
-                                <i class="fa fa-dashboard"></i> <span>首页</span>
-                            </a>
+                        <li :class="['treeview', currentRoute.breadcrumb.label == '首页'?'active':'']">
+													<router-link :to="{name: 'index'}">
+															<i class="fa fa-dashboard"></i> 首页
+													</router-link>
                         </li>
-                        <li class="treeview" v-for="nav in menu">
+                        <li
+													v-for="nav in menu"
+													:class="['treeview', currentRoute.breadcrumb.label1 == nav.label?'active':'']">
                             <a href="#">
                                 <i :class="['fa', nav.icon]"></i> <span v-text="nav.label"></span>
                                 <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                             </a>
                             <ul class="treeview-menu menu-open">
-                                <li v-for="item in nav.sub" :class="item.sub?'treeview':''">
+                                <li
+																	v-for="item in nav.sub"
+																	:class="['treeview', (currentRoute.breadcrumb.label2 == item.label)||(currentRoute.breadcrumb.label == item.label)?'active':'']">
                                     <router-link v-if="!item.sub" :to="{name: item.link}">
                                         <i class="fa fa-circle-o"></i>{{item.label}}
                                     </router-link>
@@ -93,8 +96,10 @@
                                         <i class="fa fa-circle-o"></i>{{item.label}}
                                         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                                     </a>
-                                    <ul v-if="item.sub" class="treeview-menu menu-open">
-                                        <li v-for="sub in item.sub">
+                                    <ul
+																			v-if="item.sub"
+																			class="treeview-menu menu-open">
+                                        <li :class="{'active':currentRoute.breadcrumb.label == sub.label}" v-for="sub in item.sub">
                                             <router-link :to="{name: sub.link}">
                                                 <i class="fa fa-circle-o"></i>{{sub.label}}
                                             </router-link>
@@ -114,8 +119,9 @@
                 <section class="content-header">
                     <h1 v-text="currentRoute.name"></h1>
                     <ol class="breadcrumb">
-                        <li><a href="shijianguanli-lishishijianchaxun.html">事件管理</a></li>
-                        <li class="active">历史事件查询</li>
+                        <li v-if="currentRoute.breadcrumb.label1" v-text="currentRoute.breadcrumb.label1"></li>
+												<li v-if="currentRoute.breadcrumb.label2" v-text="currentRoute.breadcrumb.label2"></li>
+                        <li v-if="currentRoute.breadcrumb.label" class="active" v-text="currentRoute.breadcrumb.label"></li>
                     </ol>
                 </section>
                 <router-view/>
@@ -129,234 +135,84 @@
                 <strong>Copyright &copy; 2014-2018 <a href="#">xxx Studio</a>.</strong> 某某管理有限公司
             </footer>
         </div>
+				<notifications classes="n-light" position="top right" group="ok" />
+				<notifications classes="n-light n-error" position="top right" group="error" />
+				<v-dialog />
     </div>
 </template>
 
 <script>
+let breadcrumbs = []
+
+const breadcrumb = (name) => {
+	let data = breadcrumbs.filter(nav => nav.link == name) || null
+	return data
+}
 export default {
-    data(){
-        return {
-            currentRoute:{
-                name:'首页',
-                breadcrumb:[]
-            },
-            menu:[
-                {
-                    icon:'fa-eye',
-                    label:'监控管理',
-                    // link:'watch',
-                    sub:[
-                        {
-                            label:'我关注的电梯',
-                            link:'focus'
-                        },
-                        {
-                            label:'实时地图监测',
-                            link:'map'
-                        },
-                        {
-                            label:'实时数据监测',
-                            link:'data'
-                        },
-                        {
-                            label:'实时视频监测',
-                            link:'video'
-                        },
-                        {
-                            label:'实时故障监测',
-                            link:'bug'
-                        },
-                        {
-                            label:'实时检修监测',
-                            link:'fix'
-                        },
-                        {
-                            label:'电梯信息列表',
-                            link:'info'
-                        },
-                    ]
-                },
-                {
-                    icon:'fa-calculator',
-                    label:'事件管理',
-                    // link:'watch',
-                    sub:[
-                        {
-                            label:'历史事件查询',
-                            link:'history'
-                        },
-                        {
-                            label:'故障级别管理',
-                            link:'level'
-                        },
-                        {
-                            label:'故障代码管理',
-                            link:'code'
-                        },
-                        {
-                            label:'故障联系人',
-                            link:'contact'
-                        },
-                        {
-                            label:'短信预览管理',
-                            link:'message'
-                        },
-                    ]
-                },
-                {
-                    icon:'fa-file-text',
-                    label:'档案管理',
-                    // link:'watch',
-                    sub:[
-                        {
-                            label:'电梯信息管理',
-                            sub:[
-                                {
-                                    label:'电梯信息查看',
-                                    link:'lift'
-                                },
-                                {
-                                    label:'出厂信息管理',
-                                    link:'factory'
-                                },
-                                {
-                                    label:'安装信息管理',
-                                    link:'install'
-                                },
-                                {
-                                    label:'维保信息管理',
-                                    link:'warranty'
-                                },
-                            ]
-                        },
-                        {
-                            label:'单位管理',
-                            // link:'level'
-                            sub:[
-                                {
-                                    label:'安装单位管理',
-                                    link:'contractor'
-                                },
-                                {
-                                    label:'维保单位管理',
-                                    link:'warrantydep'
-                                },
-                                {
-                                    label:'产权单位管理',
-                                    link:'rights'
-                                },
-                                {
-                                    label:'使用单位管理',
-                                    link:'usedep'
-                                },
-                                {
-                                    label:'物业单位管理',
-                                    link:'property'
-                                },
-                            ]
-                        },
-                        {
-                            label:'楼盘管理',
-                            link:'building'
-                        },
-                        {
-                            label:'智能终端管理',
-                            link:'client'
-                        },
-                        {
-                            label:'电梯分配管理',
-                            link:'liftmanage'
-                        },
-                        {
-                            label:'制造商管理',
-                            link:'contractormanage'
-                        },
-                    ]
-                },
-                {
-                    icon:'fa-wrench',
-                    label:'维保管理',
-                    // link:'watch',
-                    sub:[
-                        {
-                            label:'电梯维保信息',
-                            link:'liftwarranty'
-                        },
-                        {
-                            label:'电梯年检管理',
-                            link:'annualinspetion'
-                        },
-                        {
-                            label:'维保站点管理',
-                            link:'site'
-                        },
-                        {
-                            label:'维保班组管理',
-                            link:'team'
-                        },
-                        {
-                            label:'维保人员管理',
-                            link:'people'
-                        },
-                        {
-                            label:'保养项管理',
-                            link:'warrantyitem'
-                        },
-                        {
-                            label:'保养类别管理',
-                            link:'warrantycategory'
-                        }
-                    ]
-                },
-                {
-                    icon:'fa-gear',
-                    label:'权限管理',
-                    // link:'watch',
-                    sub:[
-                        {
-                            label:'角色管理',
-                            link:'role'
-                        },
-                        {
-                            label:'用户管理',
-                            link:'user'
-                        },
-                    ]
-                },
-                {
-                    icon:'fa-wrench',
-                    label:'系统管理',
-                    // link:'watch',
-                    sub:[
-                        {
-                            label:'自定义设置',
-                            link:'settings'
-                        },
-                    ]
-                }
-            ]
-        }
-    },
-    mounted(){
-        $('[data-toggle="control-sidebar"]').controlSidebar()
-        $('[data-toggle="push-menu"]').pushMenu()
-        this.currentRoute.name = this.$route.meta.name
-    },
-    watch:{
-        '$route'(val){
-            this.currentRoute.name = val.meta.name
-        }
-    },
-    methods: {
-        async logout() {
-            // let res = await this.$api.logout({});
-            // if (0 === res.data.code) {
-                this.$router.replace({
-                    name: "login"
-                });
-            // }
-        }
+  data() {
+    return {
+			isActive: true,
+      currentRoute: {
+        name: '首页',
+        breadcrumb: {label:'首页'}
+      },
+      menu: []
     }
+  },
+	created(){
+		this.getMenu()
+	},
+  mounted() {
+    $('[data-toggle="control-sidebar"]').controlSidebar()
+    $('[data-toggle="push-menu"]').pushMenu()
+		let nav = this.$route.fullPath.split("/")
+		if(this.$route.name != 'index') {
+			this.currentRoute.name = this.$route.meta.name
+			this.currentRoute.breadcrumb = breadcrumb(nav[1])[0]
+		}
+  },
+  watch: {
+    '$route' (val) {
+			let nav = val.fullPath.split("/")
+			if(val.name != 'index') {
+				this.currentRoute.name = val.meta.name
+				this.currentRoute.breadcrumb = breadcrumb(nav[1])[0]
+			}else {
+				this.currentRoute = {
+	        name: '首页',
+	        breadcrumb: {label:'首页'}
+	      }
+			}
+    }
+  },
+  methods: {
+		getMenu(){
+			let menu = JSON.parse(this.$storage.get('roleMenu'))
+			this.menu = menu
+			menu.forEach(item => {
+			  item.sub.forEach(sub=>{
+					sub.label1 = item.label
+					if (sub.sub) {
+						sub.sub.forEach(nav=>{
+							nav.label1 = item.label
+							nav.label2 = sub.label
+							breadcrumbs.push(nav)
+						})
+					}else {
+						breadcrumbs.push(sub)
+					}
+				})
+			})
+		},
+    async logout() {
+      let res = await this.$api.logout({});
+      if (0 === res.data.code) {
+	      this.$router.replace({
+	        name: "login"
+	      });
+      }
+    }
+  }
 };
 </script>
 

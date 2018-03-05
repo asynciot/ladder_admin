@@ -12,43 +12,29 @@
                 </div>
             </div>
             <hr class="mt10 mb10">
-            <div class="row">
+            <div class="row mb10">
                 <div class="col-xs-12 text-right">
                     <router-link :to="{ name: 'addrole'}" class="btn btn-success">添加角色</router-link>
                 </div>
             </div>
-						<!-- <v-table
-								is-vertical-resize
-								is-horizontal-resize
-								style="width:100%"
-		            :columns="columns"
-		            :table-data="tableData"
-				    ></v-table> -->
-            <table id="dataTable" class="table table-bordered">
-                <thead>
-                <tr>
-                    <th>角色名称</th>
-                    <th>角色描述</th>
-                    <th>最后更新人</th>
-                    <th>最后更时间</th>
-                    <th>操作</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>张三</td>
-                    <td>管理员</td>
-                    <td>admin</td>
-                    <td>2018-09-08</td>
-                    <td>
-                        <router-link :to="{name:'editrole',params:{id:'12121'}}" class="btn btn-default btn-xs">对应菜单</router-link>
-                        <button class="btn btn-xs btn-warning">编辑</button>
-                        <button class="btn btn-xs btn-danger remove-btn">删除</button>
-                    </td>
-                </tr>
-
-                </tbody>
-            </table>
+						<v-table
+							class="mb10"
+							row-hover-color="#eaeaea"
+							is-vertical-resize
+							is-horizontal-resize
+							style="width:100%"
+							:is-loading="loading"
+							:columns="columns"
+							:table-data="list"
+							@on-custom-comp="getList"
+				    ></v-table>
+						<div class="tr">
+							<v-pagination
+								size="small"
+								@page-change="pageChange"
+								:total="options.total"
+								:layout="['total', 'prev', 'pager', 'next', 'jumper']" />
+						</div>
         </div>
         <!-- /.box-body -->
 
@@ -60,9 +46,82 @@
 </template>
 
 <script>
+Vue.component('role-operation', {
+  template: `<span>
+				<button @click.stop.prevent="editUser()" class="btn btn-default btn-xs">对应菜单</button>
+        <button @click.stop.prevent="update()" class="btn btn-xs btn-danger btn-warning">编辑</button>
+				<button @click.stop.prevent="deleteRow()" class="btn btn-xs btn-danger remove-btn">删除</button>
+        </span>`,
+  props: {
+    rowData: {
+      type: Object
+    },
+    field: {
+      type: String
+    },
+    index: {
+      type: Number
+    }
+  },
+  methods: {
+    editUser() {
+			this.$router.push({
+				name:'rolemenu',
+				params: {
+					id:this.rowData.id
+				}
+			})
+    },
+    update() {
+			this.$router.push({
+				name:'editrole',
+				params: {
+					id:this.rowData.id
+				}
+			})
+    },
+    deleteRow() {
+      this.$modal.show('dialog', {
+        title: '警告!',
+        text: '是否删除此项 ？',
+        buttons: [{
+            title: '取消',
+          },
+          {
+            title: '删除',
+						handler: async() => {
+							this.$modal.hide('dialog')
+							let res = null
+							if(this.$route.params.id){
+								res = await this.$api.updateRole({id:this.rowData.id})
+							}else {
+								res = await this.$api.reomveRole({id:this.rowData.id})
+							}
+							this.$emit('on-custom-comp');
+							if (0 === res.data.code) {
+								this.$notify({
+									group: 'ok',
+									title: '提示',
+									text: '操作成功'
+								});
+							}else {
+								this.$notify({
+									group: 'error',
+									title: '提示',
+									text: '操作失败'
+								});
+							}
+            }
+          }
+        ]
+      })
+    }
+  }
+})
 export default {
   data() {
     return {
+			loading: false,
       columns: [{
           field: 'name',
           title: '角色名称',
@@ -72,88 +131,48 @@ export default {
 					isResize:true
         },
         {
-          field: 'role',
+          field: 'description',
           title: '角色描述',
           width: 100,
           titleAlign: 'center',
           columnAlign: 'center',
 					isResize:true
         },
-        {
-          field: 'is',
-          title: '最后更新人',
-          width: 100,
-          titleAlign: 'center',
-          columnAlign: 'center',
-					isResize:true
-        },
-        {
-          field: 'time',
-          title: '最后更时间',
-          width: 100,
-          titleAlign: 'center',
-          columnAlign: 'center',
-					isResize:true
-        },
-        {
-          field: 'op',
-          title: '操作',
-          width: 100,
-          titleAlign: 'center',
-          columnAlign: 'center',
-					isResize:true
-        }
+				{
+		      field: 'operation',
+		      title: '操作',
+		      width: 150,
+		      titleAlign: 'center',
+		      columnAlign: 'center',
+		      componentName: 'role-operation',
+		      isResize: true
+		    }
       ],
-      tableData: [{
-          "name": "赵伟",
-          "role": "管理员",
-          "is": "admin",
-					"time": "2018-02-29",
-          "op": "操作"
-        },
-      ]
+      list: [],
+			options: {
+	      page: 1,
+	      num: 15,
+	      total: 0
+	    }
     }
   },
-  mounted() {
-    $('#dataTable').DataTable({
-      "dom": 'rtip',
-      "searching": false,
-      //            禁用最后一列排序
-      "columns": [
-        null,
-        null,
-        null,
-        null,
-        {
-          "orderable": false
-        }
-      ],
-      //            中文配置，可存为配置文件单独调用
-      language: {
-        "sProcessing": "处理中...",
-        "sLengthMenu": "显示 _MENU_ 项结果",
-        "sZeroRecords": "没有匹配结果",
-        "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
-        "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
-        "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
-        "sInfoPostFix": "",
-        "sSearch": "搜索:",
-        "sUrl": "",
-        "sEmptyTable": "表中数据为空",
-        "sLoadingRecords": "载入中...",
-        "sInfoThousands": ",",
-        "oPaginate": {
-          "sFirst": "首页",
-          "sPrevious": "上页",
-          "sNext": "下页",
-          "sLast": "末页"
-        },
-        "oAria": {
-          "sSortAscending": ": 以升序排列此列",
-          "sSortDescending": ": 以降序排列此列"
-        }
+	created() {
+    this.getList()
+  },
+	methods: {
+    pageChange(val) {
+      this.options.page = val
+      this.getList()
+    },
+    async getList() {
+      this.loading = true
+      let res = await this.$api.role(this.options)
+      this.loading = false
+      if (0 === res.data.code) {
+        this.list = res.data.data.list
+        this.options.total = res.data.data.totalNumber
       }
-    });
+    }
   }
 }
 </script>

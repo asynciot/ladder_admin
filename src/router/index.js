@@ -25,31 +25,31 @@ const Message = resolve => require(['@/views/Event/Message'], resolve)
 
 const Lift = resolve => require(['@/views/Doc/Lift'], resolve)
 const Factory = resolve => require(['@/views/Doc/Factory'], resolve)
-const AddFactory = resolve => require(['@/views/Doc/AddFactory'], resolve)
+const EditFactory = resolve => require(['@/views/Doc/EditFactory'], resolve)
 const Install = resolve => require(['@/views/Doc/Install'], resolve)
-const AddInstall = resolve => require(['@/views/Doc/AddInstall'], resolve)
+const EditInstall = resolve => require(['@/views/Doc/EditInstall'], resolve)
 const Warranty = resolve => require(['@/views/Doc/Warranty'], resolve)
-const AddWarranty = resolve => require(['@/views/Doc/AddWarranty'], resolve)
+const EditWarranty = resolve => require(['@/views/Doc/EditWarranty'], resolve)
 
 const Contractor = resolve => require(['@/views/Doc/Contractor'], resolve)
-const AddContractor = resolve => require(['@/views/Doc/AddContractor'], resolve)
+const EditContractor = resolve => require(['@/views/Doc/EditContractor'], resolve)
 const WarrantyDep = resolve => require(['@/views/Doc/WarrantyDep'], resolve)
-const AddWarrantyDep = resolve => require(['@/views/Doc/AddWarrantyDep'], resolve)
+const EditWarrantyDep = resolve => require(['@/views/Doc/EditWarrantyDep'], resolve)
 const Rights = resolve => require(['@/views/Doc/Rights'], resolve)
-const AddRights = resolve => require(['@/views/Doc/AddRights'], resolve)
+const EditRights = resolve => require(['@/views/Doc/EditRights'], resolve)
 const UseDep = resolve => require(['@/views/Doc/UseDep'], resolve)
-const AddUseDep = resolve => require(['@/views/Doc/AddUseDep'], resolve)
+const EditUseDep = resolve => require(['@/views/Doc/EditUseDep'], resolve)
 const Property = resolve => require(['@/views/Doc/Property'], resolve)
-const AddProperty = resolve => require(['@/views/Doc/AddProperty'], resolve)
+const EditProperty = resolve => require(['@/views/Doc/EditProperty'], resolve)
 
 const Building = resolve => require(['@/views/Doc/Building'], resolve)
-const AddBuilding = resolve => require(['@/views/Doc/AddBuilding'], resolve)
+const EditBuilding = resolve => require(['@/views/Doc/EditBuilding'], resolve)
 const Client = resolve => require(['@/views/Doc/Client'], resolve)
 const BindLift = resolve => require(['@/views/Doc/BindLift'], resolve)
 const LiftManage = resolve => require(['@/views/Doc/LiftManage'], resolve)
 const Distribution = resolve => require(['@/views/Doc/Distribution'], resolve)
-const ContractorManage = resolve => require(['@/views/Doc/ContractorManage'], resolve)
-const AddManufacture = resolve => require(['@/views/Doc/AddManufacture'], resolve)
+const ContractorMng = resolve => require(['@/views/Doc/ContractorMng'], resolve)
+const EditManufacture = resolve => require(['@/views/Doc/EditManufacture'], resolve)
 
 const LiftWarranty = resolve => require(['@/views/Warranty/LiftWarranty'], resolve)
 const AnnualInspetion = resolve => require(['@/views/Warranty/AnnualInspetion'], resolve)
@@ -66,8 +66,9 @@ const AddCategory = resolve => require(['@/views/Warranty/AddCategory'], resolve
 const Role = resolve => require(['@/views/Right/Role'], resolve)
 const AddRole = resolve => require(['@/views/Right/AddRole'], resolve)
 const EditRole = resolve => require(['@/views/Right/EditRole'], resolve)
+const BindRole = resolve => require(['@/views/Right/BindRole'], resolve)
 const User = resolve => require(['@/views/Right/User'], resolve)
-const AddUser = resolve => require(['@/views/Right/AddUser'], resolve)
+const EditUser = resolve => require(['@/views/Right/EditUser'], resolve)
 
 Vue.use(Router)
 
@@ -194,6 +195,12 @@ export default new Router({
 		      component: Lift
 		    },
 				{
+		      path: '/lift/add',
+		      name: 'addlift',
+					meta:{name:'电梯信息查看'},
+		      component: Lift
+		    },
+				{
 		      path: '/factory',
 		      name: 'factory',
 					meta:{name:'出厂信息管理'},
@@ -203,7 +210,13 @@ export default new Router({
 		      path: '/factory/add',
 		      name: 'addfactory',
 					meta:{name:'添加出厂信息'},
-		      component: AddFactory
+		      component: EditFactory
+		    },
+				{
+		      path: '/factory/edit/:id',
+		      name: 'editfactory',
+					meta:{name:'编辑出厂信息'},
+		      component: EditFactory
 		    },
 				{
 		      path: '/install',
@@ -215,7 +228,13 @@ export default new Router({
 		      path: '/install/add',
 		      name: 'addinstall',
 					meta:{name:'添加安装信息'},
-		      component: AddInstall
+		      component: EditInstall
+		    },
+				{
+		      path: '/install/edit/:id',
+		      name: 'editinstall',
+					meta:{name:'编辑安装信息'},
+		      component: EditInstall
 		    },
 				{
 		      path: '/warranty',
@@ -227,7 +246,13 @@ export default new Router({
 		      path: '/warranty/add',
 		      name: 'addwarranty',
 					meta:{name:'添加维保信息'},
-		      component: AddWarranty
+		      component: EditWarranty
+		    },
+				{
+		      path: '/warranty/edit/:id',
+		      name: 'editwarranty',
+					meta:{name:'编辑维保信息'},
+		      component: EditWarranty
 		    },
 				{
 		      path: '/contractor',
@@ -239,7 +264,13 @@ export default new Router({
 		      path: '/contractor/add',
 		      name: 'addcontractor',
 					meta:{name:'添加安装单位'},
-		      component: AddContractor
+		      component: EditContractor
+		    },
+				{
+		      path: '/contractor/edit/:id',
+		      name: 'editcontractor',
+					meta:{name:'编辑安装单位'},
+		      component: EditContractor
 		    },
 				{
 		      path: '/warrantydep',
@@ -251,7 +282,13 @@ export default new Router({
 		      path: '/warrantydep/add',
 		      name: 'addwarrantydep',
 					meta:{name:'添加维保单位'},
-		      component: AddWarrantyDep
+		      component: EditWarrantyDep
+		    },
+				{
+		      path: '/warrantydep/edit/:id',
+		      name: 'editwarrantydep',
+					meta:{name:'编辑维保单位'},
+		      component: EditWarrantyDep
 		    },
 				{
 		      path: '/rights',
@@ -263,7 +300,13 @@ export default new Router({
 		      path: '/rights/add',
 		      name: 'addrights',
 					meta:{name:'添加产权单位'},
-		      component: AddRights
+		      component: EditRights
+		    },
+				{
+		      path: '/rights/edit/:id',
+		      name: 'editrights',
+					meta:{name:'编辑产权单位'},
+		      component: EditRights
 		    },
 				{
 		      path: '/usedep',
@@ -275,7 +318,13 @@ export default new Router({
 		      path: '/usedep/add',
 		      name: 'addusedep',
 					meta:{name:'添加使用单位'},
-		      component: AddUseDep
+		      component: EditUseDep
+		    },
+				{
+		      path: '/usedep/edit/:id',
+		      name: 'editusedep',
+					meta:{name:'编辑使用单位'},
+		      component: EditUseDep
 		    },
 				{
 		      path: '/property',
@@ -287,7 +336,13 @@ export default new Router({
 		      path: '/property/add',
 		      name: 'addproperty',
 					meta:{name:'添加物业单位'},
-		      component: AddProperty
+		      component: EditProperty
+		    },
+				{
+		      path: '/property/edit/:id',
+		      name: 'editproperty',
+					meta:{name:'编辑物业单位'},
+		      component: EditProperty
 		    },
 				{
 		      path: '/building',
@@ -299,7 +354,13 @@ export default new Router({
 		      path: '/building/add',
 		      name: 'addbuilding',
 					meta:{name:'添加楼盘信息'},
-		      component: AddBuilding
+		      component: EditBuilding
+		    },
+				{
+		      path: '/building/add/:id',
+		      name: 'editbuilding',
+					meta:{name:'编辑楼盘信息'},
+		      component: EditBuilding
 		    },
 				{
 		      path: '/client',
@@ -326,16 +387,22 @@ export default new Router({
 		      component: Distribution
 		    },
 				{
-		      path: '/contractormanage',
-		      name: 'contractormanage',
+		      path: '/manufacture',
+		      name: 'manufacture',
 					meta:{name:'制造商管理'},
-		      component: ContractorManage
+		      component: ContractorMng
 		    },
 				{
 		      path: '/manufacture/add',
 		      name: 'addmanufacture',
 					meta:{name:'添加制造商'},
-		      component: AddManufacture
+		      component: EditManufacture
+		    },
+				{
+		      path: '/manufacture/edit/:id',
+		      name: 'editmanufacture',
+					meta:{name:'编辑制造商'},
+		      component: EditManufacture
 		    },
 				{
 		      path: '/role',
@@ -352,6 +419,12 @@ export default new Router({
 				{
 		      path: '/role/edit/:id',
 		      name: 'editrole',
+					meta:{name:'编辑角色'},
+		      component: AddRole
+		    },
+				{
+		      path: '/role/right/:id',
+		      name: 'rolemenu',
 					meta:{name:'对应权限'},
 		      component: EditRole
 		    },
@@ -365,7 +438,19 @@ export default new Router({
 		      path: '/user/add',
 		      name: 'adduser',
 					meta:{name:'添加用户'},
-		      component: AddUser
+		      component: EditUser
+		    },
+				{
+		      path: '/user/edit/:id',
+		      name: 'edituser',
+					meta:{name:'编辑用户'},
+		      component: EditUser
+		    },
+				{
+		      path: '/user/role/:id',
+		      name: 'bindrole',
+					meta:{name:'对应角色'},
+		      component: BindRole
 		    },
 				{
 		      path: '/settings',
