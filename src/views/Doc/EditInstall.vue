@@ -4,7 +4,7 @@
           <!-- form start -->
           <form class="form-horizontal" @submit.prevent="submit" data-vv-scope="form">
               <div class="box-header with-border">
-                  <h4 class="box-title">电梯信息</h4>
+                  <h4 class="box-title">安装信息</h4>
               </div>
               <div class="box-body">
                   <div class="form-group">

@@ -7,7 +7,7 @@
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <span class="logo-mini">电梯管理</span>
                     <!-- logo for regular state and mobile devices -->
-                    <span class="logo-lg">电梯管理系统</span>
+                    <span class="logo-lg">Ladder</span>
                 </router-link>
                 <!-- Header Navbar: style can be found in header.less -->
                 <nav class="navbar navbar-static-top">
@@ -131,8 +131,11 @@
             </div>
             <!-- /.content-wrapper -->
             <footer class="main-footer">
-                <div class="pull-right hidden-xs"> 详细地址：陕西省西安市</div>
-                <strong>Copyright &copy; 2014-2018 <a href="#">xxx Studio</a>.</strong> 某某管理有限公司
+                <div class="pull-right hidden-xs"> 地址：浙江省宁波市</div>
+                <strong>Copyright &copy; 2014-2018
+									<!-- <a href="#">xxx Studio</a>. -->
+								</strong>
+									宁波申菱电梯配件有限公司
             </footer>
         </div>
 				<notifications classes="n-light" position="top right" group="ok" />
@@ -207,6 +210,8 @@ export default {
     async logout() {
       let res = await this.$api.logout({});
       if (0 === res.data.code) {
+				this.$storage.remove('roleMenu')
+        this.$cookie.delete('userId');
 	      this.$router.replace({
 	        name: "login"
 	      });

@@ -2,6 +2,7 @@ import {
   AccountApi,
 	CommonApi,
 	DocApi,
+	EventApi,
 } from './config'
 export default {
   //account
@@ -115,5 +116,80 @@ export default {
 	},
 	reomveSetInfo:(data)=>{
     return DocApi.remove(Object.assign({key1:'setupInfo'},data))
+  },
+	device:(data)=>{
+		return DocApi.query(Object.assign({key1:'deviceMgr'},data))
+	},
+	searchDevice:(data)=>{
+		return DocApi.query({key1:'deviceMgr',key2:data})
+	},
+	addDevice:(data)=>{
+		return DocApi.save({key1:'deviceMgr'},data)
+	},
+	updateDevice:(data)=>{
+		return DocApi.update({key1:'deviceMgr'},data)
+	},
+	reomveDevice:(data)=>{
+    return DocApi.remove(Object.assign({key1:'deviceMgr'},data))
+  },
+	ladderBinder:(data)=>{
+		return DocApi.query(Object.assign({key1:'ladderBinder'},data))
+	},
+	addLadderBinder:(data)=>{
+		return DocApi.save({key1:'ladderBinder'},data)
+	},
+	updateLadderBinder:(data)=>{
+		return DocApi.update({key1:'ladderBinder'},data)
+	},
+	reomveLadderBinder:(data)=>{
+    return DocApi.remove(Object.assign({key1:'ladderBinder'},data))
+  },
+	history:(data)=>{
+		return EventApi.query(Object.assign({key1:'historyEvent'},data))
+	},
+	addHistory:(data)=>{
+		return EventApi.save({key1:'historyEvent'},data)
+	},
+	updateHistory:(data)=>{
+		return EventApi.update({key1:'historyEvent'},data)
+	},
+	reomveHistory:(data)=>{
+    return EventApi.remove(Object.assign({key1:'historyEvent'},data))
+  },
+	level:(data)=>{
+		return EventApi.query(Object.assign({key1:'errorLevel'},data))
+	},
+	addLevel:(data)=>{
+		return EventApi.save({key1:'errorLevel'},data)
+	},
+	updateLevel:(data)=>{
+		return EventApi.update({key1:'errorLevel'},data)
+	},
+	reomveLevel:(data)=>{
+    return EventApi.remove(Object.assign({key1:'errorLevel'},data))
+  },
+	errorCode:(data)=>{
+		return EventApi.query(Object.assign({key1:'errorCode'},data))
+	},
+	addErrorCode:(data)=>{
+		return EventApi.save({key1:'errorCode'},data)
+	},
+	updateErrorCode:(data)=>{
+		return EventApi.update({key1:'errorCode'},data)
+	},
+	reomveErrorCode:(data)=>{
+    return EventApi.remove(Object.assign({key1:'errorCode'},data))
+  },
+	msgPerson:(data)=>{
+		return EventApi.query(Object.assign({key1:'msgPerson'},data))
+	},
+	addMsgPerson:(data)=>{
+		return EventApi.save({key1:'msgPerson'},data)
+	},
+	updateMsgPerson:(data)=>{
+		return EventApi.update({key1:'msgPerson'},data)
+	},
+	reomveMsgPerson:(data)=>{
+    return EventApi.remove(Object.assign({key1:'msgPerson'},data))
   },
 }

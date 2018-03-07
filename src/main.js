@@ -43,6 +43,7 @@ window.Vue = Vue
 window.moment = moment
 window.VueDatepickerLocal = VueDatepickerLocal
 window.$cookie = VueCookie
+window.$storage = localStorage
 Vue.prototype.$api = api
 Vue.config.productionTip = false
 Vue.use(VeeValidate).use(VueCookie).use(VModal, { dialog: true }).use(Notifications).use(VueLocalStorage, {
@@ -51,6 +52,14 @@ Vue.use(VeeValidate).use(VueCookie).use(VModal, { dialog: true }).use(Notificati
 });
 Vue.component(VTable.name, VTable)
 Vue.component(VPagination.name, VPagination)
+
+router.beforeEach((to, from, next) => {
+  if(window.$cookie.get('userId')||$storage.getItem('roleMenu')||to.name=='login'){
+    next()
+  }else {
+    next({name:'login'})
+  }
+})
 
 /* eslint-disable no-new */
 new Vue({

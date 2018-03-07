@@ -6,19 +6,19 @@
           <div class="box-body">
               <div class="row">
                   <div class="col-xs-2">
-                      <input type="text" class="form-control input-sm" placeholder="电梯工号">
+                      <input type="text" v-model="options.number" class="form-control input-sm" placeholder="电梯工号">
                   </div>
-                  <div class="col-xs-2">
+                  <!-- <div class="col-xs-2">
                       <input type="text" class="form-control input-sm" placeholder="具体位置别名">
+                  </div> -->
+                  <div class="col-xs-2">
+                      <input type="text" v-model="options.code" class="form-control input-sm" placeholder="电梯编号">
                   </div>
                   <div class="col-xs-2">
-                      <input type="text" class="form-control input-sm" placeholder="注册代码">
+                      <input type="text" v-model="options.serviceCode" class="form-control input-sm" placeholder="电梯服务编码">
                   </div>
                   <div class="col-xs-2">
-                      <input type="text" class="form-control input-sm" placeholder="采集设备注册码">
-                  </div>
-                  <div class="col-xs-2">
-                      <button class="btn btn-primary btn-sm">搜索</button>
+                      <button @click="options.page=1,getList()" class="btn btn-primary btn-sm">搜索</button>
                   </div>
               </div>
               <hr class="mt10 mb10">

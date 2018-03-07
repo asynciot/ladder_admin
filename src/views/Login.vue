@@ -10,11 +10,11 @@
 				<hr>
 				<form>
 					<div class="form-group has-feedback">
-						<input type="text" v-model="form.username" class="form-control" placeholder="用户名">
+						<input @keyup.enter="login()" type="text" v-model="form.username" class="form-control" placeholder="用户名">
 						<span class="glyphicon glyphicon-user form-control-feedback"></span>
 					</div>
 					<div class="form-group has-feedback">
-						<input type="password" v-model="form.password" class="form-control" placeholder="密码">
+						<input @keyup.enter="login()" type="password" v-model="form.password" class="form-control" placeholder="密码">
 						<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 					</div>
 					<div class="row">
@@ -36,12 +36,12 @@
 		</div>
 		<footer class="login-footer">
 			<div class="pull-right hidden-xs">
-				<!-- 详细地址：陕西省西安市 -->
+				地址：浙江省宁波市
 			</div>
-			<strong>Copyright &copy; 2017-2018
+			<strong>Copyright &copy; 2014-2018
 				<!-- <a href="#">xxx Studio</a>. -->
 			</strong>
-			<!-- 某某管理有限公司 -->
+			宁波申菱电梯配件有限公司
 		</footer>
 	</div>
 </template>

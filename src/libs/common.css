@@ -245,3 +245,6 @@ div.dataTables_wrapper {
 .n-error .notification-title{
 	color: #ca3f2d;
 }
+.selected {
+  background-color: rgb(234, 234, 234);
+}

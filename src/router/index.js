@@ -16,11 +16,12 @@ const Info = resolve => require(['@/views/Watch/Info'], resolve)
 
 const History = resolve => require(['@/views/Event/History'], resolve)
 const Level = resolve => require(['@/views/Event/Level'], resolve)
+const EditLevel = resolve => require(['@/views/Event/EditLevel'], resolve)
 const Strategy = resolve => require(['@/views/Event/Strategy'], resolve)
 const Code = resolve => require(['@/views/Event/Code'], resolve)
-const AddCode = resolve => require(['@/views/Event/AddCode'], resolve)
+const EditCode = resolve => require(['@/views/Event/EditCode'], resolve)
 const Contact = resolve => require(['@/views/Event/Contact'], resolve)
-const AddContact = resolve => require(['@/views/Event/AddContact'], resolve)
+const EditContact = resolve => require(['@/views/Event/EditContact'], resolve)
 const Message = resolve => require(['@/views/Event/Message'], resolve)
 
 const Lift = resolve => require(['@/views/Doc/Lift'], resolve)
@@ -153,6 +154,18 @@ export default new Router({
 		      component: Level
 		    },
 				{
+		      path: '/level/add',
+		      name: 'addlevel',
+					meta:{name:'添加故障级别'},
+		      component: EditLevel
+		    },
+				{
+		      path: '/level/edit/:id',
+		      name: 'editlevel',
+					meta:{name:'编辑故障级别'},
+		      component: EditLevel
+		    },
+				{
 		      path: '/level/:id',
 		      name: 'strategy',
 					meta:{name:'处理策略'},
@@ -168,7 +181,13 @@ export default new Router({
 		      path: '/code/add',
 		      name: 'addcode',
 					meta:{name:'添加故障代码'},
-		      component: AddCode
+		      component: EditCode
+		    },
+				{
+		      path: '/code/edit/:id',
+		      name: 'editcode',
+					meta:{name:'编辑故障代码'},
+		      component: EditCode
 		    },
 				{
 		      path: '/contact',
@@ -180,7 +199,13 @@ export default new Router({
 		      path: '/contact/add',
 		      name: 'addcontact',
 					meta:{name:'添加联系人'},
-		      component: AddContact
+		      component: EditContact
+		    },
+				{
+		      path: '/contact/edit/:id',
+		      name: 'editcontact',
+					meta:{name:'编辑联系人'},
+		      component: EditContact
 		    },
 				{
 		      path: '/message',

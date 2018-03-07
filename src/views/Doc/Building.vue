@@ -6,10 +6,10 @@
           <div class="box-body">
               <div class="row">
                   <div class="col-xs-3">
-                      <input type="text" class="form-control input-sm" placeholder="请输入楼盘名称">
+                      <input type="text" v-model="options.name" class="form-control input-sm" placeholder="请输入楼盘名称">
                   </div>
                   <div class="col-xs-3">
-                      <button class="btn btn-primary btn-sm">搜索</button>
+                      <button @click="options.page=1,getList()" class="btn btn-primary btn-sm">搜索</button>
                   </div>
               </div>
               <hr class="mt10 mb10">
@@ -27,7 +27,7 @@
 									:is-loading="loading"
 			            :columns="columns"
 			            :table-data="list"
-									@on-custom-comp="getList"
+									@on-custom-comp="operation"
 					    />
 							<div class="tr">
 								<v-pagination
@@ -39,6 +39,9 @@
           </div>
           <!-- /.box-body -->
       </div>
+			<modal name="lift">
+
+			</modal>
       <!-- /.box -->
   </section>
   <!-- /.content -->
@@ -47,7 +50,7 @@
 <script>
 Vue.component('building-operation', {
   template: `<span>
-				<button @click.stop.prevent="bindRole()" class="btn btn-default btn-xs">关联电梯</button>
+				<button @click.stop.prevent="lift()" class="btn btn-default btn-xs">关联电梯</button>
         <button @click.stop.prevent="update()" class="btn btn-xs btn-danger btn-warning">编辑</button>
 				<button @click.stop.prevent="deleteRow()" class="btn btn-xs btn-danger remove-btn">删除</button>
         </span>`,
@@ -63,21 +66,16 @@ Vue.component('building-operation', {
     }
   },
   methods: {
-    bindRole() {
-      this.$router.push({
-				name:'bindrole',
-				params:{
-					id:this.rowData.id
-				}
-			})
+    lift() {
+      this.$emit('on-custom-comp', 'lift');
     },
     update() {
-			this.$router.push({
-				name:'editbuilding',
-				params:{
-					id:this.rowData.id
-				}
-			})
+      this.$router.push({
+        name: 'editbuilding',
+        params: {
+          id: this.rowData.id
+        }
+      })
     },
     deleteRow() {
       this.$modal.show('dialog', {
@@ -88,23 +86,25 @@ Vue.component('building-operation', {
           },
           {
             title: '删除',
-						handler: async () => {
-							this.$modal.hide('dialog')
-							let res = await this.$api.reomveUser({id:this.rowData.id})
-							this.$emit('on-custom-comp');
-							if (0 === res.data.code) {
-								this.$notify({
-									group: 'ok',
-									title: '提示',
-									text: '操作成功'
-								});
-							}else {
-								this.$notify({
-									group: 'error',
-									title: '提示',
-									text: '操作失败'
-								});
-							}
+            handler: async () => {
+              this.$modal.hide('dialog')
+              let res = await this.$api.reomveUser({
+                id: this.rowData.id
+              })
+              this.$emit('on-custom-comp', 'refresh');
+              if (0 === res.data.code) {
+                this.$notify({
+                  group: 'ok',
+                  title: '提示',
+                  text: '操作成功'
+                });
+              } else {
+                this.$notify({
+                  group: 'error',
+                  title: '提示',
+                  text: '操作失败'
+                });
+              }
             }
           }
         ]
@@ -113,7 +113,7 @@ Vue.component('building-operation', {
   }
 })
 export default {
-	data: () => ({
+  data: () => ({
     loading: false,
     columns: [{
       field: 'name',
@@ -123,12 +123,19 @@ export default {
       columnAlign: 'center',
       isResize: true
     }, {
-      field: 'address',
+      field: 'location',
       title: '详细地址',
-      width: 100,
+      width: 160,
       titleAlign: 'center',
       columnAlign: 'center',
-      isResize: true
+      isResize: true,
+      formatter: function(rowData) {
+        return `<p>
+				${rowData.province?rowData.province:''}
+				${rowData.city?rowData.city:''}
+				${rowData.district?rowData.district:''}
+				${rowData.address}</p>`
+      },
     }, {
       field: 'place',
       title: '使用场合',
@@ -152,10 +159,18 @@ export default {
       total: 0
     }
   }),
-	created() {
+  created() {
     this.getList()
   },
   methods: {
+    operation(type) {
+      if (type == 'refresh') {
+        this.getList()
+      }
+      if (type == 'lift') {
+        this.$modal.show('lift');
+      }
+    },
     pageChange(val) {
       this.options.page = val
       this.getList()

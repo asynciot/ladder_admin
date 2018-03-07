@@ -5,10 +5,10 @@
 	        <div class="box-body">
 	            <div class="row">
 	                <div class="col-xs-3">
-	                    <input type="text" class="form-control input-sm" placeholder="请输入角色名称">
+	                    <input type="text" v-model="options.nicname" class="form-control input-sm" placeholder="请输入用户名称">
 	                </div>
 	                <div class="col-xs-3">
-	                    <button class="btn btn-primary btn-sm">搜索</button>
+	                    <button @click="options.page=1,getList()" class="btn btn-primary btn-sm">搜索</button>
 	                </div>
 	            </div>
 	            <hr class="mt10 mb10">
@@ -153,6 +153,7 @@ export default {
     }],
     list: [],
     options: {
+			nicname:'',
       page: 1,
       num: 15,
       total: 0

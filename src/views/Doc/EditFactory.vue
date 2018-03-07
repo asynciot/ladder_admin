@@ -3,7 +3,7 @@
   <section class="content">
       <div class="box">
           <div class="box-header with-border">
-              <h3 class="box-title">电梯信息</h3>
+              <h3 class="box-title">出厂信息</h3>
           </div>
           <!-- /.box-header -->
           <!-- form start -->
@@ -12,7 +12,7 @@
                   <div class="form-group">
                       <label for="" class="col-sm-2 control-label">电梯工号</label>
                       <div class=" col-sm-8 col-md-6">
-                          <input type="text" name="number" v-validate="'required'" :class="{'form-control': true, 'is-error': errors.has('form.number') }" v-model="form.number" placeholder="请输入">
+                          <input type="text" name="number" v-validate="'required'" :class="{'form-control': true, 'is-error': errors.has('form.number') }" v-model="form.number" placeholder="请输入" :disabled="$route.params.id">
                       </div>
                   </div>
                   <div class="form-group">

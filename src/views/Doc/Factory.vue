@@ -4,17 +4,17 @@
       <div class="box">
           <div class="box-body">
               <div class="row">
-                  <div class="col-xs-3">
-                      <input type="text" class="form-control input-sm" placeholder="请输入电梯工号">
+									<div class="col-xs-2">
+											<input type="text" v-model="options.number" class="form-control input-sm" placeholder="电梯工号">
+									</div>
+									<div class="col-xs-2">
+                      <input type="text" v-model="options.code" class="form-control input-sm" placeholder="电梯编号">
                   </div>
-                  <div class="col-xs-3">
-                      <input type="text" class="form-control input-sm" placeholder="请输入具体位置别名">
+									<div class="col-xs-2">
+                      <input type="text" v-model="options.serviceCode" class="form-control input-sm" placeholder="电梯服务编码">
                   </div>
-                  <div class="col-xs-3">
-                      <input type="text" class="form-control input-sm" placeholder="请输入详细地址">
-                  </div>
-                  <div class="col-xs-3">
-                      <button class="btn btn-primary btn-sm">搜索</button>
+                  <div class="col-xs-2">
+                      <button @click="options.page=1,getList()" class="btn btn-primary btn-sm">搜索</button>
                   </div>
               </div>
               <hr class="mt10 mb10">

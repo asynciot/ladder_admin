@@ -5,10 +5,10 @@
         <div class="box-body">
             <div class="row">
                 <div class="col-xs-3">
-                    <input type="text" class="form-control input-sm" placeholder="请输入角色名称">
+                    <input type="text" v-model="options.name" class="form-control input-sm" placeholder="请输入角色名称">
                 </div>
                 <div class="col-xs-3">
-                    <button class="btn btn-primary btn-sm">搜索</button>
+                    <button @click="options.page=1,getList()" class="btn btn-primary btn-sm">搜索</button>
                 </div>
             </div>
             <hr class="mt10 mb10">
@@ -65,20 +65,20 @@ Vue.component('role-operation', {
   },
   methods: {
     editUser() {
-			this.$router.push({
-				name:'rolemenu',
-				params: {
-					id:this.rowData.id
-				}
-			})
+      this.$router.push({
+        name: 'rolemenu',
+        params: {
+          id: this.rowData.id
+        }
+      })
     },
     update() {
-			this.$router.push({
-				name:'editrole',
-				params: {
-					id:this.rowData.id
-				}
-			})
+      this.$router.push({
+        name: 'editrole',
+        params: {
+          id: this.rowData.id
+        }
+      })
     },
     deleteRow() {
       this.$modal.show('dialog', {
@@ -89,28 +89,32 @@ Vue.component('role-operation', {
           },
           {
             title: '删除',
-						handler: async() => {
-							this.$modal.hide('dialog')
-							let res = null
-							if(this.$route.params.id){
-								res = await this.$api.updateRole({id:this.rowData.id})
-							}else {
-								res = await this.$api.reomveRole({id:this.rowData.id})
-							}
-							this.$emit('on-custom-comp');
-							if (0 === res.data.code) {
-								this.$notify({
-									group: 'ok',
-									title: '提示',
-									text: '操作成功'
-								});
-							}else {
-								this.$notify({
-									group: 'error',
-									title: '提示',
-									text: '操作失败'
-								});
-							}
+            handler: async () => {
+              this.$modal.hide('dialog')
+              let res = null
+              if (this.$route.params.id) {
+                res = await this.$api.updateRole({
+                  id: this.rowData.id
+                })
+              } else {
+                res = await this.$api.reomveRole({
+                  id: this.rowData.id
+                })
+              }
+              this.$emit('on-custom-comp');
+              if (0 === res.data.code) {
+                this.$notify({
+                  group: 'ok',
+                  title: '提示',
+                  text: '操作成功'
+                });
+              } else {
+                this.$notify({
+                  group: 'error',
+                  title: '提示',
+                  text: '操作失败'
+                });
+              }
             }
           }
         ]
@@ -121,14 +125,14 @@ Vue.component('role-operation', {
 export default {
   data() {
     return {
-			loading: false,
+      loading: false,
       columns: [{
           field: 'name',
           title: '角色名称',
           width: 100,
           titleAlign: 'center',
           columnAlign: 'center',
-					isResize:true
+          isResize: true
         },
         {
           field: 'description',
@@ -136,30 +140,31 @@ export default {
           width: 100,
           titleAlign: 'center',
           columnAlign: 'center',
-					isResize:true
+          isResize: true
         },
-				{
-		      field: 'operation',
-		      title: '操作',
-		      width: 150,
-		      titleAlign: 'center',
-		      columnAlign: 'center',
-		      componentName: 'role-operation',
-		      isResize: true
-		    }
+        {
+          field: 'operation',
+          title: '操作',
+          width: 150,
+          titleAlign: 'center',
+          columnAlign: 'center',
+          componentName: 'role-operation',
+          isResize: true
+        }
       ],
       list: [],
-			options: {
-	      page: 1,
-	      num: 15,
-	      total: 0
-	    }
+      options: {
+        name: '',
+        page: 1,
+        num: 15,
+        total: 0
+      }
     }
   },
-	created() {
+  created() {
     this.getList()
   },
-	methods: {
+  methods: {
     pageChange(val) {
       this.options.page = val
       this.getList()

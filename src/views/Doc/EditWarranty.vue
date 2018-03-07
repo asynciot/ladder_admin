@@ -4,7 +4,7 @@
         <!-- form start -->
         <form class="form-horizontal" @submit.prevent="submit" data-vv-scope="form">
             <div class="box-header with-border">
-                <h4 class="box-title">电梯信息</h4>
+                <h4 class="box-title">维保信息</h4>
             </div>
             <div class="box-body">
                 <div class="form-group">
@@ -125,7 +125,7 @@ export default {
 	},
 	methods:{
 		async getData(){
-			let res = await this.$api.setInfo({ id: this.$route.params.id})
+			let res = await this.$api.maintenance({ id: this.$route.params.id})
 			this.form = res.data.data.list[0]
 		},
 		getOption(){
@@ -147,9 +147,9 @@ export default {
         if (result) {
 					let res = null
 					if(this.$route.params.id){
-						res = await this.$api.updateSetInfo(this.form)
+						res = await this.$api.updateMaintenance(this.form)
 					}else {
-						res = await this.$api.addSetInfo(this.form)
+						res = await this.$api.addMaintenance(this.form)
 					}
 					if(res.data.code == 0){
 						this.$notify({

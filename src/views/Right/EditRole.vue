@@ -123,6 +123,9 @@ export default {
 					if(index > -1){
 						item.open = true
 						item.checked = true
+					}else {
+						item.open = false
+						item.checked = false
 					}
 				})
 			}
