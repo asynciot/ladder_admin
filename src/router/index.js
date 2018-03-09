@@ -17,11 +17,11 @@ const Info = resolve => require(['@/views/Watch/Info'], resolve)
 const History = resolve => require(['@/views/Event/History'], resolve)
 const Level = resolve => require(['@/views/Event/Level'], resolve)
 const EditLevel = resolve => require(['@/views/Event/EditLevel'], resolve)
-const Strategy = resolve => require(['@/views/Event/Strategy'], resolve)
 const Code = resolve => require(['@/views/Event/Code'], resolve)
 const EditCode = resolve => require(['@/views/Event/EditCode'], resolve)
 const Contact = resolve => require(['@/views/Event/Contact'], resolve)
 const EditContact = resolve => require(['@/views/Event/EditContact'], resolve)
+const BindContact = resolve => require(['@/views/Event/BindContact'], resolve)
 const Message = resolve => require(['@/views/Event/Message'], resolve)
 
 const Lift = resolve => require(['@/views/Doc/Lift'], resolve)
@@ -53,16 +53,20 @@ const ContractorMng = resolve => require(['@/views/Doc/ContractorMng'], resolve)
 const EditManufacture = resolve => require(['@/views/Doc/EditManufacture'], resolve)
 
 const LiftWarranty = resolve => require(['@/views/Warranty/LiftWarranty'], resolve)
+const EditRecord = resolve => require(['@/views/Warranty/EditRecord'], resolve)
 const AnnualInspetion = resolve => require(['@/views/Warranty/AnnualInspetion'], resolve)
+const EditYearCheck = resolve => require(['@/views/Warranty/EditYearCheck'], resolve)
+
 const Site = resolve => require(['@/views/Warranty/Site'], resolve)
+const EditSite = resolve => require(['@/views/Warranty/EditSite'], resolve)
 const Team = resolve => require(['@/views/Warranty/Team'], resolve)
-const AddTeam = resolve => require(['@/views/Warranty/AddTeam'], resolve)
+const EditTeam = resolve => require(['@/views/Warranty/EditTeam'], resolve)
 const People = resolve => require(['@/views/Warranty/People'], resolve)
-const AddPeople = resolve => require(['@/views/Warranty/AddPeople'], resolve)
+const EditPeople = resolve => require(['@/views/Warranty/EditPeople'], resolve)
 const WarrantyItem = resolve => require(['@/views/Warranty/WarrantyItem'], resolve)
-const AddItem = resolve => require(['@/views/Warranty/AddItem'], resolve)
+const EditItem = resolve => require(['@/views/Warranty/EditItem'], resolve)
 const WarrantyCategory = resolve => require(['@/views/Warranty/WarrantyCategory'], resolve)
-const AddCategory = resolve => require(['@/views/Warranty/AddCategory'], resolve)
+const EditCategory = resolve => require(['@/views/Warranty/EditCategory'], resolve)
 
 const Role = resolve => require(['@/views/Right/Role'], resolve)
 const AddRole = resolve => require(['@/views/Right/AddRole'], resolve)
@@ -165,12 +169,12 @@ export default new Router({
 					meta:{name:'编辑故障级别'},
 		      component: EditLevel
 		    },
-				{
-		      path: '/level/:id',
-		      name: 'strategy',
-					meta:{name:'处理策略'},
-		      component: Strategy
-		    },
+				// {
+		    //   path: '/level/:id',
+		    //   name: 'strategy',
+				// 	meta:{name:'处理策略'},
+		    //   component: Strategy
+		    // },
 				{
 		      path: '/code',
 		      name: 'code',
@@ -206,6 +210,12 @@ export default new Router({
 		      name: 'editcontact',
 					meta:{name:'编辑联系人'},
 		      component: EditContact
+		    },
+				{
+		      path: '/contact/bind/:id',
+		      name: 'bindcontact',
+					meta:{name:'绑定电梯'},
+		      component: BindContact
 		    },
 				{
 		      path: '/message',
@@ -490,16 +500,40 @@ export default new Router({
 		      component: LiftWarranty
 		    },
 				{
+		      path: '/liftwarranty/edit/:id',
+		      name: 'addrecord',
+					meta:{name:'录入维保信息'},
+		      component: EditRecord
+		    },
+				{
 		      path: '/annualinspetion',
 		      name: 'annualinspetion',
 					meta:{name:'电梯年检管理'},
 		      component: AnnualInspetion
 		    },
 				{
+		      path: '/annualinspetion/edit/:id',
+		      name: 'addyearcheck',
+					meta:{name:'录入年检登记'},
+		      component: EditYearCheck
+		    },
+				{
 		      path: '/site',
 		      name: 'site',
 					meta:{name:'维保站点管理'},
 		      component: Site
+		    },
+				{
+		      path: '/site/add',
+		      name: 'addsite',
+					meta:{name:'添加维保站点'},
+		      component: EditSite
+		    },
+				{
+		      path: '/site/edit/:id',
+		      name: 'editsite',
+					meta:{name:'编辑维保站点'},
+		      component: EditSite
 		    },
 				{
 		      path: '/team',
@@ -511,7 +545,13 @@ export default new Router({
 		      path: '/team/add',
 		      name: 'addteam',
 					meta:{name:'添加维保班组'},
-		      component: AddTeam
+		      component: EditTeam
+		    },
+				{
+		      path: '/team/edit/:id',
+		      name: 'editteam',
+					meta:{name:'添加维保班组'},
+		      component: EditTeam
 		    },
 				{
 		      path: '/people',
@@ -520,10 +560,16 @@ export default new Router({
 		      component: People
 		    },
 				{
-		      path: '/AddPeople',
+		      path: '/people/add',
 		      name: 'addpeople',
 					meta:{name:'添加维保人员'},
-		      component: AddPeople
+		      component: EditPeople
+		    },
+				{
+		      path: '/people/edit/:id',
+		      name: 'editpeople',
+					meta:{name:'编辑维保人员'},
+		      component: EditPeople
 		    },
 				{
 		      path: '/warrantyitem',
@@ -535,7 +581,13 @@ export default new Router({
 		      path: '/warrantyitem/add',
 		      name: 'additem',
 					meta:{name:'添加保养项'},
-		      component: AddItem
+		      component: EditItem
+		    },
+				{
+		      path: '/warrantyitem/edit/:id',
+		      name: 'edititem',
+					meta:{name:'编辑保养项'},
+		      component: EditItem
 		    },
 				{
 		      path: '/warrantycategory',
@@ -546,8 +598,14 @@ export default new Router({
 				{
 		      path: '/warrantycategory/add',
 		      name: 'addcategory',
-					meta:{name:'保养类别管理'},
-		      component: AddCategory
+					meta:{name:'添加保养类别'},
+		      component: EditCategory
+		    },
+				{
+		      path: '/warrantycategory/edit/:id',
+		      name: 'editcategory',
+					meta:{name:'编辑保养类别'},
+		      component: EditCategory
 		    },
 			]
     }

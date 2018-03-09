@@ -16,47 +16,29 @@
                         </div>
                     </div>
                     <hr class="mt10 mb10">
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-xs-12 text-right">
                             <button class="btn btn-success open-layer">批量倒入年检登记</button>
                         </div>
-                    </div>
-                    <table id="dataTable" class="table table-bordered">
-                        <thead>
-                        <tr>
-                            <th>电梯工号</th>
-                            <th>具体位置别名</th>
-                            <th>使用单位</th>
-                            <th>维保单位</th>
-                            <th>注册代码</th>
-                            <th>年检状态</th>
-                            <th>年检记录状态</th>
-                            <th>上次年检日期</th>
-                            <th>下次年检日期</th>
-                            <th>操作</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>某制造商</td>
-                            <td>北京朝阳区</td>
-                            <td>010000099999</td>
-                            <td>张三/18899998888</td>
-                            <td>张三/18899998888</td>
-                            <td>张三</td>
-                            <td><span class="label label-info">技监正常</span></td>
-                            <td><span class="label label-success">质监完成</span></td>
-                            <td>2018-09-09</td>
-                            <td>2018-09-09</td>
-                            <td>
-                                <a href="weibaoguanli-diantinianjianguanli-dengji.html" class="btn btn-xs btn-default">登记</a>
-                                <a href="weibaoguanli-diantinianjianguanli-dengji.html" class="btn btn-xs btn-default">编辑</a>
-                                <a href="weibaoguanli-diantinianjianguanli-dengji.html" class="btn btn-xs btn-default">历史</a>
-                            </td>
-                        </tr>
-
-                        </tbody>
-                    </table>
+                    </div> -->
+										<v-table
+												class="mb10"
+												row-hover-color="#eaeaea"
+												is-vertical-resize
+												is-horizontal-resize
+												style="width:100%"
+												:is-loading="loading"
+												:columns="columns"
+												:table-data="list"
+												@on-custom-comp="getList"
+										/>
+										<div class="tr">
+											<v-pagination
+												size="small"
+												@page-change="pageChange"
+												:total="options.total"
+												:layout="['total', 'prev', 'pager', 'next', 'jumper']" />
+										</div>
                 </div>
                 <!-- /.box-body -->
 
@@ -68,51 +50,137 @@
 </template>
 
 <script>
+Vue.component('inspetion-operation', {
+  template: `<span>
+				<button @click.stop.prevent="add()" class="btn btn-xs btn-default">年检登记</button>
+				<button @click.stop.prevent="add()" class="btn btn-xs btn-warning">年检历史</button>
+        </span>`,
+  props: {
+    rowData: {
+      type: Object
+    },
+    field: {
+      type: String
+    },
+    index: {
+      type: Number
+    }
+  },
+  methods: {
+    add() {
+			this.$router.push({
+				name:'addyearcheck',
+				params:{
+					id:this.rowData.id
+				}
+			})
+    },
+		add() {
+			this.$router.push({
+				name:'addyearcheck',
+				params:{
+					id:this.rowData.id
+				}
+			})
+    },
+  }
+})
 export default {
-	mounted(){
-		$('#dataTable').DataTable({
-            "dom": 'rtip',
-            "searching": false,
-//            "scrollX": true, //表格太长可加此项进行横向滚动
-//            禁用最后一列排序
-            "columns": [
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                {"orderable": false}
-            ],
-//            中文配置，可存为配置文件单独调用
-            language: {
-                "sProcessing": "处理中...",
-                "sLengthMenu": "显示 _MENU_ 项结果",
-                "sZeroRecords": "没有匹配结果",
-                "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
-                "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
-                "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
-                "sInfoPostFix": "",
-                "sSearch": "搜索:",
-                "sUrl": "",
-                "sEmptyTable": "表中数据为空",
-                "sLoadingRecords": "载入中...",
-                "sInfoThousands": ",",
-                "oPaginate": {
-                    "sFirst": "首页",
-                    "sPrevious": "上页",
-                    "sNext": "下页",
-                    "sLast": "末页"
-                },
-                "oAria": {
-                    "sSortAscending": ": 以升序排列此列",
-                    "sSortDescending": ": 以降序排列此列"
-                }
-            }
-        });
-	}
+  data: () => ({
+    loading: false,
+    columns: [{
+      field: 'ladderNumber',
+      title: '电梯工号',
+      width: 100,
+      titleAlign: 'center',
+      columnAlign: 'center',
+      isResize: true
+    }, {
+      field: 'alias',
+      title: '具体位置别名',
+      width: 100,
+      titleAlign: 'center',
+      columnAlign: 'center',
+      isResize: true
+    }, {
+      field: 'ownerCompanyName',
+      title: '产权单位',
+      width: 100,
+      titleAlign: 'center',
+      columnAlign: 'center',
+      isResize: true
+    }, {
+      field: 'userCompanyName',
+      title: '使用单位',
+      width: 100,
+      titleAlign: 'center',
+      columnAlign: 'center',
+      isResize: true
+    }, {
+      field: 'propertyCompanyName',
+      title: '物业单位',
+      width: 100,
+      titleAlign: 'center',
+      columnAlign: 'center',
+      isResize: true
+    }, {
+      field: 'maintenanceCompanyName',
+      title: '维保单位',
+      width: 100,
+      titleAlign: 'center',
+      columnAlign: 'center',
+      isResize: true
+    }, {
+      field: 'contactor',
+      title: '负责人',
+      width: 100,
+      titleAlign: 'center',
+      columnAlign: 'center',
+      isResize: true
+    }, {
+      field: 'mobile',
+      title: '负责人电话',
+      width: 100,
+      titleAlign: 'center',
+      columnAlign: 'center',
+      isResize: true
+    }, {
+      field: 'operation',
+      title: '操作',
+      width: 150,
+      titleAlign: 'center',
+      columnAlign: 'center',
+      componentName: 'inspetion-operation',
+      isResize: true
+    }],
+    list: [],
+    options: {
+			ladderNumber:'',
+			alias:'',
+			address:'',
+      page: 1,
+      num: 15,
+      total: 0
+    }
+  }),
+  created() {
+    this.getList()
+  },
+  methods: {
+    pageChange(val) {
+      this.options.page = val
+      this.getList()
+    },
+    async getList() {
+      this.loading = true
+      let res = await this.$api.maintenance(this.options)
+      this.loading = false
+      if (0 === res.data.code) {
+        this.list = res.data.data.list
+        this.options.total = res.data.data.totalNumber
+      }
+    }
+  }
 }
 </script>
 

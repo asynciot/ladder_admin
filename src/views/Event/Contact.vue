@@ -35,7 +35,6 @@
 									:total="options.total"
 									:layout="['total', 'prev', 'pager', 'next', 'jumper']" />
 							</div>
-              <table id="dataTable" class="table table-bordered">
                   <thead>
                   <tr>
                       <th>联系人姓名</th>
@@ -78,8 +77,7 @@
 <script>
 Vue.component('contact-operation', {
   template: `<span>
-				<button @click.stop.prevent="bind()" class="btn btn-xs btn-btn-default">关联电梯</button>
-				<button @click.stop.prevent="update()" class="btn btn-xs btn-warning">编辑</button>
+				<button @click.stop.prevent="bind()" class="btn btn-xs btn-default">关联电梯</button>
 				<button @click.stop.prevent="deleteRow()" class="btn btn-xs btn-warning remove-btn">删除</button>
         </span>`,
   props: {
@@ -96,20 +94,20 @@ Vue.component('contact-operation', {
   methods: {
 		bind() {
 			this.$router.push({
-				name:'bindlift',
+				name:'bindcontact',
 				params:{
 					id:this.rowData.id
 				}
 			})
 		},
-		update() {
-			this.$router.push({
-				name:'editcontractor',
-				params:{
-					id:this.rowData.id
-				}
-			})
-    },
+		// update() {
+		// 	this.$router.push({
+		// 		name:'bindcontact',
+		// 		params:{
+		// 			id:this.rowData.id
+		// 		}
+		// 	})
+    // },
     deleteRow() {
       this.$modal.show('dialog', {
         title: '警告!',
@@ -121,7 +119,7 @@ Vue.component('contact-operation', {
             title: '删除',
 						handler: async () => {
 							this.$modal.hide('dialog')
-							let res = await this.$api.reomveContact({id:this.rowData.id})
+							let res = await this.$api.reomveUser({id:this.rowData.id})
 							this.$emit('on-custom-comp');
 							if (0 === res.data.code) {
 								this.$notify({
@@ -147,21 +145,21 @@ export default {
   data: () => ({
     loading: false,
     columns: [{
-      field: 'ladderNo',
+      field: 'nicname',
       title: '联系人姓名',
       width: 100,
       titleAlign: 'center',
       columnAlign: 'center',
       isResize: true
     },{
-      field: 'alias',
+      field: 'mobile',
       title: '联系人电话',
       width: 100,
       titleAlign: 'center',
       columnAlign: 'center',
       isResize: true
     }, {
-      field: 'status',
+      field: 'email',
       title: '联系人邮箱',
       width: 100,
       titleAlign: 'center',
@@ -169,14 +167,7 @@ export default {
       isResize: true
     },{
       field: 'event',
-      title: '关联综述',
-      width: 100,
-      titleAlign: 'center',
-      columnAlign: 'center',
-      isResize: true
-    },{
-      field: 'errCode',
-      title: '最后更新时间',
+      title: '关联电梯数',
       width: 100,
       titleAlign: 'center',
       columnAlign: 'center',
@@ -207,7 +198,7 @@ export default {
     },
     async getList() {
       this.loading = true
-      let res = await this.$api.history(this.options)
+      let res = await this.$api.user(this.options)
       this.loading = false
       if (0 === res.data.code) {
         this.list = res.data.data.list

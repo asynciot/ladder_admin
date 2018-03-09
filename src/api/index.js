@@ -3,6 +3,7 @@ import {
 	CommonApi,
 	DocApi,
 	EventApi,
+	MaintenanceApi,
 } from './config'
 export default {
   //account
@@ -191,5 +192,80 @@ export default {
 	},
 	reomveMsgPerson:(data)=>{
     return EventApi.remove(Object.assign({key1:'msgPerson'},data))
+  },
+	maintenanceRecord:(data)=>{
+		return MaintenanceApi.query(Object.assign({key1:'record'},data))
+	},
+	addMaintenanceRecord:(data)=>{
+		return MaintenanceApi.save({key1:'record'},data)
+	},
+	updateMaintenanceRecord:(data)=>{
+		return MaintenanceApi.update({key1:'record'},data)
+	},
+	reomveMaintenanceRecord:(data)=>{
+    return MaintenanceApi.remove(Object.assign({key1:'record'},data))
+  },
+	yearCheck:(data)=>{
+		return MaintenanceApi.query(Object.assign({key1:'yearCheck'},data))
+	},
+	lastCheck:(data)=>{
+		return MaintenanceApi.query(Object.assign({key1:'yearCheck',key2:'last'},data))
+	},
+	addYearCheck:(data)=>{
+		return MaintenanceApi.save({key1:'yearCheck'},data)
+	},
+	updateYearCheck:(data)=>{
+		return MaintenanceApi.update({key1:'yearCheck'},data)
+	},
+	reomveYearCheck:(data)=>{
+    return MaintenanceApi.remove(Object.assign({key1:'yearCheck'},data))
+  },
+	item:(data)=>{
+		return MaintenanceApi.query(Object.assign({key1:'item'},data))
+	},
+	addItem:(data)=>{
+		return MaintenanceApi.save({key1:'item'},data)
+	},
+	updateItem:(data)=>{
+		return MaintenanceApi.update({key1:'item'},data)
+	},
+	reomveItem:(data)=>{
+    return MaintenanceApi.remove(Object.assign({key1:'item'},data))
+  },
+	type:(data)=>{
+		return MaintenanceApi.query(Object.assign({key1:'type'},data))
+	},
+	addType:(data)=>{
+		return MaintenanceApi.save({key1:'type'},data)
+	},
+	updateType:(data)=>{
+		return MaintenanceApi.update({key1:'type'},data)
+	},
+	reomveType:(data)=>{
+    return MaintenanceApi.remove(Object.assign({key1:'type'},data))
+  },
+	bind:(data)=>{
+		return MaintenanceApi.query(Object.assign({key1:'bind'},data))
+	},
+	addBind:(data)=>{
+		return MaintenanceApi.save({key1:'bind'},data)
+	},
+	updateBind:(data)=>{
+		return MaintenanceApi.update({key1:'bind'},data)
+	},
+	reomveBind:(data)=>{
+    return MaintenanceApi.remove(Object.assign({key1:'bind'},data))
+  },
+	site:(data)=>{
+		return MaintenanceApi.query(Object.assign({key1:'site'},data))
+	},
+	addSite:(data)=>{
+		return MaintenanceApi.save({key1:'site'},data)
+	},
+	updateSite:(data)=>{
+		return MaintenanceApi.update({key1:'site'},data)
+	},
+	reomveSite:(data)=>{
+    return MaintenanceApi.remove(Object.assign({key1:'site'},data))
   },
 }

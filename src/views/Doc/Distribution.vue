@@ -10,7 +10,7 @@
 	                  <div class="select-tag">
 	                      <span v-if="!selectList.length" style="color: #ccc">请从右边列表选择</span>
 												<button v-for="item in selectList" @click="deleteSelect(item)" type="button" class="btn btn-xs label-success ml10">
-													<i v-text="`${item.name}`"></i>
+													<i v-text="`${item.companyId}`"></i>
 													<span class="glyphicon glyphicon-remove"></span>
 												</button>
 	                  </div>
@@ -75,28 +75,6 @@
 												:total="options.total"
 												:layout="['total', 'prev', 'pager', 'next', 'jumper']" />
 										</div>
-	                  <table id="dataTable" class="table table-bordered select-table">
-	                      <thead>
-	                      <tr>
-	                          <th>单位名称</th>
-	                          <th>单位类型</th>
-	                      </tr>
-	                      </thead>
-	                      <tbody>
-	                      <tr>
-	                          <td>哇哈哈</td>
-	                          <td>北京朝阳区</td>
-	                      </tr>
-	                      <tr>
-	                          <td>选择单位</td>
-	                          <td>北京朝阳区</td>
-	                      </tr>
-	                      <tr>
-	                          <td>选择单位</td>
-	                          <td>北京朝阳区</td>
-	                      </tr>
-	                      </tbody>
-	                  </table>
 	              </div>
 	              <!-- /.box-body -->
 	          </div>
@@ -109,27 +87,27 @@
 <script>
 export default {
   data: () => {
-		let type = [{
-				id: 0,
-				name: '安装单位'
-			},
-			{
-				id: 1,
-				name: '维保单位'
-			},
-			{
-				id: 2,
-				name: '产权单位'
-			},
-			{
-				id: 3,
-				name: '使用单位'
-			},
-			{
-				id: 4,
-				name: '物业单位'
-			},
-		]
+    let type = [{
+        id: 0,
+        name: '安装单位'
+      },
+      {
+        id: 1,
+        name: '维保单位'
+      },
+      {
+        id: 2,
+        name: '产权单位'
+      },
+      {
+        id: 3,
+        name: '使用单位'
+      },
+      {
+        id: 4,
+        name: '物业单位'
+      },
+    ]
     return {
       types: type,
       form: {},
@@ -162,29 +140,39 @@ export default {
       }
     }
   },
-  created() {
-    this.getData()
+  async created() {
+    await this.getMaintenance()
+    await this.getData()
     this.getList()
   },
   methods: {
-    async getData() {
+    async getMaintenance() {
       let res = await this.$api.maintenance({
         id: this.$route.params.id
       })
       this.form = res.data.data.list[0]
-			res = await this.$api.ladderBinder({id:this.$route.params.id})
     },
-    deleteSelect(data) {
-      let index = this.selectList.findIndex(item => item.id == data.id)
-      let listIndex = this.list.findIndex(item => item.id == data.id)
+    async getData() {
+      let res = await this.$api.ladderBinder({
+        ladderNo: this.form.ladderNumber
+      })
+      this.selectList = res.data.data.list
+    },
+    async deleteSelect(data) {
+      let index = this.selectList.findIndex(item => item.companyId == data.companyId)
+      let listIndex = this.list.findIndex(item => item.id == data.companyId)
       let list = [].concat(this.list)
       if (index > -1) {
-        this.list = list
-      }
-      if (listIndex > -1) {
+        let res = await this.$api.reomveLadderBinder({
+          id: this.selectList[index].id
+        })
         this.selectList.splice(index, 1)
-        list[listIndex].selected = false
-        this.list = list
+        if (res.data.code == 0) {
+          if (listIndex > -1) {
+            list[listIndex].selected = false
+            this.list = list
+          }
+        }
       }
     },
     columnCellClass(rowIndex, columnName, rowData) {
@@ -201,15 +189,13 @@ export default {
           companyId: data.id
         })
         if (0 === res.data.code) {
+          this.getData()
           list[rowIndex].selected = true
           this.list = list
-          this.selectList.push(data)
         }
       } else {
-        let res = await this.$api.reomveDevice({
-          deviceNo: this.form.id,
-          ladderNo: data,
-          id
+        let res = await this.$api.reomveLadderBinder({
+          id: this.selectList[index].id
         })
         if (0 === res.data.code) {
           list[rowIndex].selected = false
@@ -217,12 +203,6 @@ export default {
           this.selectList.splice(index, 1)
         }
       }
-      // data.forEach(item=>{
-      // 	let index = this.selectList.findIndex(lift => item.id == lift.id)
-      // 	if (index == -1) {
-      //     this.selectList.push(item)
-      //   }
-      // })
     },
     pageChange(val) {
       this.options.page = val
@@ -235,7 +215,7 @@ export default {
         this.loading = false
         if (0 === res.data.code) {
           this.list = res.data.data.list.map(item => {
-            let index = this.selectList.findIndex(lift => lift.id == item.id)
+            let index = this.selectList.findIndex(lift => lift.companyId == item.id)
             if (index > -1) {
               item.selected = true
             }

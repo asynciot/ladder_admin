@@ -83,12 +83,14 @@ export default {
   data() {
     return {
       form: {
-        name: '',
-        province: '',
-        city: '',
-        district: '',
-        address: '',
-        place: '',
+				username:'',
+				password:'',
+				confirm:'',
+				nicname:'',
+				mobile:'',
+				companyId: -1,
+				email:'',
+				roleType:''
       },
 			list:[]
     }
@@ -114,22 +116,27 @@ export default {
       this.form = res.data.data.list[0]
     },
     submit() {
-      this.$validator.validateAll('form').then(async (result) => {
+			this.$validator.validateAll('form').then(async (result) => {
         if (result) {
-          let res = null
-          if (this.$route.params.id) {
-            res = await this.$api.updateMsgPerson(this.form)
-          } else {
-            res = await this.$api.addMsgPerson(this.form)
-          }
-          if (res.data.code == 0) {
-            this.$notify({
-              group: 'ok',
-              title: '提示',
-              text: '操作成功'
-            });
-            this.$router.back()
-          }
+					let res = null
+					if(this.$route.params.id){
+						res = await this.$api.updateUser(this.form)
+					}else {
+						res = await this.$api.register(this.form)
+					}
+					console.log(res.data);
+					if(res.data.code == 0){
+						this.form.id = res.data.id
+						res = await this.$api.updateUser(this.form)
+						if(res.data.code == 0){
+							this.$notify({
+								group: 'ok',
+								title: '提示',
+								text: '操作成功'
+							});
+							this.$router.back()
+						}
+					}
         }
       });
     }
