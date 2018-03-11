@@ -4,6 +4,7 @@ import {
 	DocApi,
 	EventApi,
 	MaintenanceApi,
+	MointorApi,
 } from './config'
 export default {
   //account
@@ -267,5 +268,38 @@ export default {
 	},
 	reomveSite:(data)=>{
     return MaintenanceApi.remove(Object.assign({key1:'site'},data))
+  },
+	team:(data)=>{
+		return MaintenanceApi.query(Object.assign({key1:'group'},data))
+	},
+	addTeam:(data)=>{
+		return MaintenanceApi.save({key1:'group'},data)
+	},
+	updateTeam:(data)=>{
+		return MaintenanceApi.update({key1:'group'},data)
+	},
+	reomveTeam:(data)=>{
+    return MaintenanceApi.remove(Object.assign({key1:'group'},data))
+  },
+	people:(data)=>{
+		return MaintenanceApi.query(Object.assign({key1:'member'},data))
+	},
+	addPeople:(data)=>{
+		return MaintenanceApi.save({key1:'member'},data)
+	},
+	updatePeople:(data)=>{
+		return MaintenanceApi.update({key1:'member'},data)
+	},
+	reomvePeople:(data)=>{
+    return MaintenanceApi.remove(Object.assign({key1:'member'},data))
+  },
+	mointors:(data)=>{
+		return MointorApi.query(data)
+	},
+	addFavourite:(data)=>{
+		return MointorApi.save({key1:'member'},data)
+	},
+	reomveFavourite:(data)=>{
+    return MointorApi.remove(Object.assign({key1:'member'},data))
   },
 }

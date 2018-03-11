@@ -35,6 +35,7 @@
 						<div class="tr">
 							<v-pagination
 								size="small"
+								:pageSize="options.num"
 								@page-change="pageChange"
 								:total="options.total"
 								:layout="['total', 'prev', 'pager', 'next', 'jumper']" />

@@ -1,59 +1,57 @@
 <template lang="html">
-        <!-- Main content -->
-        <section class="content">
-
-            <div class="box">
-                <div class="box-body">
-                    <div class="row">
-                        <div class="col-xs-4">
-                            <input type="text" class="form-control input-sm" placeholder="电梯工号">
-                        </div>
-                        <div class="col-xs-4">
-                            <input type="text" class="form-control input-sm" placeholder="具体位置别名">
-                        </div>
-                        <div class="col-xs-2">
-                            <button class="btn btn-primary btn-sm">搜索</button>
-                        </div>
-                    </div>
-                    <hr class="mt10 mb10">
-                    <!-- <div class="row">
-                        <div class="col-xs-12 text-right">
-                            <button class="btn btn-success open-layer">批量倒入年检登记</button>
-                        </div>
-                    </div> -->
-										<v-table
-												class="mb10"
-												row-hover-color="#eaeaea"
-												is-vertical-resize
-												is-horizontal-resize
-												style="width:100%"
-												:is-loading="loading"
-												:columns="columns"
-												:table-data="list"
-												@on-custom-comp="getList"
-										/>
-										<div class="tr">
-											<v-pagination
-												size="small"
-												@page-change="pageChange"
-												:total="options.total"
-												:layout="['total', 'prev', 'pager', 'next', 'jumper']" />
-										</div>
-                </div>
-                <!-- /.box-body -->
-
-            </div>
-            <!-- /.box -->
-
-        </section>
-        <!-- /.content -->
+  <!-- Main content -->
+  <section class="content">
+      <div class="box">
+          <div class="box-body">
+              <div class="row">
+                  <div class="col-xs-4">
+                      <input type="text" v-model="options.ladderNumber" class="form-control input-sm" placeholder="电梯工号">
+                  </div>
+                  <div class="col-xs-4">
+                      <input type="text" v-model="options.alias" class="form-control input-sm" placeholder="具体位置别名">
+                  </div>
+                  <div class="col-xs-2">
+                      <button @click="options.page=1,getList()" class="btn btn-primary btn-sm">搜索</button>
+                  </div>
+              </div>
+              <hr class="mt10 mb10">
+              <!-- <div class="row">
+                  <div class="col-xs-12 text-right">
+                      <button class="btn btn-success open-layer">批量倒入年检登记</button>
+                  </div>
+              </div> -->
+							<v-table
+									class="mb10"
+									row-hover-color="#eaeaea"
+									is-vertical-resize
+									is-horizontal-resize
+									style="width:100%"
+									:is-loading="loading"
+									:columns="columns"
+									:table-data="list"
+									@on-custom-comp="getList"
+							/>
+							<div class="tr">
+								<v-pagination
+									size="small"
+									:pageSize="options.num"
+									@page-change="pageChange"
+									:total="options.total"
+									:layout="['total', 'prev', 'pager', 'next', 'jumper']" />
+							</div>
+          </div>
+          <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+  </section>
+  <!-- /.content -->
 </template>
 
 <script>
 Vue.component('inspetion-operation', {
   template: `<span>
 				<button @click.stop.prevent="add()" class="btn btn-xs btn-default">年检登记</button>
-				<button @click.stop.prevent="add()" class="btn btn-xs btn-warning">年检历史</button>
+				<button @click.stop.prevent="history()" class="btn btn-xs btn-warning">年检历史</button>
         </span>`,
   props: {
     rowData: {
@@ -71,15 +69,15 @@ Vue.component('inspetion-operation', {
 			this.$router.push({
 				name:'addyearcheck',
 				params:{
-					id:this.rowData.id
+					ladderNo:this.rowData.id
 				}
 			})
     },
-		add() {
+		history() {
 			this.$router.push({
-				name:'addyearcheck',
+				name:'yearcheckhistory',
 				params:{
-					id:this.rowData.id
+					id:this.rowData.ladderNumber
 				}
 			})
     },
@@ -157,7 +155,6 @@ export default {
     options: {
 			ladderNumber:'',
 			alias:'',
-			address:'',
       page: 1,
       num: 15,
       total: 0

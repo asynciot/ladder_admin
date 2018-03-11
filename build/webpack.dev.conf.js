@@ -47,6 +47,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   plugins: [
 		new webpack.ProvidePlugin({
         '$': "jquery",
+				"BMap": "BMap",
         'jQuery': "jquery",
     }),
     new webpack.DefinePlugin({

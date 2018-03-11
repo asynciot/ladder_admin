@@ -25,15 +25,13 @@
                 <div class="form-group">
                     <label for="" class="col-sm-2 control-label">保养类型分类</label>
                     <div class=" col-sm-8 col-md-6">
-                        <select name="" class="form-control" id="">
-                            <option value="">请选择</option>
-                        </select>
+											<select name="type" v-validate="'required'" :class="{'form-control': true, 'is-error': errors.has('form.type') }" v-model="form.type" >
+												<option v-for="item in type" :value="item.id" v-text="item.name"></option>
+											</select>
                     </div>
-
                 </div>
                 <div class="form-group">
                     <label for="" class="col-sm-2 control-label">保养项要求</label>
-
                     <div class=" col-sm-8 col-md-6">
                         <textarea name="comments" :class="{'form-control': true, 'is-error': errors.has('form.comments') }" v-model="form.comments" placeholder="请输入" rows="4"></textarea>
                     </div>
@@ -64,14 +62,27 @@ export default {
 				type:'',
 				comments:'',
 			},
-			maintenanceList:[]
+			type:[{
+				id:0,
+				name:'半月保'
+			},{
+				id:1,
+				name:'月保'
+			},{
+				id:2,
+				name:'季度保'
+			},{
+				id:3,
+				name:'年检'
+			},],
+			itemList:[]
 		}
 	},
 	created(){
 		if(this.$route.params.id){
 			this.getData()
 		}
-		this.getOption()
+		// this.getOption()
 	},
 	methods:{
 		async getData(){
@@ -79,8 +90,8 @@ export default {
 			this.form = res.data.data.list[0]
 		},
 		getOption(){
-			this.$api.company({ type:1, page:1, num:100}).then(res=>{
-				this.maintenanceList = res.data.data.list
+			this.$api.item({ page:1, num:100}).then(res=>{
+				this.itemList = res.data.data.list
 			})
 		},
 		submit(){

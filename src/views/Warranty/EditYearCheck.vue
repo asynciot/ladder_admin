@@ -47,7 +47,12 @@
 											<vue-datepicker-local v-model="last.checkTime" disabled/>
                     </div>
                 </div>
-
+								<!-- <div class="form-group">
+                    <label for="" class="col-sm-2 control-label">本次年检日期</label>
+                    <div class=" col-sm-8 col-md-6">
+											<vue-datepicker-local v-model="last.checkTime" disabled/>
+                    </div>
+                </div> -->
                 <div class="form-group">
                     <label for="" class="col-sm-2 control-label">年检记录状态</label>
 
@@ -108,27 +113,42 @@ export default {
   },
   created() {
     if (this.$route.params.id) {
+			this.getCheck()
+    }
+		if (this.$route.params.ladderNo) {
       this.getData()
     }
   },
   methods: {
-    async getData() {
-      let res = await this.$api.maintenance({
-        id: this.$route.params.id
-      })
+    async getData(id) {
+			let query = null
+			if (id)
+				query = {ladderNumber:id};
+			else
+				query = {id:this.$route.params.ladderNo};
+      let res = await this.$api.maintenance(query)
       this.form = res.data.data.list[0]
 			this.record.ladderNo = this.form.ladderNumber
     },
+		async getCheck(){
+			let res = await this.$api.yearCheck({
+        id: this.$route.params.id
+      })
+			this.record.id = res.data.data.list[0].id
+			this.record.checkTime = res.data.data.list[0].checkTime
+			this.record.status = res.data.data.list[0].status
+			this.getData(res.data.data.list[0].ladderNo)
+		},
     submit() {
       this.$validator.validateAll('record').then(async (result) => {
         if (result) {
           let res = null
-          // if (this.$route.params.id) {
-            // res = await this.$api.updateErrorCode(this.form)
-          // } else {
+          if (this.$route.params.id) {
+            res = await this.$api.updateYearCheck(this.form)
+          } else {
 						this.record.checkTime = moment(new Date()).format('YYYY-MM-DD')
             res = await this.$api.addYearCheck(this.record)
-          // }
+          }
           if (res.data.code == 0) {
             this.$notify({
               group: 'ok',

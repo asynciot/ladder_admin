@@ -55,6 +55,7 @@ const EditManufacture = resolve => require(['@/views/Doc/EditManufacture'], reso
 const LiftWarranty = resolve => require(['@/views/Warranty/LiftWarranty'], resolve)
 const EditRecord = resolve => require(['@/views/Warranty/EditRecord'], resolve)
 const AnnualInspetion = resolve => require(['@/views/Warranty/AnnualInspetion'], resolve)
+const CheckHistory = resolve => require(['@/views/Warranty/CheckHistory'], resolve)
 const EditYearCheck = resolve => require(['@/views/Warranty/EditYearCheck'], resolve)
 
 const Site = resolve => require(['@/views/Warranty/Site'], resolve)
@@ -67,6 +68,7 @@ const WarrantyItem = resolve => require(['@/views/Warranty/WarrantyItem'], resol
 const EditItem = resolve => require(['@/views/Warranty/EditItem'], resolve)
 const WarrantyCategory = resolve => require(['@/views/Warranty/WarrantyCategory'], resolve)
 const EditCategory = resolve => require(['@/views/Warranty/EditCategory'], resolve)
+const BindCategory = resolve => require(['@/views/Warranty/BindCategory'], resolve)
 
 const Role = resolve => require(['@/views/Right/Role'], resolve)
 const AddRole = resolve => require(['@/views/Right/AddRole'], resolve)
@@ -512,10 +514,22 @@ export default new Router({
 		      component: AnnualInspetion
 		    },
 				{
-		      path: '/annualinspetion/edit/:id',
+		      path: '/annualinspetion/add/:ladderNo',
 		      name: 'addyearcheck',
 					meta:{name:'录入年检登记'},
 		      component: EditYearCheck
+		    },
+				{
+		      path: '/annualinspetion/edit/:id',
+		      name: 'edityearcheck',
+					meta:{name:'编辑年检登记'},
+		      component: EditYearCheck
+		    },
+				{
+		      path: '/annualinspetion/history/:id',
+		      name: 'yearcheckhistory',
+					meta:{name:'年检登记历史'},
+		      component: CheckHistory
 		    },
 				{
 		      path: '/site',
@@ -600,6 +614,12 @@ export default new Router({
 		      name: 'addcategory',
 					meta:{name:'添加保养类别'},
 		      component: EditCategory
+		    },
+				{
+		      path: '/warrantycategory/bind/:id',
+		      name: 'bindcategory',
+					meta:{name:'对应保养项'},
+		      component: BindCategory
 		    },
 				{
 		      path: '/warrantycategory/edit/:id',

@@ -13,7 +13,7 @@
                   </div>
               </div>
               <hr class="mt10 mb10">
-              <div class="row">
+              <div class="row mb10">
                   <div class="col-xs-12 text-right">
 											<router-link :to="{name:'additem'}" class="btn btn-success">添加保养项</router-link>
                   </div>
@@ -32,6 +32,7 @@
 							<div class="tr">
 								<v-pagination
 									size="small"
+									:pageSize="options.num"
 									@page-change="pageChange"
 									:total="options.total"
 									:layout="['total', 'prev', 'pager', 'next', 'jumper']" />

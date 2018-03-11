@@ -21,12 +21,14 @@ export const menu = [
         pId: 1,
         label: '实时数据监测',
         link: 'data'
-      }, {
-        id: 14,
-        pId: 1,
-        label: '实时视频监测',
-        link: 'video'
-      }, {
+      },
+			// {
+      //   id: 14,
+      //   pId: 1,
+      //   label: '实时视频监测',
+      //   link: 'video'
+      // },
+			{
         id: 15,
         pId: 1,
         label: '实时故障监测',

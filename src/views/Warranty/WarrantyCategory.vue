@@ -31,6 +31,7 @@
 							<div class="tr">
 								<v-pagination
 									size="small"
+									:pageSize="options.num"
 									@page-change="pageChange"
 									:total="options.total"
 									:layout="['total', 'prev', 'pager', 'next', 'jumper']" />
@@ -46,8 +47,15 @@
 </template>
 
 <script>
+const type = {
+	0:'半月保',
+	1:'月保',
+	2:'季度保',
+	3:'年检',
+}
 Vue.component('category-operation', {
   template: `<span>
+				<button @click.stop.prevent="bind()" class="btn btn-xs btn-default">对应保养类型</button>
 				<button @click.stop.prevent="update()" class="btn btn-xs btn-danger btn-warning">编辑</button>
 				<button @click.stop.prevent="deleteRow()" class="btn btn-xs btn-danger remove-btn">删除</button>
         </span>`,
@@ -63,6 +71,14 @@ Vue.component('category-operation', {
     }
   },
   methods: {
+		bind(){
+			this.$router.push({
+				name:'bindcategory',
+				params:{
+					id:this.rowData.id
+				}
+			})
+		},
     update() {
 			this.$router.push({
 				name:'editcategory',
@@ -117,7 +133,7 @@ export default {
     }, {
       field: 'days',
       title: '保养周期（天）',
-      width: 100,
+      width: 120,
       titleAlign: 'center',
       columnAlign: 'center',
       isResize: true
@@ -127,7 +143,10 @@ export default {
       width: 100,
       titleAlign: 'center',
       columnAlign: 'center',
-      isResize: true
+      isResize: true,
+			formatter:(rowData)=>{
+				return `${type[rowData.type]}`
+			}
     }, {
       field: 'comments',
       title: '备注',
@@ -138,7 +157,7 @@ export default {
     }, {
       field: 'operation',
       title: '操作',
-      width: 150,
+      width: 180,
       titleAlign: 'center',
       columnAlign: 'center',
       componentName: 'category-operation',

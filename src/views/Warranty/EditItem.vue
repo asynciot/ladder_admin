@@ -32,16 +32,16 @@
                     <div class=" col-sm-8 col-md-6">
                         <div class="checkbox">
                             <label class="ml10">
-                                <input type="radio" name="area" v-validate="'required'" v-model="form.area"> 轿顶
+                                <input type="radio" :value="0" name="area" v-validate="'required'" v-model="form.area"> 轿顶
                             </label>
                             <label class="ml10">
-                                <input type="radio" name="area" v-model="form.area"> 机房
+                                <input type="radio" :value="1" name="area" v-model="form.area"> 机房
                             </label>
                             <label class="ml10">
-                                <input type="radio" name="area" v-model="form.area"> 底坑
+                                <input type="radio" :value="2" name="area" v-model="form.area"> 底坑
                             </label>
                             <label class="ml10">
-                                <input type="radio" name="area" v-model="form.area"> 扶梯
+                                <input type="radio" :value="3" name="area" v-model="form.area"> 扶梯
                             </label>
                         </div>
                     </div>
@@ -84,6 +84,7 @@ export default {
 		},
 		submit(){
 			this.$validator.validateAll('form').then(async (result) => {
+				console.log(result);
         if (result) {
 					let res = null
 					if(this.$route.params.id){

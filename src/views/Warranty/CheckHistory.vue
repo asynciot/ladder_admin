@@ -3,20 +3,23 @@
   <section class="content">
       <div class="box">
           <div class="box-body">
-              <div class="row">
-                  <div class="col-md-4">
-                      <input type="text" class="form-control input-sm" placeholder="联系人名称">
+              <!-- <div class="row">
+                  <div class="col-xs-4">
+                      <input type="text" class="form-control input-sm" placeholder="电梯工号">
                   </div>
-                  <div class="col-md-2">
+                  <div class="col-xs-4">
+                      <input type="text" class="form-control input-sm" placeholder="具体位置别名">
+                  </div>
+                  <div class="col-xs-2">
                       <button class="btn btn-primary btn-sm">搜索</button>
                   </div>
-              </div>
+              </div> -->
               <hr class="mt10 mb10">
-              <div class="row mb10">
+              <!-- <div class="row">
                   <div class="col-xs-12 text-right">
-                    <router-link :to="{ name: 'addcontact'}" class="btn btn-success">添加故障联系人</router-link>
+                      <button class="btn btn-success open-layer">批量倒入年检登记</button>
                   </div>
-              </div>
+              </div> -->
 							<v-table
 									class="mb10"
 									row-hover-color="#eaeaea"
@@ -47,10 +50,15 @@
 </template>
 
 <script>
-Vue.component('contact-operation', {
+const status = {
+	0:'待领取通知书',
+	1:'待取缴费单',
+	2:'待预约技监',
+	3:'质监完成',
+}
+Vue.component('inspetion-operation', {
   template: `<span>
-				<button @click.stop.prevent="bind()" class="btn btn-xs btn-default">关联电梯</button>
-				<button @click.stop.prevent="deleteRow()" class="btn btn-xs btn-warning remove-btn">删除</button>
+				<button @click.stop.prevent="update()" class="btn btn-xs btn-default">编辑</button>
         </span>`,
   props: {
     rowData: {
@@ -64,85 +72,38 @@ Vue.component('contact-operation', {
     }
   },
   methods: {
-		bind() {
-			this.$router.push({
-				name:'bindcontact',
-				params:{
-					id:this.rowData.id
-				}
-			})
-		},
-		// update() {
-		// 	this.$router.push({
-		// 		name:'bindcontact',
-		// 		params:{
-		// 			id:this.rowData.id
-		// 		}
-		// 	})
-    // },
-    deleteRow() {
-      this.$modal.show('dialog', {
-        title: '警告!',
-        text: '是否删除此项 ？',
-        buttons: [{
-            title: '取消',
-          },
-          {
-            title: '删除',
-						handler: async () => {
-							this.$modal.hide('dialog')
-							let res = await this.$api.reomveUser({id:this.rowData.id})
-							this.$emit('on-custom-comp');
-							if (0 === res.data.code) {
-								this.$notify({
-									group: 'ok',
-									title: '提示',
-									text: '操作成功'
-								});
-							}else {
-								this.$notify({
-									group: 'error',
-									title: '提示',
-									text: '操作失败'
-								});
-							}
-            }
-          }
-        ]
+    update() {
+      this.$router.push({
+        name: 'edityearcheck',
+        params: {
+          id: this.rowData.id
+        }
       })
-    }
+    },
   }
 })
 export default {
   data: () => ({
     loading: false,
     columns: [{
-      field: 'nicname',
-      title: '联系人姓名',
+      field: 'checkTime',
+      title: '年检日期',
       width: 100,
       titleAlign: 'center',
       columnAlign: 'center',
-      isResize: true
-    },{
-      field: 'mobile',
-      title: '联系人电话',
-      width: 100,
-      titleAlign: 'center',
-      columnAlign: 'center',
+      formatter: (rowData)=>{
+        return `${moment(rowData.checkTime).format('YYYY-MM-DD')}`
+      },
       isResize: true
     }, {
-      field: 'email',
-      title: '联系人邮箱',
+      field: 'status',
+      title: '年检记录状态',
       width: 100,
       titleAlign: 'center',
       columnAlign: 'center',
-      isResize: true
-    },{
-      field: 'event',
-      title: '关联电梯数',
-      width: 100,
-      titleAlign: 'center',
-      columnAlign: 'center',
+			formatter: (rowData)=>{
+        return `${status[rowData.status]}`
+      },
       isResize: true
     }, {
       field: 'operation',
@@ -150,11 +111,14 @@ export default {
       width: 150,
       titleAlign: 'center',
       columnAlign: 'center',
-      componentName: 'contact-operation',
+      componentName: 'inspetion-operation',
       isResize: true
     }],
     list: [],
     options: {
+      ladderNumber: '',
+      alias: '',
+      address: '',
       page: 1,
       num: 15,
       total: 0
@@ -170,7 +134,7 @@ export default {
     },
     async getList() {
       this.loading = true
-      let res = await this.$api.user(this.options)
+      let res = await this.$api.yearCheck(this.options)
       this.loading = false
       if (0 === res.data.code) {
         this.list = res.data.data.list

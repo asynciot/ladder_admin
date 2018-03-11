@@ -24,6 +24,9 @@ body {
 .mb10 {
   margin-bottom: 10px;
 }
+.mb20 {
+  margin-bottom: 20px;
+}
 .mt15 {
   margin-top: 15px;
 }
@@ -199,6 +202,9 @@ div.dataTables_wrapper {
 .follow-btn {
   color: inherit;
 }
+.fa-heart.on {
+	color: #d22d72;
+}
 .follow-btn i:before {
   color: #d22d72;
   content: "\f08a 关注";
@@ -247,4 +253,10 @@ div.dataTables_wrapper {
 }
 .selected {
   background-color: rgb(234, 234, 234);
+}
+.BMap_cpyCtrl,.anchorBL {
+  display: none;
+}
+.no-padding-right {
+	padding-right:0px;
 }

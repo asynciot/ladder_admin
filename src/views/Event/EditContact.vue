@@ -1,6 +1,5 @@
 <template lang="html">
 	<section class="content">
-
     <div class="box">
         <form class="form-horizontal" @submit.prevent="submit" data-vv-scope="form">
             <div class="box-header with-border">

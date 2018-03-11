@@ -13,10 +13,10 @@
                   </div>
               </div>
               <hr class="mt10 mb10">
-              <div class="row">
+              <div class="row mb10">
                   <div class="col-xs-12 text-right">
 											<router-link :to="{name:'addteam'}" class="btn btn-success">添加维保班组</router-link>
-                      <button class="btn btn-success open-layer">批量倒入维保班组</button>
+                      <!-- <button class="btn btn-success open-layer">批量倒入维保班组</button> -->
                   </div>
               </div>
 							<v-table
@@ -33,11 +33,12 @@
 							<div class="tr">
 								<v-pagination
 									size="small"
+									:pageSize="options.num"
 									@page-change="pageChange"
 									:total="options.total"
 									:layout="['total', 'prev', 'pager', 'next', 'jumper']" />
 							</div>
-              <table id="dataTable" class="table table-bordered">
+              <!-- <table id="dataTable" class="table table-bordered"> -->
                   <thead>
                   <tr>
                       <th>班组名称</th>
@@ -71,10 +72,8 @@
               </table>
           </div>
           <!-- /.box-body -->
-
       </div>
       <!-- /.box -->
-
   </section>
   <!-- /.content -->
 </template>
@@ -116,7 +115,7 @@ Vue.component('team-operation', {
             title: '删除',
 						handler: async () => {
 							this.$modal.hide('dialog')
-							let res = await this.$api.reomveSite({id:this.rowData.id})
+							let res = await this.$api.reomveTeam({id:this.rowData.id})
 							this.$emit('on-custom-comp');
 							if (0 === res.data.code) {
 								this.$notify({
@@ -210,7 +209,7 @@ export default {
     },
     async getList() {
       this.loading = true
-      let res = await this.$api.site(this.options)
+      let res = await this.$api.team(this.options)
       this.loading = false
       if (0 === res.data.code) {
         this.list = res.data.data.list
