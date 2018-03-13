@@ -38,7 +38,7 @@
 									:total="options.total"
 									:layout="['total', 'prev', 'pager', 'next', 'jumper']" />
 							</div>
-              <!-- <table id="dataTable" class="table table-bordered"> -->
+               <!--<table id="dataTable" class="table table-bordered"> 
                   <thead>
                   <tr>
                       <th>班组名称</th>
@@ -69,7 +69,7 @@
                   </tr>
 
                   </tbody>
-              </table>
+              </table>-->
           </div>
           <!-- /.box-body -->
       </div>

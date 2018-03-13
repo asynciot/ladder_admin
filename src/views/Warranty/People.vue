@@ -5,13 +5,13 @@
 	        <div class="box-body">
 	            <div class="row">
 	                <div class="col-xs-4">
-	                    <input type="text" class="form-control input-sm" placeholder="人员名称">
+	                    <input type="text" v-model="options.name" class="form-control input-sm" placeholder="人员名称">
 	                </div>
 	                <div class="col-xs-4">
-	                    <input type="text" class="form-control input-sm" placeholder="维保单位">
+	                    <input type="text" v-model="options.groupName" class="form-control input-sm" placeholder="维保单位">
 	                </div>
 	                <div class="col-xs-2">
-	                    <button class="btn btn-primary btn-sm">搜索</button>
+	                    <button @click="options.page=1,getList()" class="btn btn-primary btn-sm">搜索</button>
 	                </div>
 	            </div>
 	            <hr class="mt10 mb10">

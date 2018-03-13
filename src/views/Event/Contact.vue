@@ -5,10 +5,10 @@
           <div class="box-body">
               <div class="row">
                   <div class="col-md-4">
-                      <input type="text" class="form-control input-sm" placeholder="联系人名称">
+                      <input type="text" v-model="options.nicname" class="form-control input-sm" placeholder="联系人名称">
                   </div>
                   <div class="col-md-2">
-                      <button class="btn btn-primary btn-sm">搜索</button>
+                      <button @click="options.page=1,getList()" class="btn btn-primary btn-sm">搜索</button>
                   </div>
               </div>
               <hr class="mt10 mb10">
