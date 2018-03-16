@@ -99,6 +99,9 @@ export default {
 						roleMenu.push(data1)
 					}
 				})
+				let account = await this.$api.user({id:res.data.account.id})
+				account.data.data.list[0].roleName = role.data.data.list[0].name
+				this.$cookie.set('account', JSON.stringify(account.data.data.list[0]))
 				this.$storage.set('roleMenu', JSON.stringify(roleMenu))
         this.$cookie.set('userId', res.data.account.id, 3)
         window.location.href = window.location.href+'index'

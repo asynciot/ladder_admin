@@ -1,11 +1,15 @@
 import {
+	wsApi,
   AccountApi,
 	CommonApi,
 	DocApi,
 	EventApi,
 	MaintenanceApi,
 	MointorApi,
+	DeviceApi
 } from './config'
+import { stringify } from 'qs';
+
 export default {
   //account
   register:(data)=>{
@@ -296,10 +300,37 @@ export default {
 	mointors:(data)=>{
 		return MointorApi.query(data)
 	},
+	search:(data)=>{
+		return MointorApi.query(Object.assign({key1:'search'},data))
+	},
+	getFavourite:(data)=>{
+		return MointorApi.query(Object.assign({key1:'favourite'},data))
+	},
 	addFavourite:(data)=>{
-		return MointorApi.save({key1:'member'},data)
+		return MointorApi.save({key1:'favourite'},data)
 	},
 	reomveFavourite:(data)=>{
-    return MointorApi.remove(Object.assign({key1:'member'},data))
+    return MointorApi.remove(Object.assign({key1:'favourite'},data))
+  },
+	deviceInfo:(data)=>{
+    return DeviceApi.query({key1:'info',key2:data})
+  },
+	waveList:(data)=>{
+    return DeviceApi.query({key1:'ladder',key2:'waves',key3:data})
+  },
+	wave:(id,data)=>{
+    return DeviceApi.query(Object.assign({key1:'ladder',key2:'waves',key3:id},data))
+  },
+	hbp:(data)=>{
+    return DeviceApi.save({key1:'ladder',key2:'hbp',key3:data},{})
+  },
+	socket:(data)=>{
+		return new WebSocket(`${wsApi}?${stringify(data)}`);
+	},
+	menu:(data)=>{
+		return DeviceApi.query({key1:'ladder',key2:'settings',key3:data})
+	},
+	values:(id,data)=>{
+    return DeviceApi.query(Object.assign({key1:'values',key2:id},data))
   },
 }

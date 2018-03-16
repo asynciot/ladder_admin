@@ -48,6 +48,12 @@
 </template>
 
 <script>
+const status = {
+	0:'待领取通知书',
+	1:'待取缴费单',
+	2:'待预约技监',
+	3:'质监完成',
+}
 Vue.component('inspetion-operation', {
   template: `<span>
 				<button @click.stop.prevent="add()" class="btn btn-xs btn-default">年检登记</button>
@@ -69,7 +75,7 @@ Vue.component('inspetion-operation', {
 			this.$router.push({
 				name:'addyearcheck',
 				params:{
-					ladderNo:this.rowData.id
+					ladderNo:this.rowData.ladderNo
 				}
 			})
     },
@@ -77,7 +83,7 @@ Vue.component('inspetion-operation', {
 			this.$router.push({
 				name:'yearcheckhistory',
 				params:{
-					id:this.rowData.ladderNumber
+					id:this.rowData.ladderNo
 				}
 			})
     },
@@ -87,7 +93,7 @@ export default {
   data: () => ({
     loading: false,
     columns: [{
-      field: 'ladderNumber',
+      field: 'ladderNo',
       title: '电梯工号',
       width: 100,
       titleAlign: 'center',
@@ -101,22 +107,8 @@ export default {
       columnAlign: 'center',
       isResize: true
     }, {
-      field: 'ownerCompanyName',
-      title: '产权单位',
-      width: 100,
-      titleAlign: 'center',
-      columnAlign: 'center',
-      isResize: true
-    }, {
       field: 'userCompanyName',
       title: '使用单位',
-      width: 100,
-      titleAlign: 'center',
-      columnAlign: 'center',
-      isResize: true
-    }, {
-      field: 'propertyCompanyName',
-      title: '物业单位',
       width: 100,
       titleAlign: 'center',
       columnAlign: 'center',
@@ -129,18 +121,24 @@ export default {
       columnAlign: 'center',
       isResize: true
     }, {
-      field: 'contactor',
-      title: '负责人',
+      field: 'status',
+      title: '年检记录状态',
       width: 100,
       titleAlign: 'center',
       columnAlign: 'center',
+			formatter: (rowData)=>{
+        return `${status[rowData.status]}`
+      },
       isResize: true
     }, {
-      field: 'mobile',
-      title: '负责人电话',
+      field: 'checkTime',
+      title: '上次年检时间',
       width: 100,
       titleAlign: 'center',
       columnAlign: 'center',
+			formatter: (rowData)=>{
+        return `${moment(rowData.checkTime).format('YYYY-MM-DD')}`
+      },
       isResize: true
     }, {
       field: 'operation',
@@ -170,7 +168,7 @@ export default {
     },
     async getList() {
       this.loading = true
-      let res = await this.$api.maintenance(this.options)
+      let res = await this.$api.yearCheck(this.options)
       this.loading = false
       if (0 === res.data.code) {
         this.list = res.data.data.list

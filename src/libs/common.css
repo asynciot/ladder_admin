@@ -260,3 +260,6 @@ div.dataTables_wrapper {
 .no-padding-right {
 	padding-right:0px;
 }
+.fa-heart {
+	cursor: pointer;
+}

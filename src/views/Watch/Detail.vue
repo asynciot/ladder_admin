@@ -1,132 +1,42 @@
 <template lang="html">
-	<!-- Main content -->
 	<section class="content">
-
-	    <div class="box">
-	        <!--<div class="box-header with-border">-->
-	        <!--<h4 class="box-title">请从下面列表选择电梯</h4>-->
-	        <!--</div>-->
-	        <div class="box-body">
-	            <div class="row">
-	                <div class="col-sm-6 img-content">
-	                  <img class="img-responsive" style="width:90%" src="../../assets/img/ladder-l.png" alt="..">
-	                </div>
-	                <div class="col-sm-6">
-	                    <div class="center-block" style="width: 400px">
-	                        <table class="state-table table table-bordered">
-	                            <tr>
-	                                <td class="off">
-	                                    <div class="icon"><i class="fa fa-wrench"></i></div>
-	                                    <p>检修</p>
-	                                </td>
-	                                <td>
-	                                    <div class="icon"><i class="fa fa-warning"></i></div>
-	                                    <p>故障</p>
-	                                </td>
-	                                <td>
-	                                    <div class="icon"><i class="fa fa-times-circle"></i></div>
-	                                    <p>超载</p>
-	                                </td>
-	                            </tr>
-	                            <tr>
-	                                <td>
-	                                    <div class="icon"><i class="fa fa-group"></i></div>
-	                                    <p>满载</p>
-	                                </td>
-	                                <td>
-	                                    <div class="icon"><i class="fa fa-fire-extinguisher"></i></div>
-	                                    <p>消防</p>
-	                                </td>
-	                                <td class="on">
-	                                    <div class="icon"><i class="fa fa-unlock-alt"></i></div>
-	                                    <p>锁梯</p>
-	                                </td>
-	                            </tr>
-	                            <tr>
-	                                <td>
-	                                    <div class="icon"><i class="fa fa-building-o"></i></div>
-	                                    <p>门区</p>
-	                                </td>
-	                                <td>
-	                                    <div class="icon"><i class="fa fa-exclamation"></i></div>
-	                                    <p>困人</p>
-	                                </td>
-	                                <td>
-	                                    <div class="icon"><i class="fa fa-exclamation-circle"></i></div>
-	                                    <p>串口异常</p>
-	                                </td>
-	                            </tr>
-	                            <tr>
-	                                <td>
-	                                    <div class="icon"><i class="fa fa-unlock"></i></div>
-	                                    <p>控制器密码</p>
-	                                </td>
-	                                <td>
-	                                    <div class="icon"><i class="fa fa-battery-full"></i></div>
-	                                    <p>供电状态</p>
-	                                </td>
-	                                <td>
-	                                    <div class="icon"><i class="fa fa-commenting"></i></div>
-	                                    <p>乘客信号</p>
-	                                </td>
-	                            </tr>
-
-	                        </table>
-	                    </div>
-	                    <div class="center-block" style="width: 400px">
-	                        <p class="text-center mb20">系统运行时间：300分钟 运行次数：1254次</p>
-	                        <table class="table text-center mb10">
-	                            <tr>
-	                                <td>
-	                                    <button class="btn btn-default">端子状态</button>
-	                                </td>
-	                                <td>
-	                                    <button class="btn btn-default">电梯参数</button>
-	                                </td>
-	                                <td>
-	                                    <button class="btn btn-default">电梯事件</button>
-	                                </td>
-	                            </tr>
-													</table>
-													<table class="table text-center">
-	                            <tr>
-	                                <td>
-	                                    <button class="btn btn-default">电梯档案</button>
-	                                </td>
-	                                <td>
-	                                    <button class="btn btn-default">高级功能</button>
-	                                </td>
-	                                <td>
-	                                    <button class="btn btn-default">同步楼层</button>
-	                                </td>
-	                            </tr>
-	                        </table>
-	                    </div>
-
-	                </div>
-	            </div>
-	        </div>
-	        <!-- /.box-body -->
-
-	    </div>
-	    <!-- /.box -->
-
+		<ul class="nav nav-tabs">
+			<li role="presentation" :class="$route.name==item.link?'active':''" v-for="item in nav">
+				<router-link :to="{ name: item.link }">{{item.label}}</router-link>
+			</li>
+		</ul>
+		<div class="box">
+			<div class="box-body">
+				<router-view />
+			</div>
+		</div>
 	</section>
 </template>
 
 <script>
 export default {
-	mounted(){
-	}
+	data:()=>({
+		nav:[{
+			link:'position',
+			label:'门位置'
+		},{
+			link:'speed',
+			label:'门速度'
+		},{
+			link:'current',
+			label:'门电流'
+		},{
+			link:'params',
+			label:'门参数'
+		},]
+	}),
+	created(){
+	},
 }
 </script>
 
 <style lang="css" scoped>
-.img-content {
-	text-align: center;
-	display: flex;
-	flex-flow: row nowrap;
-	justify-content: center;
-	align-items: center;
+.box {
+	border-top:0;
 }
 </style>

@@ -38,12 +38,13 @@ export const menu = [
         pId: 1,
         label: '实时检修监测',
         link: 'fix'
-      }, {
-        id: 17,
-        pId: 1,
-        label: '电梯信息列表',
-        link: 'info'
-      }
+      },
+			// {
+      //   id: 17,
+      //   pId: 1,
+      //   label: '电梯信息列表',
+      //   link: 'info'
+      // }
     ]
   }, {
     id: 2,
@@ -72,12 +73,13 @@ export const menu = [
 				pId:2,
         label: '故障联系人',
         link: 'contact'
-      }, {
-				id:25,
-				pId:2,
-        label: '短信预览管理',
-        link: 'message'
-      }
+      },
+			// {
+			// 	id:25,
+			// 	pId:2,
+      //   label: '短信预览管理',
+      //   link: 'message'
+      // }
     ]
   }, {
 		id:3,

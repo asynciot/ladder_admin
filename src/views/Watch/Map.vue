@@ -61,18 +61,7 @@ export default {
 		clientHeight:window.innerHeight,
     map: null,
 		loading: false,
-		list: [
-			{
-				ladderNumber:'电梯工号',
-				alias:'xxxx',
-				latitude:31.24916171,
-				longitude:121.48789949
-			},
-			{
-				ladderNumber:'电梯工号',
-				alias:'xxxx'
-			},
-		],
+		list: [],
     columns: [{
       field: 'ladderNumber',
       title: '电梯工号',
@@ -92,7 +81,13 @@ export default {
 			page:1,
 			num:10,
 			total:0
-    }
+    },
+		province: {
+			count: true,
+			page:1,
+			num:10,
+			total:0
+		}
   }),
   created() {
     this.option = this.$storage.get("map")
@@ -138,13 +133,36 @@ export default {
       }));
       map.addControl(new BMap.ScaleControl());
       map.addControl(new BMap.OverviewMapControl());
-			// map.addEventListener('tilesloaded', this.getList);
+			map.addEventListener('tilesloaded', this.getList);
       this.map = map
     },
+		addMaker(list){
+			if (this.map) {
+				this.map.clearOverlays();
+				list.forEach((item) => {
+	        const point = new BMap.Point(item.longitude, item.latitude);
+	        let marker = null;
+	        // if (item.Alert == '0') {
+	        //   labelStyle.color = '#55BC52';
+	        //   labelStyle.borderColor = '#55BC52';
+	        //   marker = new BMap.Marker(point, { icon: greenMark });
+	        // } else {
+	        //   labelStyle.color = 'red';
+	        //   labelStyle.borderColor = 'red';
+	        //   marker = new BMap.Marker(point, { icon: redMark });
+	        // }
+					marker = new BMap.Marker(point);
+	        this.map.addOverlay(marker);
+	      });
+			}
+		},
 		pageChange(val) {
       this.options.page = val
       this.getList()
     },
+		async getProvince(){
+			let res = await this.$api.mointors(this.province)
+		},
 		async getList(){
 			if (this.map) {
 				this.loading = true
@@ -161,6 +179,7 @@ export default {
 	      this.loading = false
 	      if (0 === res.data.code) {
 	        this.list = res.data.data.list
+					this.addMaker(this.list)
 	        this.options.total = res.data.data.totalNumber
 	      }
 			}

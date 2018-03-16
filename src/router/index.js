@@ -8,6 +8,11 @@ const Settings = resolve => require(['@/views/Settings'], resolve)
 const Focus = resolve => require(['@/views/Watch/Focus'], resolve)
 const Map = resolve => require(['@/views/Watch/Map'], resolve)
 const Data = resolve => require(['@/views/Watch/Data'], resolve)
+const Detail = resolve => require(['@/views/Watch/Detail'], resolve)
+const Position = resolve => require(['@/views/Watch/Position'], resolve)
+const Current = resolve => require(['@/views/Watch/Current'], resolve)
+const Speed = resolve => require(['@/views/Watch/Speed'], resolve)
+const Params = resolve => require(['@/views/Watch/Params'], resolve)
 const DataDetail = resolve => require(['@/views/Watch/Detail'], resolve)
 const Video = resolve => require(['@/views/Watch/Video'], resolve)
 const Bug = resolve => require(['@/views/Watch/Bug'], resolve)
@@ -117,11 +122,43 @@ export default new Router({
 					meta:{name:'实时数据监测'},
 		      component: Data
 		    },
+				// {
+		    //   path: '/data/:id',
+		    //   name: 'dataDetail',
+				// 	meta:{name:'电梯监测详情'},
+		    //   component: DataDetail
+		    // },
 				{
-		      path: '/data/:id',
+		      path: '/data',
 		      name: 'dataDetail',
 					meta:{name:'电梯监测详情'},
-		      component: DataDetail
+		      component: Detail,
+					children: [
+						{
+							path: '/data/position/:id',
+				      name: 'position',
+							meta:{name:'电梯监测详情'},
+				      component: Position
+						},
+						{
+							path: '/data/current/:id',
+				      name: 'current',
+							meta:{name:'电梯监测详情'},
+				      component: Current
+						},
+						{
+							path: '/data/speed/:id',
+				      name: 'speed',
+							meta:{name:'电梯监测详情'},
+				      component: Speed
+						},
+						{
+							path: '/data/params/:id',
+				      name: 'params',
+							meta:{name:'电梯监测详情'},
+				      component: Params
+						},
+					]
 		    },
 				{
 		      path: '/video',

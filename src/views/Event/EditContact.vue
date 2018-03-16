@@ -14,7 +14,6 @@
                 </div>
                 <div class="form-group">
                     <label for="" class="col-sm-2 control-label">联系人电话</label>
-
                     <div class=" col-sm-8 col-md-6">
                         <input type="tel" name="mobile" v-validate="'required'" :class="{'form-control': true, 'is-error': errors.has('form.mobile') }" v-model="form.mobile" placeholder="请输入">
                     </div>
@@ -131,9 +130,14 @@ export default {
 							this.$notify({
 								group: 'ok',
 								title: '提示',
-								text: '操作成功'
+								text: '操作成功，请绑定电梯'
 							});
-							this.$router.back()
+							this.$router.push({
+								name:'bindcontact',
+								params:{
+									id:this.form.id
+								}
+							})
 						}
 					}
         }
