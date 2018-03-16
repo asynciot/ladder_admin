@@ -8,7 +8,7 @@ let API_ROOT = (process.env.NODE_ENV == 'production')
 			// ? 'http://ladder.asynciot.com/v1'
 			? 'http://ladder.ezplay.top/v1'
 			// :'http://server.paradish.cn'
-			:'http://localhost:9001/v1'
+			:'http://ladder.ezplay.top/v1'
 Vue.http.options.root = API_ROOT
 Vue.http.options.crossOrigin = true;
 Vue.http.options.credentials = true ;

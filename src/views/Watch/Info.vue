@@ -6,16 +6,16 @@
 	                <div class="box-body">
 	                    <div class="row">
 	                        <div class="col-md-3">
-	                            <input type="text" class="form-control input-sm" placeholder="故障代码">
+	                            <input type="text" v-model="options" class="form-control input-sm" placeholder="故障代码">
 	                        </div>
 	                        <div class="col-md-3">
-	                            <input type="text" class="form-control input-sm" placeholder="具体位置别名">
+	                            <input type="text" v-model="options" class="form-control input-sm" placeholder="具体位置别名">
 	                        </div>
 	                        <div class="col-md-3">
-	                            <input type="text" class="form-control input-sm" placeholder="故障代码">
+	                            <input type="text" v-model="options" class="form-control input-sm" placeholder="故障代码">
 	                        </div>
 	                        <div class="col-md-2">
-	                            <button class="btn btn-primary btn-sm">搜索</button>
+	                            <button @click="options.page=1,getList()" class="btn btn-primary btn-sm">搜索</button>
 	                        </div>
 	                    </div>
 	                    <hr class="mt10 mb10">
@@ -68,6 +68,11 @@
 
 <script>
 export default {
+	options: {
+      page: 1,
+      num: 15,
+      total: 0
+   },
 }
 </script>
 
