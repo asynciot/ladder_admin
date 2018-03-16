@@ -39,36 +39,6 @@
 									:total="options.total"
 									:layout="['total', 'prev', 'pager', 'next', 'jumper']" />
 							</div>
-	            <table id="dataTable" class="table table-bordered">
-	                <thead>
-	                <tr>
-	                    <th>人员名称</th>
-	                    <th>手机号码</th>
-	                    <th>人员账户</th>
-	                    <th>人员类别</th>
-	                    <th>维保班组</th>
-	                    <th>维保站点</th>
-	                    <th>维保单位</th>
-	                    <th>操作</th>
-	                </tr>
-	                </thead>
-	                <tbody>
-	                <tr>
-	                    <td>某制造商</td>
-	                    <td>北京朝阳区</td>
-	                    <td>010000099999</td>
-	                    <td>张三/18899998888</td>
-	                    <td>张三/18899998888</td>
-	                    <td>张三</td>
-	                    <td>张三</td>
-	                    <td>
-	                        <a href="weibaoguanli-weibaorenyuanguanli-tianjia.html" class="btn btn-xs btn-warning">编辑</a>
-	                        <a href="javascript:;" class="btn btn-xs btn-danger remove-btn">删除</a>
-	                    </td>
-	                </tr>
-
-	                </tbody>
-	            </table>
 	        </div>
 	        <!-- /.box-body -->
 	    </div>

@@ -13,9 +13,11 @@ Vue.http.options.root = API_ROOT
 Vue.http.options.crossOrigin = true;
 Vue.http.options.credentials = true ;
 
+export const wsApi = `${API_ROOT.replace('http', 'ws')}/devices/socket`;
 export const CommonApi = Vue.resource('common{/key1}{/key2}{/key3}')
 export const AccountApi = Vue.resource('accounts{/key1}{/key2}{/key3}')
 export const DocApi = Vue.resource('documents{/key1}{/key2}{/key3}')
 export const EventApi = Vue.resource('events{/key1}{/key2}{/key3}')
 export const MointorApi = Vue.resource('mointors{/key1}{/key2}{/key3}')
+export const DeviceApi = Vue.resource('devices{/key1}{/key2}{/key3}')
 export const MaintenanceApi = Vue.resource('maintenance{/key1}{/key2}{/key3}')

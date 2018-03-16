@@ -56,7 +56,7 @@ const status = {
 	2:'待预约技监',
 	3:'质监完成',
 }
-Vue.component('inspetion-operation', {
+Vue.component('yearhistory-operation', {
   template: `<span>
 				<button @click.stop.prevent="update()" class="btn btn-xs btn-default">编辑</button>
         </span>`,
@@ -111,7 +111,7 @@ export default {
       width: 150,
       titleAlign: 'center',
       columnAlign: 'center',
-      componentName: 'inspetion-operation',
+      componentName: 'yearhistory-operation',
       isResize: true
     }],
     list: [],

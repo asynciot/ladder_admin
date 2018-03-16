@@ -68,7 +68,7 @@ Vue.component('contact-operation', {
 			this.$router.push({
 				name:'bindcontact',
 				params:{
-					id:this.rowData.id
+					id:this.rowData.accountId
 				}
 			})
 		},
@@ -117,7 +117,7 @@ export default {
   data: () => ({
     loading: false,
     columns: [{
-      field: 'nicname',
+      field: 'name',
       title: '联系人姓名',
       width: 100,
       titleAlign: 'center',
@@ -138,7 +138,7 @@ export default {
       columnAlign: 'center',
       isResize: true
     },{
-      field: 'event',
+      field: 'num',
       title: '关联电梯数',
       width: 100,
       titleAlign: 'center',
@@ -170,7 +170,7 @@ export default {
     },
     async getList() {
       this.loading = true
-      let res = await this.$api.user(this.options)
+      let res = await this.$api.msgPerson(this.options)
       this.loading = false
       if (0 === res.data.code) {
         this.list = res.data.data.list

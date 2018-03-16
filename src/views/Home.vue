@@ -7,20 +7,20 @@
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <span class="logo-mini">电梯管理</span>
                     <!-- logo for regular state and mobile devices -->
-                    <span class="logo-lg">Ladder</span>
+                    <span class="logo-lg">电梯管理系统</span>
                 </router-link>
                 <!-- Header Navbar: style can be found in header.less -->
                 <nav class="navbar navbar-static-top">
                     <!-- Sidebar toggle button-->
                     <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-                        <span class="sr-only">Toggle navigation</span>
+                        <span class="sr-only"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
                     <div class="navbar-custom-menu">
                         <ul class="nav navbar-nav">
-                            <li class="dropdown messages-menu"><router-link
+                            <!-- <li class="dropdown messages-menu"><router-link
 															:to="{name:'lift'}" class="dropdown-toggle"> 全部 <span
                                         class="label label-info">4</span> </router-link></li>
                             <li class="dropdown messages-menu"><router-link
@@ -34,8 +34,7 @@
                                         class="label label-warning">4</span> </router-link ></li>
                             <li class="dropdown messages-menu"><router-link
 															:to="{name:'lift'}" class="dropdown-toggle"> 正常 <span
-                                        class="label label-success">4</span> </router-link ></li>
-                            <!-- User Account: style can be found in dropdown.less -->
+                                        class="label label-success">4</span> </router-link ></li> -->
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <img src="../assets/img/headimg.jpg" class="user-image" alt="User Image">
@@ -67,15 +66,16 @@
                             <img src="../assets/img/headimg.jpg" class="img-circle" alt="User Image">
                         </div>
                         <div class="pull-left info">
-                            <p>admin</p>
-                            <a href="#">系统管理员</a>
+                            <p v-text="account.nicname"></p>
+                            <a href="javascript:void(0)" v-text="account.roleName"></a>
                         </div>
                     </div>
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu" data-widget="tree">
                         <li :class="['treeview', currentRoute.breadcrumb.label == '首页'?'active':'']">
 													<router-link :to="{name: 'index'}">
-															<i class="fa fa-dashboard"></i> 首页
+															<i class="fa fa-dashboard"></i>
+															<span>首页</span>
 													</router-link>
                         </li>
                         <li
@@ -124,7 +124,7 @@
                         <li v-if="currentRoute.breadcrumb.label" class="active" v-text="currentRoute.breadcrumb.label"></li>
                     </ol>
                 </section>
-                <router-view/>
+                <router-view />
 
                 </section>
                 <!-- /.content -->
@@ -155,6 +155,9 @@ export default {
   data() {
     return {
 			isActive: true,
+			account:{
+				nicname:'admin',
+			},
       currentRoute: {
         name: '首页',
         breadcrumb: {label:'首页'}
@@ -163,6 +166,7 @@ export default {
     }
   },
 	created(){
+		this.account = JSON.parse(this.$cookie.get('account'))
 		this.getMenu()
 	},
   mounted() {
@@ -212,6 +216,7 @@ export default {
       if (0 === res.data.code) {
 				this.$storage.remove('roleMenu')
         this.$cookie.delete('userId');
+				this.$cookie.delete('account');
 	      this.$router.replace({
 	        name: "login"
 	      });

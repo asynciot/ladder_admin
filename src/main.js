@@ -9,6 +9,7 @@ import VeeValidate from 'vee-validate';
 import VModal from 'vue-js-modal'
 import Notifications from 'vue-notification'
 import VueDatepickerLocal from 'vue-datepicker-local'
+import VueCollapse from 'vue2-collapse'
 
 import moment from 'moment'
 
@@ -46,7 +47,7 @@ window.$cookie = VueCookie
 window.$storage = localStorage
 Vue.prototype.$api = api
 Vue.config.productionTip = false
-Vue.use(VeeValidate).use(VueCookie).use(VModal, { dialog: true }).use(Notifications).use(VueLocalStorage, {
+Vue.use(VeeValidate).use(VueCollapse).use(VueCookie).use(VModal, { dialog: true }).use(Notifications).use(VueLocalStorage, {
 	name: 'storage',
 	bind: true
 });

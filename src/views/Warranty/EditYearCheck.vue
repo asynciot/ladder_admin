@@ -116,7 +116,7 @@ export default {
 			this.getCheck()
     }
 		if (this.$route.params.ladderNo) {
-      this.getData()
+      this.getData(this.$route.params.ladderNo)
     }
   },
   methods: {
@@ -138,6 +138,11 @@ export default {
 			this.record.checkTime = res.data.data.list[0].checkTime
 			this.record.status = res.data.data.list[0].status
 			this.getData(res.data.data.list[0].ladderNo)
+			this.getLast(res.data.data.list[0].ladderNo)
+		},
+		async getLast(id){
+			let res = await this.$api.lastCheck({ladderNo:id})
+			this.last.checkTime = moment(res.data.data.checkTime).format('YYYY-MM-DD')
 		},
     submit() {
       this.$validator.validateAll('record').then(async (result) => {

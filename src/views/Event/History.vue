@@ -50,37 +50,6 @@
 								:total="options.total"
 								:layout="['total', 'prev', 'pager', 'next', 'jumper']" />
 						</div>
-            <table id="dataTable" class="table table-bordered">
-                <thead>
-                <tr>
-                    <th>电梯工号</th>
-                    <th>具体位置别名</th>
-                    <th>解除状态</th>
-                    <th>事件名称</th>
-                    <th>故障代码</th>
-                    <th>故障代码描述</th>
-                    <th>故障上报时间</th>
-                    <th>故障解除时间</th>
-                    <th>操作</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>某制造商</td>
-                    <td>某制造商</td>
-                    <td><span class="label label-success">已解除</span></td>
-                    <td>北京朝阳区</td>
-                    <td>010000099999</td>
-                    <td>010000099999</td>
-                    <td>张三/18899998888</td>
-                    <td>2018-09-09</td>
-                    <td>
-                        <button class="btn btn-xs btn-default">处理</button>
-                    </td>
-                </tr>
-
-                </tbody>
-            </table>
         </div>
         <!-- /.box-body -->
 
