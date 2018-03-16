@@ -150,6 +150,9 @@ export default {
     }],
     list: [],
     options: {
+    	number:'',
+    	code:'',
+    	serviceCode:'',
       page: 1,
       num: 15,
       total: 0

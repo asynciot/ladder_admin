@@ -150,6 +150,8 @@ export default {
     }],
     list: [],
     options: {
+      ladderNumber:'',
+      alias:'',
       page: 1,
       num: 15,
       total: 0

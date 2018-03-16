@@ -7,9 +7,9 @@
                   <div class="col-xs-5">
                       <input type="text" class="form-control input-sm" v-model="query.id" placeholder="采集设备序列号">
                   </div>
-                  <div class="col-xs-5">
+                  <!--<div class="col-xs-5">
                       <input type="text" class="form-control input-sm" placeholder="电梯工号">
-                  </div>
+                  </div>-->
                   <div class="col-xs-2">
                       <button @click="search()" class="btn btn-primary btn-sm">搜索</button>
                   </div>
