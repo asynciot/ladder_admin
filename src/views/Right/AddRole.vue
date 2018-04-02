@@ -58,8 +58,8 @@ export default {
 		},
 		submit(){
 			this.$validator.validateAll('form').then(async (result) => {
-        if (result) {
-          let res = null
+		        if (result) {
+		  			let res = null
 					if(this.$route.params.id){
 						res = await this.$api.updateRole(this.form)
 					}else {
@@ -73,8 +73,8 @@ export default {
 						});
 						this.$router.back()
 					}
-        }
-      });
+		        }
+	      	});
 		}
 	}
 }

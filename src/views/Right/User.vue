@@ -88,23 +88,33 @@ Vue.component('user-operation', {
           },
           {
             title: '删除',
-						handler: async () => {
-							this.$modal.hide('dialog')
-							let res = await this.$api.reomveUser({id:this.rowData.id})
-							this.$emit('on-custom-comp');
-							if (0 === res.data.code) {
-								this.$notify({
-									group: 'ok',
-									title: '提示',
-									text: '操作成功'
-								});
-							}else {
-								this.$notify({
-									group: 'error',
-									title: '提示',
-									text: '操作失败'
-								});
-							}
+			handler: async () => {
+			  	this.$modal.hide('dialog')
+//				let res = null
+				let res = await this.$api.removeUser({id:this.rowData.id})
+//				if (this.$route.params.id) {
+//	                res = await this.$api.updateUser({
+//	                  	id: this.rowData.id
+//	                })
+//	          	} else {
+//	                res = await this.$api.removeUser({
+//	                  	id: this.rowData.id
+//	                })
+//	          	}
+				this.$emit('on-custom-comp');
+				if (0 === res.data.code) {
+					this.$notify({
+						group: 'ok',
+						title: '提示',
+						text: '操作成功'
+					});
+				}else {
+					this.$notify({
+						group: 'error',
+						title: '提示',
+						text: '操作失败'
+					});
+				}
             }
           }
         ]

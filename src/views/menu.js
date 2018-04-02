@@ -11,15 +11,33 @@ export const menu = [
         pId: 1,
         label: '我关注的电梯',
         link: 'focus'
-      }, {
-        id: 12,
-        pId: 1,
-        label: '实时地图监测',
-        link: 'map'
-      }, {
+      },{
+      	id:12,
+				pId:1,
+    		label: '地图列表',
+   		 	link: 'map',
+        sub: [
+          {
+						id:121,
+						pId:12,
+            label: '地图列表',
+            link: 'map'
+          }, {
+						id:122,
+						pId:12,
+            label: '出厂信息管理',
+            link: 'factory'
+          }, {
+						id:123,
+						pId:12,
+            label: '安装信息管理',
+            link: 'install'
+          }, 
+			]
+      },{
         id: 13,
         pId: 1,
-        label: '实时数据监测',
+        label: '历史状态查看',
         link: 'data'
       },
 			// {
@@ -36,7 +54,7 @@ export const menu = [
       }, {
         id: 16,
         pId: 1,
-        label: '实时检修监测',
+        label: '设备故障统计',
         link: 'fix'
       },
 			// {
@@ -50,13 +68,13 @@ export const menu = [
     id: 2,
     pId: 0,
     icon: 'fa-calculator',
-    label: '事件管理',
+    label: '技术支持',
     // link:'watch',
     sub: [
       {
         id: 21,
         pId: 2,
-        label: '历史事件查询',
+        label: '产品说明书',
         link: 'history'
       }, {
 				id:22,
@@ -66,12 +84,12 @@ export const menu = [
       }, {
 				id:23,
 				pId:2,
-        label: '故障代码管理',
+        label: '故障代码查询',
         link: 'code'
       }, {
 				id:24,
 				pId:2,
-        label: '故障联系人',
+        label: '其他相关资料',
         link: 'contact'
       },
 			// {
@@ -85,7 +103,7 @@ export const menu = [
 		id:3,
 		pId:0,
     icon: 'fa-file-text',
-    label: '档案管理',
+    label: '电子档案管理',
     // link:'watch',
     sub: [
       {
@@ -115,40 +133,42 @@ export const menu = [
             link: 'warranty'
           }
         ]
-      }, {
+      }
+      , {
 				id:32,
 				pId:3,
-        label: '单位管理',
+        label: '修改档案',
         // link:'level'
         sub: [
-          {
+        	{
 						id:321,
 						pId:32,
-            label: '安装单位管理',
-            link: 'contractor'
-          }, {
+            label: '产权单位',
+            link: 'rights'
+          }, 
+          {
 						id:322,
 						pId:32,
-            label: '维保单位管理',
-            link: 'warrantydep'
+            label: '安装单位',
+            link: 'contractor'
           }, {
 						id:323,
 						pId:32,
-            label: '产权单位管理',
-            link: 'rights'
+            label: '维保单位',
+            link: 'warrantydep'
           }, {
 						id:324,
 						pId:32,
-            label: '使用单位管理',
-            link: 'usedep'
+            label: '物业单位',
+            link: 'property'
           }, {
 						id:325,
 						pId:32,
-            label: '物业单位管理',
-            link: 'property'
+            label: '故障联系人',
+            link: 'usedep'
           }
         ]
-      }, {
+    	}, {
 				id:33,
 				pId:3,
         label: '楼盘管理',
@@ -174,7 +194,7 @@ export const menu = [
 		id:4,
 		pId:0,
     icon: 'fa-wrench',
-    label: '维保管理',
+    label: '单位群管理',
     // link:'watch',
     sub: [
       {
@@ -212,7 +232,17 @@ export const menu = [
 				pId:4,
         label: '保养类别管理',
         link: 'warrantycategory'
-      }
+      },{
+				id:48,
+				pId:4,
+        label: '新建群',
+        link: 'newgroup'
+      },{
+				id:49,
+				pId:4,
+        label: '加入群',
+        link: 'addgroup'
+      },
     ]
   }, {
 		id:5,

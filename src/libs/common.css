@@ -263,3 +263,20 @@ div.dataTables_wrapper {
 .fa-heart {
 	cursor: pointer;
 }
+.bg-1 {
+	font-size: 30px;
+}
+.hx{
+	font-size: 25px;
+	color:#585956;
+	position: relative;  
+	min-height: 1px;
+  padding-left: 15px;
+  float: left;
+
+}
+#choice{
+	margin-left: 100px;
+	margin-top: -40px;
+	margin-right:-100px ;
+}

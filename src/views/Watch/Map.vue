@@ -76,6 +76,13 @@ export default {
       titleAlign: 'center',
       columnAlign: 'center',
       isResize: true
+    }, {
+      field: 'status',
+      title: '运行状态',
+      width: 80,
+      titleAlign: 'center',
+      columnAlign: 'center',
+      isResize: true
     }],
     options: {
 			page:1,

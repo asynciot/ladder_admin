@@ -15,12 +15,6 @@
 	                    </div>
 	                </div>
 	                <div class="form-group">
-	                    <label for="" class="col-sm-2 control-label">旧密码</label>
-	                    <div class=" col-sm-8 col-md-6">
-	                        <input type="password" v-model="form.oldpassword" name="oldpassword" v-validate="'required'" :class="{'form-control': true, 'is-error': errors.has('form.oldpassword') }" placeholder="请输入">
-	                    </div>
-	                </div>
-	                <div class="form-group">
 	                    <label for="" class="col-sm-2 control-label">新密码</label>
 	                    <div class=" col-sm-8 col-md-6">
 	                        <input type="password" v-model="form.password" name="password" v-validate="'required'" :class="{'form-control': true, 'is-error': errors.has('form.password') }" placeholder="请输入">
@@ -69,7 +63,6 @@ export default {
 		return {
 			form:{
 				username:'',
-				oldpassword:'',
 				password:'',
 				confirm:'',
 				nicname:'',

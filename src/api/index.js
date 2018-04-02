@@ -1,6 +1,6 @@
 import {
 	wsApi,
-  AccountApi,
+  	AccountApi,
 	CommonApi,
 	DocApi,
 	EventApi,
@@ -21,8 +21,8 @@ export default {
 	user:(data)=>{
     return AccountApi.query(data)
   },
-	reomveUser:(data)=>{
-    return AccountApi.remove(data)
+	removeUser:(data)=>{
+    return AccountApi.remove(Object.assign({key1:'delete'},data))
   },
   login:(data)=>{
     return AccountApi.save({key1:'login'},data)
@@ -43,7 +43,7 @@ export default {
 	updateRole:(data)=>{
 		return AccountApi.update({key1:'authority'},data)
 	},
-	reomveRole:(data)=>{
+	removeRole:(data)=>{
     return AccountApi.remove(Object.assign({key1:'authority'},data))
   },
 	//setting

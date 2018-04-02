@@ -88,7 +88,7 @@ Vue.component('building-operation', {
             title: '删除',
             handler: async () => {
               this.$modal.hide('dialog')
-              let res = await this.$api.reomveUser({
+              let res = await this.$api.removeUser({
                 id: this.rowData.id
               })
               this.$emit('on-custom-comp', 'refresh');

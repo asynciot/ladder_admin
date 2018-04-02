@@ -15,7 +15,7 @@
               <hr class="mt10 mb10">
               <div class="row mb10">
                   <div class="col-xs-12 text-right">
-											<router-link :to="{name:'addusedep'}" class="btn btn-success">添加使用单位</router-link>
+											<router-link :to="{name:'addusedep'}" class="btn btn-success">添加联系人</router-link>
                   </div>
               </div>
 							<v-table

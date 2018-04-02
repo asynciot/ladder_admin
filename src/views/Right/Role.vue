@@ -98,7 +98,7 @@ Vue.component('role-operation', {
                   id: this.rowData.id
                 })
               } else {
-                res = await this.$api.reomveRole({
+                res = await this.$api.removeRole({
                   id: this.rowData.id
                 })
               }

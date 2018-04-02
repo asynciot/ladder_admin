@@ -2,8 +2,10 @@ import Vue from 'vue'
 import Router from 'vue-router'
 const Login = resolve => require(['@/views/Login'], resolve)
 const Home = resolve => require(['@/views/Home'], resolve)
-const Index = resolve => require(['@/views/Index'], resolve)
-const Settings = resolve => require(['@/views/Settings'], resolve)
+
+const Index = resolve => require(['@/views/New/Index'], resolve)
+
+const Settings = resolve => require(['@/views/Setting/Settings'], resolve)
 
 const Focus = resolve => require(['@/views/Watch/Focus'], resolve)
 const Map = resolve => require(['@/views/Watch/Map'], resolve)
@@ -48,6 +50,7 @@ const EditUseDep = resolve => require(['@/views/Doc/EditUseDep'], resolve)
 const Property = resolve => require(['@/views/Doc/Property'], resolve)
 const EditProperty = resolve => require(['@/views/Doc/EditProperty'], resolve)
 
+
 const Building = resolve => require(['@/views/Doc/Building'], resolve)
 const EditBuilding = resolve => require(['@/views/Doc/EditBuilding'], resolve)
 const Client = resolve => require(['@/views/Doc/Client'], resolve)
@@ -57,6 +60,8 @@ const Distribution = resolve => require(['@/views/Doc/Distribution'], resolve)
 const ContractorMng = resolve => require(['@/views/Doc/ContractorMng'], resolve)
 const EditManufacture = resolve => require(['@/views/Doc/EditManufacture'], resolve)
 
+const NewGroup = resolve => require(['@/views/Warranty/NewGroup'], resolve)
+const AddGroup = resolve => require(['@/views/Warranty/AddGroup'], resolve)
 const LiftWarranty = resolve => require(['@/views/Warranty/LiftWarranty'], resolve)
 const EditRecord = resolve => require(['@/views/Warranty/EditRecord'], resolve)
 const AnnualInspetion = resolve => require(['@/views/Warranty/AnnualInspetion'], resolve)
@@ -81,6 +86,7 @@ const EditRole = resolve => require(['@/views/Right/EditRole'], resolve)
 const BindRole = resolve => require(['@/views/Right/BindRole'], resolve)
 const User = resolve => require(['@/views/Right/User'], resolve)
 const EditUser = resolve => require(['@/views/Right/EditUser'], resolve)
+const AddUser = resolve => require(['@/views/Right/AddUSer'], resolve)
 
 Vue.use(Router)
 
@@ -101,7 +107,7 @@ export default new Router({
 				{
 		      path: '/index',
 		      name: 'index',
-					meta:{name:'首页'},
+					meta:{name:'消息通知'},
 		      component: Index
 		    },
 				{
@@ -113,7 +119,7 @@ export default new Router({
 				{
 		      path: '/map',
 		      name: 'map',
-					meta:{name:'实时地图监测'},
+					meta:{name:'地图'},
 		      component: Map
 		    },
 				{
@@ -217,7 +223,7 @@ export default new Router({
 				{
 		      path: '/code',
 		      name: 'code',
-					meta:{name:'故障代码管理'},
+					meta:{name:'故障代码查询'},
 		      component: Code
 		    },
 				{
@@ -235,7 +241,7 @@ export default new Router({
 				{
 		      path: '/contact',
 		      name: 'contact',
-					meta:{name:'故障联系人'},
+					meta:{name:'其他相关资料'},
 		      component: Contact
 		    },
 				{
@@ -385,13 +391,13 @@ export default new Router({
 				{
 		      path: '/usedep',
 		      name: 'usedep',
-					meta:{name:'使用单位管理'},
+					meta:{name:'故障联系人'},
 		      component: UseDep
 		    },
 				{
 		      path: '/usedep/add',
 		      name: 'addusedep',
-					meta:{name:'添加使用单位'},
+					meta:{name:'添加联系人'},	
 		      component: EditUseDep
 		    },
 				{
@@ -417,7 +423,7 @@ export default new Router({
 		      name: 'editproperty',
 					meta:{name:'编辑物业单位'},
 		      component: EditProperty
-		    },
+		   },
 				{
 		      path: '/building',
 		      name: 'building',
@@ -512,7 +518,7 @@ export default new Router({
 		      path: '/user/add',
 		      name: 'adduser',
 					meta:{name:'添加用户'},
-		      component: EditUser
+		      component: AddUser
 		    },
 				{
 		      path: '/user/edit/:id',
@@ -531,6 +537,24 @@ export default new Router({
 		      name: 'settings',
 					meta:{name:'自定义设置'},
 		      component: Settings
+		   	},
+		   		{
+		      path: '/newgroup',
+		      name: 'newgroup',
+					meta:{name:'新建群'},
+		      component: NewGroup
+		    },
+		    	{
+		      path: '/addgroup',
+		      name: 'addgroup',
+					meta:{name:'加入群'},
+		      component: AddGroup
+		    },
+		    	{
+		      path: '/liftwarranty',
+		      name: 'liftwarranty',
+					meta:{name:'电梯维保信息'},
+		      component: LiftWarranty
 		    },
 				{
 		      path: '/liftwarranty',

@@ -75,7 +75,7 @@
                         <li :class="['treeview', currentRoute.breadcrumb.label == '首页'?'active':'']">
 													<router-link :to="{name: 'index'}">
 															<i class="fa fa-dashboard"></i>
-															<span>首页</span>
+															<span>消息通知</span>
 													</router-link>
                         </li>
                         <li
@@ -159,7 +159,7 @@ export default {
 				nicname:'admin',
 			},
       currentRoute: {
-        name: '首页',
+        name: '消息通知',
         breadcrumb: {label:'首页'}
       },
       menu: []
