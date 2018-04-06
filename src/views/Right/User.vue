@@ -14,28 +14,28 @@
 	            <hr class="mt10 mb10">
 	            <div class="row mb10">
 	                <div class="col-xs-12 text-right">
-											<router-link :to="{ name: 'adduser'}"  class="btn btn-success">添加用户</router-link>
+						<router-link :to="{ name: 'adduser'}"  class="btn btn-success">添加用户</router-link>
 	                </div>
 	            </div>
-							<v-table
-									class="mb10"
-									row-hover-color="#eaeaea"
-									is-vertical-resize
-									is-horizontal-resize
-									style="width:100%"
-									:is-loading="loading"
+				<v-table
+						class="mb10"
+						row-hover-color="#eaeaea"
+						is-vertical-resize
+						is-horizontal-resize
+						style="width:100%"
+						:is-loading="loading"
 			            :columns="columns"
 			            :table-data="list"
-									@on-custom-comp="getList"
-					    />
-							<div class="tr">
-								<v-pagination
-									size="small"
-									:pageSize="options.num"
-									@page-change="pageChange"
-									:total="options.total"
-									:layout="['total', 'prev', 'pager', 'next', 'jumper']" />
-							</div>
+						@on-custom-comp="getList"
+		   		/>
+				<div class="tr">
+					<v-pagination
+						size="small"
+						:pageSize="options.num"
+						@page-change="pageChange"
+						:total="options.total"
+						:layout="['total', 'prev', 'pager', 'next', 'jumper']" />
+				</div>
 	        </div>
 	        <!-- /.box-body -->
 	    </div>
@@ -64,12 +64,12 @@ Vue.component('user-operation', {
   },
   methods: {
     bindRole() {
-      this.$router.push({
-				name:'bindrole',
-				params:{
-					id:this.rowData.id
-				}
-			})
+      	this.$router.push({
+			name:'bindrole',
+			params:{
+				id:this.rowData.id
+			}
+		})
     },
     update() {
 			this.$router.push({
@@ -90,17 +90,7 @@ Vue.component('user-operation', {
             title: '删除',
 			handler: async () => {
 			  	this.$modal.hide('dialog')
-//				let res = null
-				let res = await this.$api.removeUser({id:this.rowData.id})
-//				if (this.$route.params.id) {
-//	                res = await this.$api.updateUser({
-//	                  	id: this.rowData.id
-//	                })
-//	          	} else {
-//	                res = await this.$api.removeUser({
-//	                  	id: this.rowData.id
-//	                })
-//	          	}
+				let res = await this.$api.reomveUser({id:this.rowData.id})
 				this.$emit('on-custom-comp');
 				if (0 === res.data.code) {
 					this.$notify({

@@ -11,25 +11,25 @@ import {
 import { stringify } from 'qs';
 
 export default {
-  //account
-  register:(data)=>{
-    return AccountApi.save(data)
-  },
-	updateUser:(data)=>{
-    return AccountApi.update(data)
-  },
-	user:(data)=>{
-    return AccountApi.query(data)
-  },
-	removeUser:(data)=>{
-    return AccountApi.remove(Object.assign({key1:'delete'},data))
-  },
-  login:(data)=>{
-    return AccountApi.save({key1:'login'},data)
-  },
-	logout:(data)=>{
-    return AccountApi.save({key1:'logout'},data)
-  },
+ 	//account
+ 	register:(data)=>{
+	    return AccountApi.save(data)
+  	},
+		updateUser:(data)=>{
+	    return AccountApi.update(data)
+  	},
+		user:(data)=>{
+	    return AccountApi.query(data)
+  	},
+		reomveUser:(data)=>{
+	    return AccountApi.remove(Object.assign({key1:'delete'},data))
+ 	},
+	  login:(data)=>{
+	    return AccountApi.save({key1:'login'},data)
+  	},
+		logout:(data)=>{
+	    return AccountApi.save({key1:'logout'},data)
+  	},
 	password:(data)=>{
 		return AccountApi.save({key1:'password'},data)
 	},
@@ -45,7 +45,7 @@ export default {
 	},
 	removeRole:(data)=>{
     return AccountApi.remove(Object.assign({key1:'authority'},data))
-  },
+  	},
 	//setting
 	addSettings:(data)=>{
 		return CommonApi.save({key1:'settings'},data)
@@ -332,5 +332,12 @@ export default {
 	},
 	values:(id,data)=>{
     return DeviceApi.query(Object.assign({key1:'values',key2:id},data))
-  },
+  	},
+  	//group
+//	group:(id,data)=>{
+//  return GroupApi.query(data)
+//	},
+//	newGroup:(id,data)=>{
+//  return GroupApi.query(data)
+//	},
 }

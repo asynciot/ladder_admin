@@ -83,72 +83,73 @@
 
 <script>
 export default {
-  data() {
+data() {
     return {
       form: {
       	groupType:'',
-				userName:'',
-				groupName:'',
-				sex:'',
-				idNumber:'',
-				companyId: '',
-				address:'',
-				companyName:''
+			userName:'',
+			groupName:'',
+			sex:'',
+			idNumber:'',
+			companyId: '',
+			address:'',
+			companyName:''
       },
-			list:[]
+		list:[]
     }
-  },
-  created() {
-		this.getList()
-    if (this.$route.params.id) {
-      this.getData()
-    }
-  },
-  methods: {
-		async getList() {
-      let res = await this.$api.role({
-				page:1,
-				num:100
-      })
-			this.list = res.data.data.list
-		},
-    async getData() {
-      let res = await this.$api.msgPerson({
-        id: this.$route.params.id
-      })
-      this.form = res.data.data.list[0]
-    },
-    submit() {
-			this.$validator.validateAll('form').then(async (result) => {
-        if (result) {
-					let res = null
-					if(this.$route.params.id){
-						res = await this.$api.updateUser(this.form)
-					}else {
-						res = await this.$api.register(this.form)
-					}
-					console.log(res.data);
-					if(res.data.code == 0){
-						this.form.id = res.data.id
-						res = await this.$api.updateUser(this.form)
-						if(res.data.code == 0){
-							this.$notify({
-								group: 'ok',
-								title: '提示',
-								text: '操作成功'
-							});
-//							this.$router.push({
-//								name:'bindcontact',
-//								params:{
-//									id:this.form.id
-//								}
-//							})
-						}
-					}
-        }
-      });
-    }
-  }
+},
+//created() {
+//		this.getList()
+//  if (this.$route.params.id) {
+//    this.getData()
+//  }
+//},
+//methods: {
+//		async getList() {
+//  	let res = await this.$api.group({
+//		page:1,
+//		num:100
+//    })
+//			this.list = res.data.data.list
+//		},
+//  async getData() {
+//    let res = await this.$api.msgPerson({
+//      id: this.$route.params.id
+//    })
+//    this.form = res.data.data.list[0]
+//  },
+//  submit() {
+//		this.$validator.validateAll('form').then(async (result) => {
+//      if (result) {
+//			let res = null
+//			if(this.$route.params.id){
+//				res = await this.$api.newGroup(this.form)
+//			}
+////			else {
+////				res = await this.$api.register(this.form)
+////			}
+//			console.log(res.data);
+//			if(res.data.code == 0){
+//				this.form.id = res.data.id
+//				res = await this.$api.newGroup(this.form)
+//				if(res.data.code == 0){
+//					this.$notify({
+//						group: 'ok',
+//						title: '提示',
+//						text: '操作成功'
+//					});
+////					this.$router.push({
+////						name:'bindcontact',
+////						params:{
+////							id:this.form.id
+////						}
+////					})
+//				}
+//			}
+//      }
+//    });
+//  }
+//}
 }
 </script>
 
