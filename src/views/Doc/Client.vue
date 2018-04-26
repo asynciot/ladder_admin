@@ -11,7 +11,7 @@
                       <input type="text" class="form-control input-sm" placeholder="电梯工号">
                   </div>-->
                   <div class="col-xs-2">
-                      <button @click="search()" class="btn btn-primary btn-sm">搜索</button>
+                      <button @click="options.page=1,getList()" class="btn btn-primary btn-sm">搜索</button>
                   </div>
               </div>
               <hr class="mt10 mb10">
@@ -200,28 +200,55 @@ export default {
 		list:[],
 		options:{
 			page:1,
-			num:10,
+			num:15,
 			total:0
 		}
 	}),
-	// created(){
-	// 	this.getData()
-	// },
-	methods:{
-		async search(){
-			this.loading = true
-			let res = await this.$api.searchDevice(this.query.id)
-			res.data.deviceModel = '控制器'
-			this.list = [res.data]
-			this.loading = false
-		},
-		pageChange(val) {
-      this.options.page = val
-      this.search()
-    },
+//	 	created(){
+//	 		this.getData()
+//	 	},
+//		methods:{
+//		async search(){
+//			this.loading = true
+//			let res = await this.$api.searchDevice(this.query.id)
+//			res.data.deviceModel = '控制器'
+//			this.list = [res.data]
+//			this.loading = false
+//		},
+//		pageChange(val) {
+//    this.options.page = val
+//    this.search()
+//  },
+//	},
+//	mounted(){
+//		$("#dataTable").treetable({expandable: true});
+//	}
+//}
+	created() {
+    this.getList()
 	},
-	mounted(){
-		$("#dataTable").treetable({expandable: true});
+	methods: {
+    operation(type) {
+      if (type == 'refresh') {
+        this.getList()
+      }
+      if (type == 'lift') {
+        this.$modal.show('lift');
+      }
+    },
+    pageChange(val) {
+      this.options.page = val
+      this.getList()
+    },
+    async getList() {
+      this.loading = true
+      let res = await this.$api.building(this.options)
+      this.loading = false
+//    if (0 === res.data.code) {
+//      this.list = res.data.data.list
+//      this.options.total = res.data.data.totalNumber
+//    }
+    }
 	}
 }
 </script>
