@@ -9,10 +9,10 @@
 	              <div class="box-body">
 	                  <div class="select-tag">
 	                      <span v-if="!selectList.length" style="color: #ccc">请从右边列表选择</span>
-												<button v-for="item in selectList" @click="deleteSelect(item)" type="button" class="btn btn-xs label-success ml10">
-													<i v-text="`${item.companyId}`"></i>
-													<span class="glyphicon glyphicon-remove"></span>
-												</button>
+							<button v-for="item in selectList" @click="deleteSelect(item)" type="button" class="btn btn-xs label-success ml10">
+								<i v-text="`${item.companyId}`"></i>
+								<span class="glyphicon glyphicon-remove"></span>
+							</button>
 	                  </div>
 	              </div>
 	          </div>
@@ -42,40 +42,40 @@
 	              <div class="box-body">
 	                  <div class="row">
 	                      <div class="col-md-4">
-	                          <input type="text" class="form-control input-sm" placeholder="电梯工号">
+	                          <input type="text" class="form-control input-sm" placeholder="单位名称">
 	                      </div>
 	                      <div class="col-md-4">
-													<select name="type" class="form-control" v-model="options.type">
-															<option value="">请选择单位</option>
-															<option v-for="item in types" :value="item.id" v-text="item.name"></option>
-													</select>
+								<select name="type" class="form-control" v-model="options.type">
+										<option value="">请选择单位</option>
+										<option v-for="item in types" :value="item.id" v-text="item.name"></option>
+								</select>
 	                      </div>
 	                      <div class="col-sm-4">
 	                          <button @click="getList()" class="btn btn-primary btn-sm">搜索</button>
 	                      </div>
 	                  </div>
 	                  <hr class="mt10 mb10">
-										<v-table
-												class="mb10"
-												row-hover-color="#eaeaea"
-												is-vertical-resize
-												is-horizontal-resize
-												style="width:100%"
-												:is-loading="loading"
-												:column-cell-class-name="columnCellClass"
-												:columns="columns"
-												:row-click="select"
-												:table-data="list"
-												@on-custom-comp="getList"
-										/>
-										<div class="tr">
-											<v-pagination
-												size="small"
-												:pageSize="options.num"
-												@page-change="pageChange"
-												:total="options.total"
-												:layout="['total', 'prev', 'pager', 'next', 'jumper']" />
-										</div>
+						<v-table
+								class="mb10"
+								row-hover-color="#eaeaea"
+								is-vertical-resize
+								is-horizontal-resize
+								style="width:100%"
+								:is-loading="loading"
+								:column-cell-class-name="columnCellClass"
+								:columns="columns"
+								:row-click="select"
+								:table-data="list"
+								@on-custom-comp="getList"
+						/>
+						<div class="tr">
+							<v-pagination
+								size="small"
+								:pageSize="options.num"
+								@page-change="pageChange"
+								:total="options.total"
+								:layout="['total', 'prev', 'pager', 'next', 'jumper']" />
+						</div>
 	              </div>
 	              <!-- /.box-body -->
 	          </div>

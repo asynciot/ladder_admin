@@ -20,31 +20,29 @@
                 <div class="col-xs-12 text-right">
                 </div>
             </div>
-						<v-table
-								class="mb10"
-								row-hover-color="#eaeaea"
-								is-vertical-resize
-								is-horizontal-resize
-								style="width:100%"
-								:is-loading="loading"
-								:columns="columns"
-								:table-data="list"
-								@on-custom-comp="getList"
-						/>
-						<div class="tr">
-							<v-pagination
-								size="small"
-								:pageSize="options.num"
-								@page-change="pageChange"
-								:total="options.total"
-								:layout="['total', 'prev', 'pager', 'next', 'jumper']" />
-						</div>
+			<v-table
+				class="mb10"
+				row-hover-color="#eaeaea"
+				is-vertical-resize
+				is-horizontal-resize
+				style="width:100%"
+				:is-loading="loading"
+				:columns="columns"
+				:table-data="list"
+				@on-custom-comp="getList"
+			/>
+			<div class="tr">
+				<v-pagination
+					size="small"
+					:pageSize="options.num"
+					@page-change="pageChange"
+					:total="options.total"
+					:layout="['total', 'prev', 'pager', 'next', 'jumper']" />
+			</div>
         </div>
         <!-- /.box-body -->
-
     </div>
     <!-- /.box -->
-
 </section>
 <!-- /.content -->
 </template>

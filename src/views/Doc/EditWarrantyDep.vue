@@ -153,15 +153,15 @@ export default {
 			let index = this.region.findIndex(item=>item.value==val)
 			if(index > -1){
 				this.cityList = this.region[index].children
-				this.form.city = ''
-				this.form.district = ''
+//				this.form.city = ''
+//				this.form.district = ''
 			}
     },
 		'form.city': function(val){
 			let index = this.cityList.findIndex(item=>item.value==val)
 			if(index > -1){
 				this.districtList = this.cityList[index].children
-				this.form.district = ''
+//				this.form.district = ''
 			}
 
     },

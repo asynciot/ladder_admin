@@ -1,49 +1,46 @@
 <template lang="html">
-	        <!-- Main content -->
-	        <section class="content">
-
-	            <div class="box">
-	                <div class="box-body">
-	                    <div class="row">
-	                        <div class="col-xs-3">
-	                            <input type="text" v-model='options.name' class="form-control input-sm" placeholder="请输入制造厂商名称">
-	                        </div>
-	                        <div class="col-xs-3">
-	                            <button @click="options.page=1,getList()" class="btn btn-primary btn-sm">搜索</button>
-	                        </div>
-	                    </div>
-	                    <hr class="mt10 mb10">
-	                    <div class="row mb10">
-	                        <div class="col-xs-12 text-right">
-															<router-link :to="{name:'addmanufacture'}" class="btn btn-success">添加制造厂商</router-link>
-	                        </div>
-	                    </div>
-						<v-table
-							class="mb10"
-							row-hover-color="#eaeaea"
-							is-vertical-resize
-							is-horizontal-resize
-							style="width:100%"
-							:is-loading="loading"
-				            :columns="columns"
-				            :table-data="list"
-							@on-custom-comp="getList"
-					    />
-						<div class="tr">
-							<v-pagination
-								size="small"
-								@page-change="pageChange"
-								:total="options.total"
-								:layout="['total', 'prev', 'pager', 'next', 'jumper']" />
-						</div>
-	                </div>
-	                <!-- /.box-body -->
-
-	            </div>
-	            <!-- /.box -->
-
-	        </section>
-	        <!-- /.content -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="box">
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <input type="text" v-model='options.name' class="form-control input-sm" placeholder="请输入制造厂商名称">
+                    </div>
+                    <div class="col-xs-3">
+                        <button @click="options.page=1,getList()" class="btn btn-primary btn-sm">搜索</button>
+                    </div>
+                </div>
+                <hr class="mt10 mb10">
+                <div class="row mb10">
+                    <div class="col-xs-12 text-right">
+						<router-link :to="{name:'addmanufacture'}" class="btn btn-success">添加制造厂商</router-link>
+                    </div>
+                </div>
+				<v-table
+					class="mb10"
+					row-hover-color="#eaeaea"
+					is-vertical-resize
+					is-horizontal-resize
+					style="width:100%"
+					:is-loading="loading"
+		            :columns="columns"
+		            :table-data="list"
+					@on-custom-comp="getList"
+			    />
+				<div class="tr">
+					<v-pagination
+						size="small"
+						@page-change="pageChange"
+						:total="options.total"
+						:layout="['total', 'prev', 'pager', 'next', 'jumper']" />
+				</div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </section>
+    <!-- /.content -->
 </template>
 
 <script>
@@ -112,6 +109,7 @@ export default {
       field: 'name',
       title: '制造厂商名称',
       width: 100,
+      count: 2,
       titleAlign: 'center',
       columnAlign: 'center',
       isResize: true
