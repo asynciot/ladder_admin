@@ -64,7 +64,7 @@ Vue.component('code-operation', {
   methods: {
 		update() {
       this.$router.push({
-        name: 'editbuilding',
+        name: 'editlevel',
         params: {
           id: this.rowData.id
         }

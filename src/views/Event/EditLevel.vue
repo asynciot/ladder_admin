@@ -58,7 +58,8 @@
               <div class="box-footer">
                   <div class="col-sm-offset-2">
                       <button type="submit" class="btn btn-success">提交</button>
-                  </div>
+                      <button type="button" v-on:click="" class="btn btn-success">取消</button>
+                  </div>                 
               </div>
               <!-- /.box-footer -->
           </form>
@@ -101,6 +102,7 @@ export default {
         this.buildingList = res.data.data.list
       })
     },
+
     submit() {
       this.$validator.validateAll('form').then(async (result) => {
         if (result) {

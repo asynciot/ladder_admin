@@ -13,28 +13,28 @@
                         <input type="text" name="name" v-validate="'required'" :class="{'form-control': true, 'is-error': errors.has('form.name') }" v-model="form.name" placeholder="请输入">
                     </div>
                 </div>
-								<div class="form-group">
-										<label for="" class="col-sm-2 control-label">所在区域</label>
-										<div class=" col-sm-8 col-md-6">
-												<div class="row">
-														<div class="col-sm-4">
-																<select name="province" v-validate="'required'" :class="{'form-control': true, 'is-error': errors.has('form.province') }" v-model="form.province">
-																		<option v-for="item in region" :value="item.value" v-text="item.label"></option>
-																</select>
-														</div>
-														<div class="col-sm-4">
-																<select v-model="form.city" name="city" v-validate="'required'" :class="{'form-control': true, 'is-error': errors.has('form.city') }">
-																		<option v-for="item in cityList" :value="item.value" v-text="item.label"></option>
-																</select>
-														</div>
-														<div class="col-sm-4">
-																<select v-model="form.district" name="district" v-validate="'required'" :class="{'form-control': true, 'is-error': errors.has('form.district') }">
-																		<option v-for="item in districtList" :value="item.value" v-text="item.label"></option>
-																</select>
-														</div>
-												</div>
-										</div>
-								</div>
+				<div class="form-group">
+					<label for="" class="col-sm-2 control-label">所在区域</label>
+					<div class=" col-sm-8 col-md-6">
+						<div class="row">
+							<div class="col-sm-4">
+								<select v-model="form.province" name="province" v-validate="'required'" :class="{'form-control': true, 'is-error': errors.has('form.province') }" >
+									<option v-for="item in region" :value="item.value" v-text="item.label"></option>
+								</select>
+							</div>
+							<div class="col-sm-4">
+								<select v-model="form.city" name="city" v-validate="'required'" :class="{'form-control': true, 'is-error': errors.has('form.city') }">
+									<option v-for="item in cityList" :value="item.value" v-text="item.label"></option>
+								</select>
+							</div>
+							<div class="col-sm-4">
+								<select v-model="form.district" name="district" v-validate="'required'" :class="{'form-control': true, 'is-error': errors.has('form.district') }">
+									<option v-for="item in districtList" :value="item.value" v-text="item.label"></option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
                 <div class="form-group">
                     <label for="" class="col-sm-2 control-label">详细地址</label>
 
@@ -102,8 +102,8 @@ export default {
 	data(){
 		return {
 			region: region,
-			cityList: [],
-			districtList: [],
+			cityList:[] ,
+		  	districtList:[] ,
 			form:{
 				name:'',
 				province:'',
@@ -126,20 +126,19 @@ export default {
 	},
 	watch: {
     'form.province': function(val){
-			let index = this.region.findIndex(item=>item.value==val)
-			if(index > -1){
-				this.cityList = this.region[index].children
-				this.form.city = ''
-				this.form.district = ''
-			}
+		let index = this.region.findIndex(item=>item.value==val)
+		if(index > -1){
+			this.cityList = this.region[index].children
+			this.form.city = ''
+			this.form.district = ''
+		}
     },
-		'form.city': function(val){
-			let index = this.cityList.findIndex(item=>item.value==val)
-			if(index > -1){
-				this.districtList = this.cityList[index].children
-				this.form.district = ''
-			}
-
+	'form.city': function(val){
+		let index = this.cityList.findIndex(item=>item.value==val)
+		if(index > -1){
+			this.districtList = this.cityList[index].children
+			this.form.district = ''
+		}
     },
   },
 	methods:{

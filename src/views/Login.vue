@@ -49,7 +49,7 @@
 
 <script>	
 import {
-  menu
+  menu,
 } from '@/views/menu'
 export default {
   data() {
@@ -115,5 +115,4 @@ export default {
 </script>
 
 <style lang="css">
-
 </style>

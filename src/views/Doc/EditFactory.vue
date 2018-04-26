@@ -16,15 +16,21 @@
                       </div>
                   </div>
                   <div class="form-group">
-                      <label for="" class="col-sm-2 control-label">电梯服务编码</label>
+                      <label for="" class="col-sm-2 control-label">电梯编码</label>
                       <div class=" col-sm-8 col-md-6">
                           <input type="text" name="code" v-validate="'required'" :class="{'form-control': true, 'is-error': errors.has('form.code') }" v-model="form.code" placeholder="请输入">
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label for="" class="col-sm-2 control-label">电梯服务编码</label>
+                      <div class=" col-sm-8 col-md-6">
+                          <input type="text" name="serviceCode" v-validate="'required'" :class="{'form-control': true, 'is-error': errors.has('form.serviceCode') }" v-model="form.serviceCode" placeholder="请输入">
                       </div>
                   </div>
 									<div class="form-group">
                       <label for="" class="col-sm-2 control-label">电梯型号</label>
                       <div class=" col-sm-8 col-md-6">
-                          <input type="text" name="serviceCode" v-validate="'required'" :class="{'form-control': true, 'is-error': errors.has('form.serviceCode') }" v-model="form.serviceCode" placeholder="请输入">
+                          <input type="text" name="model" v-validate="'required'" :class="{'form-control': true, 'is-error': errors.has('form.model') }" v-model="form.model" placeholder="请输入">
                       </div>
                   </div>
                   <div :class="{'form-group': true, 'has-error': errors.has('form.serviceCode') }">

@@ -15,19 +15,19 @@ export default {
  	register:(data)=>{
 	    return AccountApi.save(data)
   	},
-		updateUser:(data)=>{
+	updateUser:(data)=>{
 	    return AccountApi.update(data)
   	},
-		user:(data)=>{
+	user:(data)=>{
 	    return AccountApi.query(data)
   	},
-		reomveUser:(data)=>{
+	reomveUser:(data)=>{
 	    return AccountApi.remove(Object.assign({key1:'delete'},data))
  	},
-	  login:(data)=>{
+	login:(data)=>{
 	    return AccountApi.save({key1:'login'},data)
   	},
-		logout:(data)=>{
+	logout:(data)=>{
 	    return AccountApi.save({key1:'logout'},data)
   	},
 	password:(data)=>{
