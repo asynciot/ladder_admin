@@ -18,24 +18,24 @@
 															<router-link :to="{name:'addmanufacture'}" class="btn btn-success">添加制造厂商</router-link>
 	                        </div>
 	                    </div>
-											<v-table
-													class="mb10"
-													row-hover-color="#eaeaea"
-													is-vertical-resize
-													is-horizontal-resize
-													style="width:100%"
-													:is-loading="loading"
-							            :columns="columns"
-							            :table-data="list"
-													@on-custom-comp="getList"
-									    />
-											<div class="tr">
-												<v-pagination
-													size="small"
-													@page-change="pageChange"
-													:total="options.total"
-													:layout="['total', 'prev', 'pager', 'next', 'jumper']" />
-											</div>
+						<v-table
+							class="mb10"
+							row-hover-color="#eaeaea"
+							is-vertical-resize
+							is-horizontal-resize
+							style="width:100%"
+							:is-loading="loading"
+				            :columns="columns"
+				            :table-data="list"
+							@on-custom-comp="getList"
+					    />
+						<div class="tr">
+							<v-pagination
+								size="small"
+								@page-change="pageChange"
+								:total="options.total"
+								:layout="['total', 'prev', 'pager', 'next', 'jumper']" />
+						</div>
 	                </div>
 	                <!-- /.box-body -->
 

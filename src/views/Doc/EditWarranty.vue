@@ -19,17 +19,31 @@
 												<input type="text" name="alias" v-validate="'required'" :class="{'form-control': true, 'is-error': errors.has('form.alias') }" v-model="form.alias"  placeholder="请输入">
 										</div>
                 </div>
-                <!-- <div class="form-group">
+                 <div class="form-group">
                     <label for="" class="col-sm-2 control-label">电梯使用状态</label>
                     <div class=" col-sm-8 col-md-6">
-                        <select type="text" class="form-control" id="">
+                    	<div class="checkbox">
+                              <label class="ml10">
+                                  <input name="type" type="radio" v-model="form.type" v-validate="'required'" value="0"> 正常
+                              </label>
+                              <label class="ml10">
+                                  <input name="type" type="radio" value="1" v-model="form.type"> 临时停用
+                              </label>
+                              <label class="ml10">
+                                  <input name="type" type="radio" value="2" v-model="form.type"> 长期停用
+                              </label>
+                              <label class="ml10">
+                                  <input name="type" type="radio" value="3" v-model="form.type"> 拆除
+                              </label>
+                          </div>
+                        <!--<select type="text" class="form-control" id="">
                             <option value="">正常</option>
                             <option value="">临时停用</option>
                             <option value="">长期停用</option>
                             <option value="">拆除</option>
-                        </select>
+                        </select>-->
                     </div>
-                </div> -->
+                </div> 
             </div>
             <div class="box-header with-border">
                 <h4 class="box-title">使用单位信息</h4>
