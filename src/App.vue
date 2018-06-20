@@ -1,12 +1,30 @@
-<template>
-  <router-view/>
+<template lang="jade">
+div#app
+	transition(name="fade")
+		router-view
 </template>
 
 <script>
 export default {
-  name: 'App'
+  name: 'app'
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+#app {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    min-width: 1024px;
+}
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.3s ease;
+}
+.fade-enter,
+.fade-leave-active {
+    opacity: 0;
+}
 </style>

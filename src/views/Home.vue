@@ -1,231 +1,245 @@
-<template lang="html">
-    <div>
-        <div class="wrapper">
-            <header class="main-header">
-                <!-- Logo -->
-                <router-link :to="{name:'index'}" class="logo">
-                    <!-- mini logo for sidebar mini 50x50 pixels -->
-                    <span class="logo-mini">电梯管理</span>
-                    <!-- logo for regular state and mobile devices -->
-                    <span class="logo-lg">电梯管理系统</span>
-                </router-link>
-                <!-- Header Navbar: style can be found in header.less -->
-                <nav class="navbar navbar-static-top">
-                    <!-- Sidebar toggle button-->
-                    <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-                        <span class="sr-only"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </a>
-                    <div class="navbar-custom-menu">
-                        <ul class="nav navbar-nav">
-                            <!-- <li class="dropdown messages-menu"><router-link
-															:to="{name:'lift'}" class="dropdown-toggle"> 全部 <span
-                                        class="label label-info">4</span> </router-link></li>
-                            <li class="dropdown messages-menu"><router-link
-															:to="{name:'lift'}" class="dropdown-toggle"> 离线 <span
-                                        class="label label-default">4</span> </router-link ></li>
-                            <li class="dropdown messages-menu"><router-link
-															:to="{name:'lift'}" class="dropdown-toggle"> 故障 <span
-                                        class="label label-danger">4</span> </router-link ></li>
-                            <li class="dropdown messages-menu"><router-link
-															:to="{name:'lift'}" class="dropdown-toggle"> 检修 <span
-                                        class="label label-warning">4</span> </router-link ></li>
-                            <li class="dropdown messages-menu"><router-link
-															:to="{name:'lift'}" class="dropdown-toggle"> 正常 <span
-                                        class="label label-success">4</span> </router-link ></li> -->
-                            <li class="dropdown user user-menu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="../assets/img/headimg.jpg" class="user-image" alt="User Image">
-                                    <span class="hidden-xs">admin</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="user-footer">
-                                        <div class="pull-left">
-																						<router-link class="btn btn-default btn-flat btn-sm" :to="{name:'edituser',params:{id:$cookie.get('userId')}}">个人信息修改</router-link>
-																						<router-link class="btn btn-default btn-flat btn-sm" :to="{name:'edituser',params:{id:$cookie.get('userId')}}">密码修改</router-link>
-                                        </div>
-                                        <div class="pull-right">
-                                            <span @click="logout()" class="btn btn-danger btn-flat btn-sm">退出登录</span>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            </header>
-            <!-- Left side column. contains the sidebar -->
-            <aside class="main-sidebar">
-                <!-- sidebar: style can be found in sidebar.less -->
-                <section class="sidebar">
-                    <!-- Sidebar user panel -->
-                    <div class="user-panel">
-                        <div class="pull-left image">
-                            <img src="../assets/img/headimg.jpg" class="img-circle" alt="User Image">
-                        </div>
-                        <div class="pull-left info">
-                            <p v-text="account.nicname"></p>
-                            <a href="javascript:void(0)" v-text="account.roleName"></a>
-                        </div>
-                    </div>
-                    <!-- sidebar menu: : style can be found in sidebar.less -->
-                    <ul class="sidebar-menu" data-widget="tree">
-                        <li :class="['treeview', currentRoute.breadcrumb.label == '首页'?'active':'']">
-													<router-link :to="{name: 'index'}">
-															<i class="fa fa-dashboard"></i>
-															<span>首页</span>
-													</router-link>
-                        </li>
-                        <li
-													v-for="nav in menu"
-													:class="['treeview', currentRoute.breadcrumb.label1 == nav.label?'active':'']">
-                            <a href="#">
-                                <i :class="['fa', nav.icon]"></i> <span v-text="nav.label"></span>
-                                <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-                            </a>
-                            <ul class="treeview-menu menu-open">
-                                <li
-																	v-for="item in nav.sub"
-																	:class="['treeview', (currentRoute.breadcrumb.label2 == item.label)||(currentRoute.breadcrumb.label == item.label)?'active':'']">
-                                    <router-link v-if="!item.sub" :to="{name: item.link}">
-                                        <i class="fa fa-circle-o"></i>{{item.label}}
-                                    </router-link>
-                                    <a href="#" v-if="item.sub">
-                                        <i class="fa fa-circle-o"></i>{{item.label}}
-                                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-                                    </a>
-                                    <ul
-																			v-if="item.sub"
-																			class="treeview-menu menu-open">
-                                        <li :class="{'active':currentRoute.breadcrumb.label == sub.label}" v-for="sub in item.sub">
-                                            <router-link :to="{name: sub.link}">
-                                                <i class="fa fa-circle-o"></i>{{sub.label}}
-                                            </router-link>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </section>
-                <!-- /.sidebar -->
-            </aside>
-            <!-- =============================================== -->
-            <!-- Content Wrapper. Contains page content -->
-            <div class="content-wrapper">
-                <!-- Content Header (Page header) -->
-                <section class="content-header">
-                    <h1 v-text="currentRoute.name"></h1>
-                    <ol class="breadcrumb">
-                        <li v-if="currentRoute.breadcrumb.label1" v-text="currentRoute.breadcrumb.label1"></li>
-												<li v-if="currentRoute.breadcrumb.label2" v-text="currentRoute.breadcrumb.label2"></li>
-                        <li v-if="currentRoute.breadcrumb.label" class="active" v-text="currentRoute.breadcrumb.label"></li>
-                    </ol>
-                </section>
-                <router-view />
-
-                </section>
-                <!-- /.content -->
-            </div>
-            <!-- /.content-wrapper -->
-            <footer class="main-footer">
-                <div class="pull-right hidden-xs"> 地址：浙江省宁波市</div>
-                <strong>Copyright &copy; 2014-2018
-									<!-- <a href="#">xxx Studio</a>. -->
-								</strong>
-									宁波申菱电梯配件有限公司
-            </footer>
-        </div>
-				<notifications classes="n-light" position="top right" group="ok" />
-				<notifications classes="n-light n-error" position="top right" group="error" />
-				<v-dialog />
+<template>
+<div class="layout">
+  <Row type="flex">
+    <Col span="3" class="layout-menu-left noprint">
+    <Menu class="layout-menu-ul" theme="dark" width="auto" @on-select="go" :active-name="active">
+      <div class="layout-logo-left">菜单</div>
+      <template v-for="item in menu" v-if="!item.sub">
+          <Menu-item :key="item.name" :name="item.name">
+						<Icon :type="item.icon" size="16"></Icon>
+            {{item.label}}
+          </Menu-item>
+			</template>
+      <template v-else>
+				<Submenu :name="item.name">
+					<template slot="title">
+						<Icon :type="item.icon" size="16"></Icon>
+						<Badge v-if="item.count" :count="item.count" class-name="badge-sub-alone" :dot="true">
+							{{item.label}}
+						</Badge>
+						<i v-else>{{item.label}}</i>
+					</template>
+      <Menu-item class="submenu" v-for="sub in item.sub" :key="sub.name" :name="sub.name">
+        <Badge class-name="badge-alone" overflow-count="99" :count="sub.count?sub.count:0">{{sub.label}}</Badge>
+      </Menu-item>
+      </Submenu>
+      </template>
+    </Menu>
+    </Col>
+    <Col class="laycontent" span="21">
+    <div class="layout-header clearfix noprint">
+      <Dropdown class="layout-header-user fr" @on-click="logout" trigger="click" style="margin-left: 20px">
+        <Button type="ghost" long>
+            {{role[$cookie.get('role')]}}
+            <Icon type="arrow-down-b"></Icon>
+        </Button>
+        <Dropdown-menu slot="list">
+          <Dropdown-item :name="1">个人信息</Dropdown-item>
+          <Dropdown-item :name="2">修改密码</Dropdown-item>
+          <Dropdown-item :name="3">退出</Dropdown-item>
+        </Dropdown-menu>
+      </Dropdown>
     </div>
+    <div class="layout-breadcrumb noprint">
+      <Breadcrumb>
+        <Breadcrumb-item>{{$route.meta.name}}</Breadcrumb-item>
+      </Breadcrumb>
+    </div>
+    <div class="layout-content">
+      <transition name="fade">
+        <router-view></router-view>
+      </transition>
+    </div>
+    <!-- <div class="layout-copy noprint">
+      2016-2017 &copy; 上海心话信息科技有限公司提供技术支持
+    </div> -->
+    </Col>
+  </Row>
+</div>
 </template>
 
 <script>
-let breadcrumbs = []
-
-const breadcrumb = (name) => {
-	let data = breadcrumbs.filter(nav => nav.link == name) || null
-	return data
-}
 export default {
   data() {
-    return {
-			isActive: true,
-			account:{
-				nicname:'admin',
-			},
-      currentRoute: {
-        name: '首页',
-        breadcrumb: {label:'首页'}
-      },
-      menu: []
-    }
-  },
-	created(){
-		this.account = JSON.parse(this.$cookie.get('account'))
-		this.getMenu()
-	},
-  mounted() {
-    $('[data-toggle="control-sidebar"]').controlSidebar()
-    $('[data-toggle="push-menu"]').pushMenu()
-		let nav = this.$route.fullPath.split("/")
-		if(this.$route.name != 'index') {
-			this.currentRoute.name = this.$route.meta.name
-			this.currentRoute.breadcrumb = breadcrumb(nav[1])[0]
-		}
-  },
-  watch: {
-    '$route' (val) {
-			let nav = val.fullPath.split("/")
-			if(val.name != 'index') {
-				this.currentRoute.name = val.meta.name
-				this.currentRoute.breadcrumb = breadcrumb(nav[1])[0]
-			}else {
-				this.currentRoute = {
-	        name: '首页',
-	        breadcrumb: {label:'首页'}
-	      }
-			}
-    }
-  },
-  methods: {
-		getMenu(){
-			let menu = JSON.parse(this.$storage.get('roleMenu'))
-			this.menu = menu
-			menu.forEach(item => {
-			  item.sub.forEach(sub=>{
-					sub.label1 = item.label
-					if (sub.sub) {
-						sub.sub.forEach(nav=>{
-							nav.label1 = item.label
-							nav.label2 = sub.label
-							breadcrumbs.push(nav)
-						})
-					}else {
-						breadcrumbs.push(sub)
-					}
-				})
-			})
-		},
-    async logout() {
-      let res = await this.$api.logout({});
-      if (0 === res.data.code) {
-				this.$storage.remove('roleMenu')
-        this.$cookie.delete('userId');
-				this.$cookie.delete('account');
-	      this.$router.replace({
-	        name: "login"
-	      });
+    const validateOldPassCheck = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请再次输入密码'));
+      } else if (value !== this.password.password) {
+        callback(new Error('两次输入密码不一致!'));
+      } else {
+        callback();
       }
+    };
+    return {
+      modal: false,
+      modalType: 0,
+      info: {
+        nicname: '',
+        phone: ''
+      },
+      password: {
+        oldPassword: '',
+        password: ''
+      },
+      passwordRules: {
+        oldPassword: [{
+          required: true,
+          message: '旧密码不能为空',
+          trigger: 'blur'
+        }, {
+          min: 5,
+          message: '密码不能少于6个字符',
+          trigger: 'blur'
+        }],
+        password: [{
+          required: true,
+          message: '新密码不能为空',
+          trigger: 'blur'
+        }, {
+          min: 5,
+          message: '密码不能少于6个字符',
+          trigger: 'blur'
+        }],
+        confirm: [{
+          validator: validateOldPassCheck,
+          required: true,
+          trigger: 'blur'
+        }],
+      },
+      role: {
+        0: '管理员',
+      },
+      count: null,
+      active: this.$route.path.split('/')[1],
+      menu: [{
+          name: 'menu',
+          icon: 'cube',
+          label: '版本更新'
+        },
+      ]
     }
+  },
+  computed: {},
+  created() {},
+  methods: {
+    async logout(index) {
+      this.modalType = parseInt(index)
+      switch (parseInt(index)) {
+        case 1:
+          let user = await this.$api.user(this.$cookie.get('id'))
+          this.info = user.data.account.data
+          this.modal = true
+          break;
+        case 2:
+          this.modal = true
+          break;
+          break;
+        case 3:
+          let res = await this.$api.logout({})
+          window.$cookie.delete('id')
+          window.$cookie.delete('role')
+          this.$router.replace({
+            name: 'login'
+          })
+          break;
+      }
+    },
+    go(name) {
+      if (typeof name === 'string')
+        this.$router.push({
+          name: name
+        });
+    },
   }
-};
+}
 </script>
 
-<style lang="css">
-
+<style lang="scss" scoped>
+.layout {
+    border: 1px solid #d7dde4;
+    background: #f5f7f9;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.layout-breadcrumb {
+    padding: 10px 15px 0;
+}
+.laycontent {
+    position: relative;
+}
+.layout-content {
+    // position: relative;
+    position: absolute;
+    top: 90px;
+    left: 0;
+    right: 0;
+    bottom: 10px;
+    margin: 15px;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 4px;
+    // min-height: 500px;
+    // min-height: 100%;
+}
+.layout-copy {
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 0 0 15px;
+    color: #9ea7b4;
+    bottom: 0;
+}
+.ivu-row-flex {
+    height: 100%;
+}
+.layout-menu-left {
+    background: #464c5b;
+    overflow-y: scroll;
+}
+.layout-menu-ul {
+    padding-top: 1px;
+}
+.layout-header {
+    height: 60px;
+    background: #fff;
+    box-shadow: 0 1px 1px rgba(0,0,0,.1);
+}
+.layout-header-user {
+    height: 40px;
+    margin: 14px 15px 0 0;
+}
+.layout-logo-left {
+    width: 90%;
+    height: 30px;
+    line-height: 30px;
+    background: #5b6270;
+    border-radius: 3px;
+    margin: 15px auto;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+}
+.ivu-menu-dark.ivu-menu-vertical .ivu-menu-item {
+    color: #FDFEFC;
+}
+.ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu) {
+    // color: #39f;
+}
+.submenu {
+    padding: 8px 24px;
+}
+.info {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+}
 </style>
