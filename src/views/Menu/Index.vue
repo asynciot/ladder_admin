@@ -6,8 +6,7 @@ div.layout-content-main
 				Col(span="5")
 					Form-item(label="版本选择：")
 						Select(placeholder="请选择",v-model="query.version")
-							Option(:value="0",selected)|无
-							Option(v-for="item in versions",:key="item.id",:value="item.id")|{{item.name}}
+							Option(v-for="item in versions",:key="item.name",:value="item.name")|{{item.name}}
 				Col(span="8")
 					Button.mr-10(type="primary",:disabled="(select.length == 0) || !query.version",@click="update(select)")|更新
 	Table(@on-selection-change="selection",border,:columns="columns",:data="data",size="small")
@@ -58,14 +57,14 @@ export default {
           title: '设备类型',
           key: 'typeId',
           render: (h, params) => {
-            return h('p',type[params.row.typeId]||'')
+            return h('p',type[params.row.typeId]||'-')
           }
         },
         {
           title: '网络类型',
           key: 'networkType',
           render: (h, params) => {
-            return h('p',netWork[params.row.networkType]||'')
+            return h('p',netWork[params.row.networkType]||'-')
           }
         },
         {
@@ -143,7 +142,7 @@ export default {
     },
 		async update(val) {
 			const ids = val.toString()
-			let res = await this.$http.put(`${this.api}/devices?ids=${ids}&version=${this.query.version}`, {})
+			let res = await this.$http.put(`${this.api}/devices/version?ids=${ids}&version=${this.query.version}`, {})
 			if (res.data.code === 0) {
 				this.getList()
 				this.$Notice.success({

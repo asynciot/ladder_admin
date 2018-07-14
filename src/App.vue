@@ -17,7 +17,7 @@ export default {
     left: 0;
     right: 0;
     bottom: 0;
-    min-width: 1024px;
+    min-width: 1200px;
 }
 .fade-enter-active,
 .fade-leave-active {

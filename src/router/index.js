@@ -3,6 +3,8 @@ import Router from 'vue-router'
 const Login = resolve => require(['@/views/Login'], resolve)
 const Home = resolve => require(['@/views/Home'], resolve)
 const Menu = resolve => require(['@/views/Menu/Index'], resolve)
+const Map = resolve => require(['@/views/Map/Index'], resolve)
+const Device = resolve => require(['@/views/Device/Index'], resolve)
 
 Vue.use(Router)
 
@@ -26,6 +28,17 @@ export default new Router({
           name: 'menu',
 					meta:{name:'版本更新'},
           component: Menu
+        },{
+          path: '/map',
+          name: 'map',
+					meta:{name:'地图'},
+          component: Map
+        },
+				{
+          path: '/device/:id/:type',
+          name: 'device',
+					meta:{name:'设备'},
+          component: Device
         },
       ],
     },

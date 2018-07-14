@@ -2,54 +2,53 @@
 <div class="layout">
   <Row type="flex">
     <Col span="3" class="layout-menu-left noprint">
-    <Menu class="layout-menu-ul" theme="dark" width="auto" @on-select="go" :active-name="active">
-      <div class="layout-logo-left">菜单</div>
-      <template v-for="item in menu" v-if="!item.sub">
-          <Menu-item :key="item.name" :name="item.name">
-						<Icon :type="item.icon" size="16"></Icon>
-            {{item.label}}
-          </Menu-item>
-			</template>
-      <template v-else>
-				<Submenu :name="item.name">
-					<template slot="title">
-						<Icon :type="item.icon" size="16"></Icon>
-						<Badge v-if="item.count" :count="item.count" class-name="badge-sub-alone" :dot="true">
-							{{item.label}}
-						</Badge>
-						<i v-else>{{item.label}}</i>
-					</template>
-      <Menu-item class="submenu" v-for="sub in item.sub" :key="sub.name" :name="sub.name">
-        <Badge class-name="badge-alone" overflow-count="99" :count="sub.count?sub.count:0">{{sub.label}}</Badge>
-      </Menu-item>
-      </Submenu>
-      </template>
-    </Menu>
+	    <Menu class="layout-menu-ul" theme="dark" width="auto" @on-select="go" :active-name="active">
+	      <div class="layout-logo-left">菜单</div>
+	      <template v-for="item in menu" v-if="!item.sub">
+	          <Menu-item :key="item.name" :name="item.name">
+							<Icon :type="item.icon" size="16"></Icon>
+	            {{item.label}}
+	          </Menu-item>
+				</template>
+	      <template v-else>
+					<Submenu :name="item.name">
+						<template slot="title">
+							<Icon :type="item.icon" size="16"></Icon>
+							<Badge v-if="item.count" :count="item.count" class-name="badge-sub-alone" :dot="true">
+								{{item.label}}
+							</Badge>
+							<i v-else>{{item.label}}</i>
+						</template>
+	      <Menu-item class="submenu" v-for="sub in item.sub" :key="sub.name" :name="sub.name">
+	        <Badge class-name="badge-alone" overflow-count="99" :count="sub.count?sub.count:0">{{sub.label}}</Badge>
+	      </Menu-item>
+	      </Submenu>
+	      </template>
+	    </Menu>
     </Col>
     <Col class="laycontent" span="21">
-    <div class="layout-header clearfix noprint">
-      <Dropdown class="layout-header-user fr" @on-click="logout" trigger="click" style="margin-left: 20px">
-        <Button type="ghost" long>
-            {{role[$cookie.get('role')]}}
-            <Icon type="arrow-down-b"></Icon>
-        </Button>
-        <Dropdown-menu slot="list">
-          <Dropdown-item :name="1">个人信息</Dropdown-item>
-          <Dropdown-item :name="2">修改密码</Dropdown-item>
-          <Dropdown-item :name="3">退出</Dropdown-item>
-        </Dropdown-menu>
-      </Dropdown>
-    </div>
-    <div class="layout-breadcrumb noprint">
-      <Breadcrumb>
-        <Breadcrumb-item>{{$route.meta.name}}</Breadcrumb-item>
-      </Breadcrumb>
-    </div>
-    <div class="layout-content">
-      <transition name="fade">
-        <router-view></router-view>
-      </transition>
-    </div>
+	    <div class="layout-header clearfix noprint">
+				<h2 class="header-title fl">宁波申菱 管理系统</h2>
+	      <Dropdown class="layout-header-user fr" @on-click="logout" trigger="click" style="margin-left: 20px">
+	        <Button type="ghost" long>
+	            {{role[$cookie.get('role')]}}
+	            <Icon type="arrow-down-b"></Icon>
+	        </Button>
+	        <Dropdown-menu slot="list">
+	          <Dropdown-item :name="3">退出</Dropdown-item>
+	        </Dropdown-menu>
+	      </Dropdown>
+	    </div>
+	    <div class="layout-breadcrumb noprint">
+	      <Breadcrumb>
+	        <Breadcrumb-item>{{$route.meta.name}}</Breadcrumb-item>
+	      </Breadcrumb>
+	    </div>
+	    <div class="layout-content">
+	      <transition name="fade">
+	        <router-view></router-view>
+	      </transition>
+	    </div>
     <!-- <div class="layout-copy noprint">
       2016-2017 &copy; 上海心话信息科技有限公司提供技术支持
     </div> -->
@@ -112,11 +111,14 @@ export default {
       count: null,
       active: this.$route.path.split('/')[1],
       menu: [{
-          name: 'menu',
-          icon: 'cube',
-          label: '版本更新'
-        },
-      ]
+        name: 'menu',
+        icon: 'cube',
+        label: '版本更新'
+      }, {
+        name: 'map',
+        icon: 'map',
+        label: '地图'
+      }, ]
     }
   },
   computed: {},
@@ -198,7 +200,7 @@ export default {
 }
 .layout-menu-left {
     background: #464c5b;
-    overflow-y: scroll;
+    // overflow-y: scroll;
 }
 .layout-menu-ul {
     padding-top: 1px;
@@ -235,6 +237,10 @@ export default {
 }
 .submenu {
     padding: 8px 24px;
+}
+.header-title {
+    line-height: 60px;
+    padding-left: 20px;
 }
 .info {
     display: flex;

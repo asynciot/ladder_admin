@@ -6,7 +6,7 @@ div.account
 			Input(type="text",v-model="form.username",placeholder="用户名")
 				Icon(type="ios-person-outline",size="20",slot="prepend")
 		Form-item(prop="password")
-			Input(type="password",v-model="form.password",placeholder="密码",@keyup.enter="login('form')")
+			Input(type="password",v-model="form.password",placeholder="密码",@on-keyup.enter="login('form')")
 				Icon(type="ios-locked-outline",size="18",slot="prepend")
 		Form-item
 			Button(type="primary",long,@click="login('form')",:loading="loading")|登录

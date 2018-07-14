@@ -1,7 +1,11 @@
+import { stringify } from 'qs';
 import {
+	root,
   AccountApi,
+	DeviceApi
 } from './config'
 export default {
+	ws: (data) => `${root.replace('http', 'ws')}/v1/devices/socket?${stringify(data)}`,
   //account
   register:(data)=>{
     return AccountApi.save(data)
@@ -20,5 +24,14 @@ export default {
   },
 	password:(data)=>{
 		return AccountApi.save({key1:'password'},data)
+	},
+	devices: (data) => {
+		return DeviceApi.query(Object.assign({key1: 'location'}, data))
+	},
+	deviceInfo: (data) => {
+		return DeviceApi.query({key1: 'info', key2: data })
+	},
+	monitor: (data, opt) => {
+		return DeviceApi.save(Object.assign({key1: 'ladder', key2: 'monitor', key3: data.id, key4: data.num }, opt),{})
 	},
 }
