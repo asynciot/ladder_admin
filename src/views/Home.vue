@@ -1,21 +1,21 @@
 <template>
 <div class="layout">
-  <Row type="flex">
-    <Col span="3" class="layout-menu-left noprint">
-	    <Menu class="layout-menu-ul" theme="dark" width="auto" @on-select="go" :active-name="active">
+  <Layout :style="{minHeight: '100vh'}">
+    <Sider collapsible :collapsed-width="78" v-model="isCollapsed">
+			<Menu :class="menuitemClasses" theme="dark" width="auto" @on-select="go" :active-name="active">
 	      <div class="layout-logo-left">菜单</div>
 	      <template v-for="item in menu" v-if="!item.sub">
-	          <Menu-item :key="item.name" :name="item.name">
-							<Icon :type="item.icon" size="16"></Icon>
-	            {{item.label}}
-	          </Menu-item>
+          <Menu-item :key="item.name" :name="item.name">
+						<Icon :type="item.icon" size="16"></Icon>
+            {{isCollapsed?'':item.label}}
+          </Menu-item>
 				</template>
 	      <template v-else>
 					<Submenu :name="item.name">
 						<template slot="title">
 							<Icon :type="item.icon" size="16"></Icon>
 							<Badge v-if="item.count" :count="item.count" class-name="badge-sub-alone" :dot="true">
-								{{item.label}}
+								{{isCollapsed?'':item.label}}
 							</Badge>
 							<i v-else>{{item.label}}</i>
 						</template>
@@ -25,9 +25,9 @@
 	      </Submenu>
 	      </template>
 	    </Menu>
-    </Col>
-    <Col class="laycontent" span="21">
-	    <div class="layout-header clearfix noprint">
+		</Sider>
+    <Layout>
+	    <Header class="clearfix" :style="{background: '#fff', boxShadow: '0 2px 3px 2px rgba(0,0,0,.1)'}">
 				<h2 class="header-title fl">宁波申菱 管理系统</h2>
 	      <Dropdown class="layout-header-user fr" @on-click="logout" trigger="click" style="margin-left: 20px">
 	        <Button type="ghost" long>
@@ -38,22 +38,21 @@
 	          <Dropdown-item :name="3">退出</Dropdown-item>
 	        </Dropdown-menu>
 	      </Dropdown>
-	    </div>
-	    <div class="layout-breadcrumb noprint">
-	      <Breadcrumb>
-	        <Breadcrumb-item>{{$route.meta.name}}</Breadcrumb-item>
-	      </Breadcrumb>
-	    </div>
-	    <div class="layout-content">
-	      <transition name="fade">
-	        <router-view></router-view>
-	      </transition>
-	    </div>
-    <!-- <div class="layout-copy noprint">
-      2016-2017 &copy; 上海心话信息科技有限公司提供技术支持
-    </div> -->
-    </Col>
-  </Row>
+	    </Header>
+			<Content :style="{padding: '0 16px 16px',position:'relative'}">
+		    <div class="layout-breadcrumb noprint">
+		      <Breadcrumb>
+		        <Breadcrumb-item>{{$route.meta.name}} {{$route.params.id}}</Breadcrumb-item>
+		      </Breadcrumb>
+		    </div>
+		    <div class="layout-content">
+		      <transition name="fade">
+		        <router-view></router-view>
+		      </transition>
+		    </div>
+			</Content>
+		</Layout>
+	</Layout>
 </div>
 </template>
 
@@ -70,6 +69,7 @@ export default {
       }
     };
     return {
+			isCollapsed: false,
       modal: false,
       modalType: 0,
       info: {
@@ -121,7 +121,14 @@ export default {
       }, ]
     }
   },
-  computed: {},
+  computed: {
+		menuitemClasses: function () {
+        return [
+            'menu-item',
+            this.isCollapsed ? 'collapsed-menu' : ''
+        ]
+    }
+	},
   created() {},
   methods: {
     async logout(index) {
@@ -175,7 +182,7 @@ export default {
 .layout-content {
     // position: relative;
     position: absolute;
-    top: 90px;
+    top: 30px;
     left: 0;
     right: 0;
     bottom: 10px;
@@ -212,7 +219,6 @@ export default {
 }
 .layout-header-user {
     height: 40px;
-    margin: 14px 15px 0 0;
 }
 .layout-logo-left {
     width: 90%;
@@ -220,7 +226,7 @@ export default {
     line-height: 30px;
     background: #5b6270;
     border-radius: 3px;
-    margin: 15px auto;
+    margin: 15px auto 36px;
     color: #fff;
     font-size: 18px;
     font-weight: bold;

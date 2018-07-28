@@ -26,8 +26,8 @@ export default {
   },
   data() {
 		const type= {
-      1: '控制器',
-      2: '控制柜',
+      15: '控制器',
+      240: '控制柜',
     };
     const netWork = {
       3: '联通3G',
@@ -98,7 +98,7 @@ export default {
                   this.update([params.row.id])
                 }
               }
-            }, '烧录')
+            }, '升级')
           }
         }
       ],
@@ -147,12 +147,12 @@ export default {
 				this.getList()
 				this.$Notice.success({
 					title: '成功',
-					desc: '烧录成功'
+					desc: '开始升级成功'
 				});
 			} else {
 				this.$Notice.error({
 					title: '错误',
-					desc: '烧录失败'
+					desc: '开始升级失败'
 				});
 			}
 		},

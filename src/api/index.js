@@ -2,10 +2,12 @@ import { stringify } from 'qs';
 import {
 	root,
   AccountApi,
-	DeviceApi
+	DeviceApi,
+	rootApi
 } from './config'
 export default {
 	ws: (data) => `${root.replace('http', 'ws')}/v1/devices/socket?${stringify(data)}`,
+	debug: (data) => `${root.replace('http', 'ws')}/v1/devices/socketDebug?${stringify(data)}`,
   //account
   register:(data)=>{
     return AccountApi.save(data)
@@ -34,4 +36,13 @@ export default {
 	monitor: (data, opt) => {
 		return DeviceApi.save(Object.assign({key1: 'ladder', key2: 'monitor', key3: data.id, key4: data.num }, opt),{})
 	},
+	deviceHistory: (id, data)=>{
+		return DeviceApi.query(Object.assign({key1:'values', key2: id},data))
+	},
+	getHistory: (id,data)=>{
+		return DeviceApi.query(Object.assign({key1:'ladder', key2: 'waves', key3: id},data))
+	},
+	staticts: (data)=> {
+		return rootApi.query(Object.assign({key1:'mointors', key2: 'statistic'},data))
+	}
 }

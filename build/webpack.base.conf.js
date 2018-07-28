@@ -27,7 +27,8 @@ module.exports = {
     }
   },
   externals: {
-    "BMap": "BMap"
+    "BMap": "BMap",
+		"BMapLib": "BMapLib",
   },
   module: {
     rules: [{
