@@ -4,15 +4,15 @@ div.layout-content-main
 		Form(ref='form',:model="query",label-position="left",:label-width="80")
 			Row(:gutter="16")
 				Col(span="6")
-					Form-item(label="姓名：")
-						Input(v-model="query.username",placeholder="请输入姓名")
+					Form-item(label="维保单位：")
+						Input(v-model="query.companyName",placeholder="请输入维保单位名")
 				Col(span="6")
 					Form-item(label="手机号码：")
 						Input(v-model="query.mobile",placeholder="请输入手机号码")
 				Col(span="6")
 					Button.mr-10(type="primary",icon="search",:loading="loading",@click="options.page=1,getList()")|搜索
-					router-link.mr-10(:to="{ name: 'maintainMemberNew'}")
-						Button(type="success",icon="plus",:loading="loading")|添加人员
+					router-link.mr-10(:to="{ name: 'maintainCompanyNew'}")
+						Button(type="success",icon="plus",:loading="loading")|添加维保单位
 	Table(:loading="loading",:stripe="true",:columns="column",:data="list",stripe)
 </template>
 
@@ -28,29 +28,29 @@ export default {
 			},
 			column: [
 				{
-					title: '人员账号',
-					key: 'username',
-				},
-				{
-					title: '人员姓名',
-					key: 'nicname',
-				},
-				{
-					title: '手机号码',
-					key: 'mobile',
-				},
-				{
-					title: '维保班组',
-					key: 'groupName',
-				},
-				{
-					title: '维保站点',
-					key: 'siteName',
-				},
-				{
 					title: '维保单位',
 					key: 'companyName',
 				},
+// 				{
+// 					title: '人员账号',
+// 					key: 'username',
+// 				},
+				{
+					title: '负责人',
+					key: 'nicname',
+				},
+				{
+					title: '联系方式',
+					key: 'mobile',
+				},
+// 				{
+// 					title: '维保班组',
+// 					key: 'groupName',
+// 				},
+// 				{
+// 					title: '维保站点',
+// 					key: 'siteName',
+// 				},
 				{
 					title: '操作',
 					key: 'companyName',

@@ -5,8 +5,13 @@ const Home = resolve => require(['@/views/Home'], resolve)
 const Menu = resolve => require(['@/views/Menu/Index'], resolve)
 const Map = resolve => require(['@/views/Map/Index'], resolve)
 const Device = resolve => require(['@/views/Device/Index'], resolve)
+
 const Maintain = resolve => require(['@/views/Maintain/Index'], resolve)
 const Member = resolve => require(['@/views/Maintain/Member'], resolve)
+const Group = resolve => require(['@/views/Maintain/Group'], resolve)
+const GroupDetail = resolve => require(['@/views/Maintain/GroupDetail'], resolve)
+const Company = resolve => require(['@/views/Maintain/Company'], resolve)
+const CompanyDetail = resolve => require(['@/views/Maintain/CompanyDetail'], resolve)
 
 Vue.use(Router)
 
@@ -49,11 +54,35 @@ export default new Router({
           component: Maintain
         },
 				{
-          path: '/maintain/member/new',
-          name: 'maintainMemberNew',
+					path: '/maintain/member/new',
+					name: 'maintainMemberNew',
 					meta:{name:'添加维保人员'},
-          component: Member
-        },
+					component: Member
+				},
+				{
+					path: '/maintain/group',
+					name: 'maintainGroup',
+					meta:{name:'维保群组管理'},
+					component: Group
+				},				
+				{
+					path: '/maintain/group/new',
+					name: 'maintainGroupNew',
+					meta:{name:'添加维保群组'},
+					component: GroupDetail
+				},
+				{
+					path: '/maintain/company',
+					name: 'maintainCompany',
+					meta:{name:'维保单位管理'},
+					component: Company
+				},				
+				{
+					path: '/maintain/Company/new',
+					name: 'maintainCompanyNew',
+					meta:{name:'添加维保单位'},
+					component: CompanyDetail
+				}
       ],
     },
 		{ path: '*', redirect: '/' }

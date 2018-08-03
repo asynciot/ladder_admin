@@ -125,7 +125,15 @@ export default {
         sub: [{
           name: 'maintainMember',
           label: '维保人员'
-        }]
+        },{
+					name: 'maintainGroup',
+					label: '维保群组'
+				},{
+					name: 'maintainCompany',
+					label: '维保单位'
+				}
+				],
+				
       }, ]
     }
   },

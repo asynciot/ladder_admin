@@ -1,16 +1,16 @@
 <template lang="jade">
 div.layout-content-main
-	Form(ref="form",:model="form",:rules="rules",:label-width="90")
-		Row(:gutter="16")
+	Form(ref="form",:model="form",:rules="rules",:label-width="100")
+		Row(:gutter="18")
 			Col(span="10",offset="2")
-				Form-item(label="门店名称",prop="name")
-					Input(v-model="form.name",placeholder="请输入")
-				Form-item(label="门店负责人",prop="contactor")
-					Input(v-model="form.contactor",placeholder="请输入")
-				Form-item(label="门店电话",prop="phone")
-					Input(v-model="form.phone",placeholder="请输入",:maxlength="11")
-				Form-item(label="门店位置",prop="address")
-					Input(v-model="form.address",type="textarea",:rows="5",placeholder="请填写门店位置")
+				Form-item(label="维保单位名称",prop="companyName")
+					Input(v-model="form.companyName",placeholder="请输入")
+				Form-item(label="维保单位负责人",prop="nicname")
+					Input(v-model="form.nicname",placeholder="请输入")
+				Form-item(label="负责人电话",prop="mobile")
+					Input(v-model="form.mobile",placeholder="请输入",:maxlength="11")
+				Form-item(label="维保单位位置",prop="address")
+					Input(v-model="form.address",type="textarea",:rows="5",placeholder="请填写维保单位位置")
 		Row.mb-20
 			Col(span="14",offset="2")
 				Form-item.tc
@@ -24,27 +24,27 @@ export default {
     return {
 			loading:false,
       form: {
-        name: '',
-				contactor:'',
-        phone: '',
-				address:''
+        companyName: '',
+				nicname:'',
+        mobile: '',
+				siteName:''
       },
       rules: {
-        name: [{
+        companyName: [{
             required: true,
 						type: 'string',
-            message: '请填写门店名',
+            message: '请填写维保单位名称',
             trigger: 'blur'
           }
         ],
-				contactor: [{
+				nicname: [{
             required: false,
 						type: 'string',
-            message: '请填写门店负责人',
+            message: '请填写维保单位负责人',
             trigger: 'blur'
           }
         ],
-				phone: [{
+				mobile: [{
             required: false,
 						type: 'string',
 						pattern:/^1(3|4|5|7|8)\d{9}$/,
@@ -52,10 +52,10 @@ export default {
             trigger: 'blur'
           }
         ],
-				address: [{
+				siteName: [{
             required: false,
 						type: 'string',
-            message: '请填写门店位置',
+            message: '请填写维保单位位置',
             trigger: 'blur'
           }
         ],
@@ -73,13 +73,13 @@ export default {
 		          this.$refs[name].resetFields();
 		          this.$Notice.success({
 		            title: '成功',
-		            desc: '成功添加门店！'
+		            desc: '成功添加维保单位！'
 		          })
 		        }else{
 							this.loading = false
 							this.$Notice.error({
 								title: '错误',
-								desc: '添加门店失败！'
+								desc: '添加维保单位失败！'
 							})
 						}
 					})
