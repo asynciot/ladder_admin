@@ -2,15 +2,15 @@
 <div class="layout">
   <Layout :style="{minHeight: '100vh'}">
     <Sider collapsible :collapsed-width="78" v-model="isCollapsed">
-			<Menu :class="menuitemClasses" theme="dark" width="auto" @on-select="go" :active-name="active">
-	      <div class="layout-logo-left">菜单</div>
-	      <template v-for="item in menu" v-if="!item.sub">
+      <Menu :class="menuitemClasses" theme="dark" width="auto" @on-select="go" :active-name="active">
+        <div class="layout-logo-left">菜单</div>
+        <template v-for="item in menu" v-if="!item.sub">
           <Menu-item :key="item.name" :name="item.name">
 						<Icon :type="item.icon" size="16"></Icon>
             {{isCollapsed?'':item.label}}
           </Menu-item>
 				</template>
-	      <template v-else>
+        <template v-else>
 					<Submenu :name="item.name">
 						<template slot="title">
 							<Icon :type="item.icon" size="16"></Icon>
@@ -19,40 +19,40 @@
 							</Badge>
 							<i v-else>{{item.label}}</i>
 						</template>
-	      <Menu-item class="submenu" v-for="sub in item.sub" :key="sub.name" :name="sub.name">
-	        <Badge class-name="badge-alone" overflow-count="99" :count="sub.count?sub.count:0">{{sub.label}}</Badge>
-	      </Menu-item>
-	      </Submenu>
-	      </template>
-	    </Menu>
-		</Sider>
+		        <Menu-item class="submenu" v-for="sub in item.sub" :key="sub.name" :name="sub.name">
+		          <Badge class-name="badge-alone" overflow-count="99" :count="sub.count?sub.count:0">{{sub.label}}</Badge>
+		        </Menu-item>
+	        </Submenu>
+        </template>
+      </Menu>
+    </Sider>
     <Layout>
-	    <Header class="clearfix" :style="{background: '#fff', boxShadow: '0 2px 3px 2px rgba(0,0,0,.1)'}">
-				<h2 class="header-title fl">宁波申菱 管理系统</h2>
-	      <Dropdown class="layout-header-user fr" @on-click="logout" trigger="click" style="margin-left: 20px">
-	        <Button type="ghost" long>
+      <Header class="clearfix" :style="{background: '#fff', boxShadow: '0 2px 3px 2px rgba(0,0,0,.1)'}">
+        <h2 class="header-title fl">宁波申菱 管理系统</h2>
+        <Dropdown class="layout-header-user fr" @on-click="logout" trigger="click" style="margin-left: 20px">
+          <Button type="ghost" long>
 	            {{role[$cookie.get('role')]}}
 	            <Icon type="arrow-down-b"></Icon>
 	        </Button>
-	        <Dropdown-menu slot="list">
-	          <Dropdown-item :name="3">退出</Dropdown-item>
-	        </Dropdown-menu>
-	      </Dropdown>
-	    </Header>
-			<Content :style="{padding: '0 16px 16px',position:'relative'}">
-		    <div class="layout-breadcrumb noprint">
-		      <Breadcrumb>
-		        <Breadcrumb-item>{{$route.meta.name}} {{$route.params.id}}</Breadcrumb-item>
-		      </Breadcrumb>
-		    </div>
-		    <div class="layout-content">
-		      <transition name="fade">
-		        <router-view></router-view>
-		      </transition>
-		    </div>
-			</Content>
-		</Layout>
-	</Layout>
+          <Dropdown-menu slot="list">
+            <Dropdown-item :name="3">退出</Dropdown-item>
+          </Dropdown-menu>
+        </Dropdown>
+      </Header>
+      <Content :style="{padding: '0 16px 16px',position:'relative'}">
+        <div class="layout-breadcrumb noprint">
+          <Breadcrumb>
+            <Breadcrumb-item>{{$route.meta.name}} {{$route.params.id}}</Breadcrumb-item>
+          </Breadcrumb>
+        </div>
+        <div class="layout-content">
+          <transition name="fade">
+            <router-view></router-view>
+          </transition>
+        </div>
+      </Content>
+    </Layout>
+  </Layout>
 </div>
 </template>
 
@@ -69,7 +69,7 @@ export default {
       }
     };
     return {
-			isCollapsed: false,
+      isCollapsed: false,
       modal: false,
       modalType: 0,
       info: {
@@ -118,17 +118,25 @@ export default {
         name: 'map',
         icon: 'map',
         label: '地图'
+      }, {
+        name: 'maintain',
+        icon: 'wrench',
+        label: '维保',
+        sub: [{
+          name: 'maintainMember',
+          label: '维保人员'
+        }]
       }, ]
     }
   },
   computed: {
-		menuitemClasses: function () {
-        return [
-            'menu-item',
-            this.isCollapsed ? 'collapsed-menu' : ''
-        ]
+    menuitemClasses: function() {
+      return [
+        'menu-item',
+        this.isCollapsed ? 'collapsed-menu' : ''
+      ]
     }
-	},
+  },
   created() {},
   methods: {
     async logout(index) {

@@ -5,6 +5,8 @@ const Home = resolve => require(['@/views/Home'], resolve)
 const Menu = resolve => require(['@/views/Menu/Index'], resolve)
 const Map = resolve => require(['@/views/Map/Index'], resolve)
 const Device = resolve => require(['@/views/Device/Index'], resolve)
+const Maintain = resolve => require(['@/views/Maintain/Index'], resolve)
+const Member = resolve => require(['@/views/Maintain/Member'], resolve)
 
 Vue.use(Router)
 
@@ -39,6 +41,18 @@ export default new Router({
           name: 'device',
 					meta:{name:'设备'},
           component: Device
+        },
+				{
+          path: '/maintain/member',
+          name: 'maintainMember',
+					meta:{name:'维保人员'},
+          component: Maintain
+        },
+				{
+          path: '/maintain/member/new',
+          name: 'maintainMemberNew',
+					meta:{name:'添加维保人员'},
+          component: Member
         },
       ],
     },
