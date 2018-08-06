@@ -1,16 +1,20 @@
 <template lang="jade">
 div.layout-content-main
-	Form(ref="form",:model="form",:rules="rules",:label-width="90")
+	Form(ref="form",:model="form",:rules="rules",:label-width="100")
 		Row(:gutter="16")
 			Col(span="10",offset="2")
 				Form-item(label="班组名称",prop="groupName")
-					Input(v-model="form.groupName",placeholder="请输入")
+					Input(v-model="form.groupName",placeholder="请输入班组名称")
 				Form-item(label="班组负责人",prop="nicname")
-					Input(v-model="form.nicname",placeholder="请输入")
+					Input(v-model="form.nicname",placeholder="请输入班组负责人")
 				Form-item(label="负责人电话",prop="mobile")
-					Input(v-model="form.mobile",placeholder="请输入",:maxlength="11")
+					Input(v-model="form.mobile",placeholder="请输入负责人电话",:maxlength="11")
+				Form-item(label="维保单位",prop="companyName")
+					Input(v-model="form.companyName",placeholder="请输入维保单位名称")
 				Form-item(label="维保站点",prop="siteName")
 					Input(v-model="form.siteName",type="textarea",:rows="5",placeholder="请填写维保站点")
+					<!-- select() -->
+					<!-- option(v-for="item in siteList" :value="item.id" v-text="item.name") -->
 		Row.mb-20
 			Col(span="14",offset="2")
 				Form-item.tc
@@ -27,7 +31,8 @@ export default {
         groupName: '',
 				nicname:'',
         mobile: '',
-				siteName:''
+				siteName:'',
+				companyName:''
       },
       rules: {
         groupName: [{
@@ -53,12 +58,19 @@ export default {
           }
         ],
 				siteName: [{
-            required: false,
+            required: true,
 						type: 'string',
             message: '请填写维保站点',
             trigger: 'blur'
           }
         ],
+				companyName: [{
+						required: true,
+						type: 'string',
+						message: '请填写维保单位',
+						trigger: 'blur'
+					}
+				],
       },
     }
   },
@@ -93,7 +105,7 @@ export default {
 			})
     },
     reset(name) {
-      this.$refs[name].resetFields();
+      this.$refs[name].resetFields();	
     }
   }
 }

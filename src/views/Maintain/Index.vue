@@ -103,6 +103,12 @@ export default {
 								},
 								on: {
 									click: () => {
+										// this.$router.push({
+										// 	name: 'editMember',
+										// 	params: {
+										// 		id: params.row.id
+										// 	}
+										// })
 									}
 								}
 							}, '删除')

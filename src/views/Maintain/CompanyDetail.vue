@@ -4,11 +4,11 @@ div.layout-content-main
 		Row(:gutter="18")
 			Col(span="10",offset="2")
 				Form-item(label="维保单位名称",prop="companyName")
-					Input(v-model="form.companyName",placeholder="请输入")
-				Form-item(label="维保单位负责人",prop="nicname")
-					Input(v-model="form.nicname",placeholder="请输入")
+					Input(v-model="form.companyName",placeholder="请输入维保单位名称")
+				Form-item(label="单位负责人",prop="nicname")
+					Input(v-model="form.nicname",placeholder="请输入单位负责人")
 				Form-item(label="负责人电话",prop="mobile")
-					Input(v-model="form.mobile",placeholder="请输入",:maxlength="11")
+					Input(v-model="form.mobile",placeholder="请输入负责人电话",:maxlength="11")
 				Form-item(label="维保单位位置",prop="address")
 					Input(v-model="form.address",type="textarea",:rows="5",placeholder="请填写维保单位位置")
 		Row.mb-20
@@ -40,7 +40,7 @@ export default {
 				nicname: [{
             required: false,
 						type: 'string',
-            message: '请填写维保单位负责人',
+            message: '请填写单位负责人',
             trigger: 'blur'
           }
         ],
