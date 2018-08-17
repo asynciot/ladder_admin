@@ -128,13 +128,31 @@ export default {
         },{
 					name: 'maintainGroup',
 					label: '维保群组'
-				},{
-					name: 'maintainCompany',
-					label: '维保单位'
-				}
+				},
 				],
-				
-      }, ]
+			},{
+				name: 'company',
+				icon: 'home',
+				label: '单位管理',
+				sub: [{					
+					name: 'contractor',
+					label: '安装单位',
+				},
+				{					
+					name: 'maintainCompany',
+					label: '维保单位',
+				},
+				{					
+					name: 'usedep',
+					label: '使用单位',
+				},
+				{
+					name: 'property',
+					label: '物业单位',
+				}
+				],	
+			}							
+       ]
     }
   },
   computed: {

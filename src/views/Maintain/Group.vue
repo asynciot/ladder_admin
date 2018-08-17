@@ -110,7 +110,13 @@ export default {
 					}
 				}
 			],
-			list: []
+			list: [],
+			options: {
+				name:'',
+				page: 1,
+				num: 15,
+				total: 0
+			}
 		}
 	},
 	created() {
@@ -119,6 +125,12 @@ export default {
 	methods: {
 		async getList() {
 			this.loading = false
+			let res = await this.$api.team(this.options)
+			this.loading = false
+			if (0 === res.data.code) {
+				this.list = res.data.data.list
+				this.options.total = res.data.data.totalNumber
+			}
 		}
 	}
 }

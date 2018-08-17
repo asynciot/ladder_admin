@@ -44,5 +44,14 @@ export default {
 	},
 	staticts: (data)=> {
 		return rootApi.query(Object.assign({key1:'mointors', key2: 'statistic'},data))
-	}
+	},
+	people:(data)=>{
+		return MaintenanceApi.query(Object.assign({key1:'member'},data))
+	},
+	team:(data)=>{
+		return MaintenanceApi.query(Object.assign({key1:'group'},data))
+	},
+	company:(data)=>{
+		return MaintenanceApi.query(Object.assign({key1:'company'},data))
+	},
 }

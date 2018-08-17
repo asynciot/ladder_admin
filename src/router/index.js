@@ -10,8 +10,15 @@ const Maintain = resolve => require(['@/views/Maintain/Index'], resolve)
 const Member = resolve => require(['@/views/Maintain/Member'], resolve)
 const Group = resolve => require(['@/views/Maintain/Group'], resolve)
 const GroupDetail = resolve => require(['@/views/Maintain/GroupDetail'], resolve)
-const Company = resolve => require(['@/views/Maintain/Company'], resolve)
-const CompanyDetail = resolve => require(['@/views/Maintain/CompanyDetail'], resolve)
+
+const Contractor = resolve => require(['@/views/Doc/Contractor'], resolve)
+const ContractorDetail = resolve => require(['@/views/Doc/ContractorDetail'], resolve)
+const Company = resolve => require(['@/views/Doc/Company'], resolve)
+const CompanyDetail = resolve => require(['@/views/Doc/CompanyDetail'], resolve)
+const UseDep = resolve => require(['@/views/Doc/UseDep'], resolve)
+const UseDepDetail = resolve => require(['@/views/Doc/UseDepDetail'], resolve)
+const Property = resolve => require(['@/views/Doc/Property'], resolve)
+const PropertyDetail = resolve => require(['@/views/Doc/PropertyDetail'], resolve)
 
 Vue.use(Router)
 
@@ -72,17 +79,53 @@ export default new Router({
 					component: GroupDetail
 				},
 				{
-					path: '/maintain/company',
+					path: '/doc/company',
 					name: 'maintainCompany',
 					meta:{name:'维保单位管理'},
 					component: Company
 				},				
 				{
-					path: '/maintain/Company/new',
+					path: '/doc/company/new',
 					name: 'maintainCompanyNew',
 					meta:{name:'添加维保单位'},
 					component: CompanyDetail
-				}
+				},
+				{
+					path: '/doc/contractor',
+					name: 'contractor',
+					meta:{name:'安装单位管理'},
+					component: Contractor
+				},
+				{
+					path: '/doc/contractor/new',
+					name: 'maintainContractorNew',
+					meta:{name:'添加安装单位'},
+					component: ContractorDetail
+				},
+				{
+					path: '/doc/usedep',
+					name: 'usedep',
+					meta:{name:'故障联系人'},
+					component: UseDep
+				},
+				{
+					path: '/doc/usedep/new',
+					name: 'maintainUseDepNew',
+					meta:{name:'添加联系人'},
+					component: UseDepDetail
+				},
+				{
+					path: '/doc/property',
+					name: 'property',
+					meta:{name:'物业单位管理'},
+					component: Property
+				},
+				{
+					path: '/doc/usedep/new',
+					name: 'maintainPropertyNew',
+					meta:{name:'添加物业单位'},
+					component: PropertyDetail
+				},
       ],
     },
 		{ path: '*', redirect: '/' }
