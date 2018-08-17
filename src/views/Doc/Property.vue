@@ -89,7 +89,7 @@ export default {
 								on: {
 									click: () => {
 										// this.$router.push({
-										// 	name: 'editMaterial',
+										// 	name: 'editProperty',
 										// 	params: {
 										// 		id: params.row.id
 										// 	}

@@ -91,6 +91,12 @@ export default new Router({
 					component: CompanyDetail
 				},
 				{
+					path: '/doc/company/edit/:id',
+					name: 'editCompany',
+					meta:{name:'添加维保单位'},
+					component: CompanyDetail
+				},
+				{
 					path: '/doc/contractor',
 					name: 'contractor',
 					meta:{name:'安装单位管理'},
@@ -99,6 +105,12 @@ export default new Router({
 				{
 					path: '/doc/contractor/new',
 					name: 'maintainContractorNew',
+					meta:{name:'添加安装单位'},
+					component: ContractorDetail
+				},
+				{
+					path: '/doc/contractor/edit/:id',
+					name: 'editContractor',
 					meta:{name:'添加安装单位'},
 					component: ContractorDetail
 				},
@@ -115,6 +127,12 @@ export default new Router({
 					component: UseDepDetail
 				},
 				{
+					path: '/doc/usedep/edit/:id',
+					name: 'editUseDep',
+					meta:{name:'添加联系人'},
+					component: UseDepDetail
+				},
+				{
 					path: '/doc/property',
 					name: 'property',
 					meta:{name:'物业单位管理'},
@@ -123,6 +141,12 @@ export default new Router({
 				{
 					path: '/doc/usedep/new',
 					name: 'maintainPropertyNew',
+					meta:{name:'添加物业单位'},
+					component: PropertyDetail
+				},
+				{
+					path: '/doc/usedep/edit/:id',
+					name: 'editProperty',
 					meta:{name:'添加物业单位'},
 					component: PropertyDetail
 				},

@@ -70,7 +70,7 @@ export default {
 								on: {
 									click: () => {
 										// this.$router.push({
-										// 	name: 'infoMaterial',
+										// 	name: 'infoContractor',
 										// 	params: {
 										// 		id: params.row.id
 										// 	}
@@ -89,7 +89,7 @@ export default {
 								on: {
 									click: () => {
 										// this.$router.push({
-										// 	name: 'editMaterial',
+										// 	name: 'editContractor',
 										// 	params: {
 										// 		id: params.row.id
 										// 	}

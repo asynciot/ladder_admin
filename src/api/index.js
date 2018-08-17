@@ -54,4 +54,13 @@ export default {
 	company:(data)=>{
 		return MaintenanceApi.query(Object.assign({key1:'company'},data))
 	},
+	addCompany:(data)=>{
+		return DocApi.save({key1:'company'},data)
+	},
+	updateCompany:(data)=>{
+		return DocApi.update({key1:'company'},data)
+	},
+	reomveCompany:(data)=>{
+		return DocApi.remove(Object.assign({key1:'company'},data))
+	},
 }

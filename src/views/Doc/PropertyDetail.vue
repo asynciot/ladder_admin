@@ -5,6 +5,17 @@ div.layout-content-main
 			Col(span="10",offset="2")
 				Form-item(label="单位名称",prop="companyName")
 					Input(v-model="form.companyName",placeholder="请输入物业单位名称")					
+				Form-item(label="所在区域",prop="location",data-toggle="distpicker")
+					Row(:gutter="18")
+						Col(span="6" style="padding-right:10px")
+							Select(placeholder="请选择",v-model="query.province")
+								Option(v-for="item in locations",:key="item.name",:value="item.name")|{{item.name}}
+						Col(span="6" style="padding-right:10px")
+							Select(placeholder="请选择",v-model="query.city")
+								Option(v-for="item in locations",:key="item.name",:value="item.name")|{{item.name}}
+						Col(span="6" style="padding-right:10px")
+								Select(placeholder="请选择",v-model="query.district")
+									Option(v-for="item in locations",:key="item.name",:value="item.name")|{{item.name}}
 				Form-item(label="单位负责人",prop="nicname")
 					Input(v-model="form.nicname",placeholder="请输入单位负责人")
 				Form-item(label="负责人电话",prop="mobile")
@@ -22,6 +33,10 @@ div.layout-content-main
 export default {
   data() {
     return {
+		query: {
+			location: null
+		},
+		locations: [],
 		loading:false,
       form: {
         companyName: '',
