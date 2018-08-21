@@ -42,7 +42,7 @@ export default {
         companyName: '',
 				nicname:'',
         mobile: '',
-				siteName:''
+				address:''
       },
       rules: {
         companyName: [{
@@ -67,7 +67,7 @@ export default {
             trigger: 'blur'
           }
         ],
-				siteName: [{
+				address: [{
             required: false,
 						type: 'string',
             message: '请填写维保单位位置',
@@ -82,7 +82,7 @@ export default {
 			this.loading = true
 			this.$refs[name].validate(async (valid) => {
         if (valid) {
-					let res = await this.$api.register(this.form)
+					let res = await this.$api.addCompany(this.form)
 		      // this.$store.dispatch('newKitchen', this.form).then(res => {
 					this.loading = false
 					if (res.code == 0) {

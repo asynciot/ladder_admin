@@ -3,7 +3,9 @@ import {
 	root,
   AccountApi,
 	DeviceApi,
-	rootApi
+	rootApi,
+	MaintenanceApi,
+	DocApi
 } from './config'
 export default {
 	ws: (data) => `${root.replace('http', 'ws')}/v1/devices/socket?${stringify(data)}`,
@@ -48,11 +50,29 @@ export default {
 	people:(data)=>{
 		return MaintenanceApi.query(Object.assign({key1:'member'},data))
 	},
+	addPeople:(data)=>{
+		return MaintenanceApi.save({key1:'member'},data)
+	},
+	updatePeople:(data)=>{
+		return MaintenanceApi.update({key1:'member'},data)
+	},
+	reomvePeople:(data)=>{
+    return MaintenanceApi.remove(Object.assign({key1:'member'},data))
+  },
 	team:(data)=>{
 		return MaintenanceApi.query(Object.assign({key1:'group'},data))
 	},
+	addTeam:(data)=>{
+		return MaintenanceApi.save({key1:'group'},data)
+	},
+	updateTeam:(data)=>{
+		return MaintenanceApi.update({key1:'group'},data)
+	},
+	reomveTeam:(data)=>{
+    return MaintenanceApi.remove(Object.assign({key1:'group'},data))
+  },
 	company:(data)=>{
-		return MaintenanceApi.query(Object.assign({key1:'company'},data))
+		return DocApi.query(Object.assign({key1:'company'},data))
 	},
 	addCompany:(data)=>{
 		return DocApi.save({key1:'company'},data)

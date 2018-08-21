@@ -5,7 +5,7 @@ div.layout-content-main
 			Row(:gutter="16")
 				Col(span="6")
 					Form-item(label="姓名：")
-						Input(v-model="query.username",placeholder="请输入姓名")
+						Input(v-model="query.name",placeholder="请输入姓名")
 				Col(span="6")
 					Form-item(label="手机号码：")
 						Input(v-model="query.mobile",placeholder="请输入手机号码")
@@ -24,7 +24,7 @@ export default {
 			query: {
 				username: '',
 				mobile: '',
-				nicname: ''
+				name: ''
 			},
 			column: [
 				{
@@ -33,7 +33,7 @@ export default {
 				},
 				{
 					title: '人员姓名',
-					key: 'nicname',
+					key: 'name',
 				},
 				{
 					title: '手机号码',
@@ -116,7 +116,13 @@ export default {
 					}
 				}
 			],
-			list: []
+			list: [],
+			options: {
+				name:'',
+				page: 1,
+				num: 15,
+				total: 0
+			}
 		}
 	},
 	created() {
@@ -125,12 +131,6 @@ export default {
 	methods: {
 		async getList() {
 			this.loading = false
-			let res = await this.$api.people(this.query)
-			this.loading = false
-			if (0 === res.data.code) {
-				this.list = res.data.data.list
-				this.query.total = res.data.data.totalNumber
-			}
 		}
 	}
 }

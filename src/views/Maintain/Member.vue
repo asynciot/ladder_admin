@@ -12,6 +12,8 @@ div.layout-content-main
 					Radio-group(v-model="form.sex")
 						Radio(label="0")|男
 						Radio(label="1")|女
+				Form-item(label="联系方式",prop="mobile")
+					Input(v-model="form.mobile",placeholder="请输入联系方式",:maxlength="11")		
 				Form-item(label="密码",prop="password")
 					Input(type="password",v-model="form.password",placeholder="请输入密码")
 				Form-item(label="重复密码",prop="confirm")
@@ -46,7 +48,7 @@ export default {
       form: {
         username: '',
         contactor: '',
-        phone: '',
+        mobile: '',
         address: ''
       },
       rules: {
@@ -102,7 +104,13 @@ export default {
       this.loading = true
       this.$refs[name].validate(async (valid) => {
         if (valid) {
-          let res = await this.$api.register(this.form)
+					let res = null
+          // let res = await this.$api.register(this.form)
+					if(this.$route.params.id){
+						res = await this.$api.updatePeople(this.form)
+					}else {
+						res = await this.$api.addPeople(this.form)
+					}
           this.loading = false
           if (res.data.code == 0) {
             this.$refs[name].resetFields();

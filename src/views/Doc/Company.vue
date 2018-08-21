@@ -37,7 +37,7 @@ export default {
 				},
 				{
 					title: '详细地址',
-					key: 'siteName',
+					key: 'address',
 				},
 				{
 					title: '负责人',
@@ -114,7 +114,13 @@ export default {
 					}
 				}
 			],
-			list: []
+			list: [],
+			options: {
+				name:'',
+				page: 1,
+				num: 15,
+				total: 0
+			}
 		}
 	},
 	created() {

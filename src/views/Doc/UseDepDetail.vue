@@ -82,7 +82,12 @@ export default {
 			this.loading = true
 			this.$refs[name].validate(async (valid) => {
         if (valid) {
-					let res = await this.$api.register(this.form)
+					let res = null
+					if(this.$route.params.id){
+						res = await this.$api.updateCompany(this.form)
+					}else {
+						res = await this.$api.addCompany(this.form)
+					}
 		      // this.$store.dispatch('newKitchen', this.form).then(res => {
 					this.loading = false
 					if (res.code == 0) {
