@@ -139,13 +139,13 @@ export default new Router({
 					component: Property
 				},
 				{
-					path: '/doc/usedep/new',
+					path: '/doc/property/new',
 					name: 'maintainPropertyNew',
 					meta:{name:'添加物业单位'},
 					component: PropertyDetail
 				},
 				{
-					path: '/doc/usedep/edit/:id',
+					path: '/doc/property/edit/:id',
 					name: 'editProperty',
 					meta:{name:'编辑物业单位'},
 					component: PropertyDetail

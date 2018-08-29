@@ -1,11 +1,11 @@
 <template lang="jade">
 div.layout-content-main
 	div.form
-		Form(ref='form',:model="query",label-position="left",:label-width="80")
+		Form(ref='form',:model="query",label-position="left",:label-width="100")
 			Row(:gutter="16")
 				Col(span="6")
 					Form-item(label="单位名称：")
-						Input(v-model="query.companyName",placeholder="请输入安装单位名")
+						Input(v-model="query.name",placeholder="请输入安装单位名")
 				Col(span="6")
 					Form-item(label="手机号码：")
 						Input(v-model="query.mobile",placeholder="请输入手机号码")
@@ -24,23 +24,25 @@ export default {
 			query: {
 				username: '',
 				mobile: '',
-				nicname: ''
+				nicname: '',
+				name:'',
+				id:''
 			},
 			column: [
 				{
 					title: '单位名称',
-					key: 'companyName',
+					key: 'name',
 				},
 				{
-					title: '单位账号',
-					key: 'username',
+					title: '单位编号',
+					key: 'id',
 				},
 				{
 					title: '详细地址',
-					key: 'siteName',
+					key: 'address',
 				},
 				{
-					title: '负责人',
+					title: '电梯数',
 					key: 'nicname',
 				},
 				{
@@ -55,7 +57,7 @@ export default {
 				{
 					title: '操作',
 					key: 'companyName',
-					width: 180,
+					width: 200,
 					align: 'center',
 					render: (h, params) => {
 						return h('div', [
@@ -88,12 +90,12 @@ export default {
 								},
 								on: {
 									click: () => {
-										// this.$router.push({
-										// 	name: 'editContractor',
-										// 	params: {
-										// 		id: params.row.id
-										// 	}
-										// })
+										this.$router.push({
+											name: 'editContractor',
+											params: {
+												id: params.row.id
+											}
+										})
 									}
 								}
 							}, '编辑'),
@@ -125,7 +127,7 @@ export default {
 	},
 	methods: {
 		async getList() {
-			this.loading = false
+			this.loading = true
 			let res = await this.$api.company(this.options)
 			this.loading = false
 			if (0 === res.data.code) {

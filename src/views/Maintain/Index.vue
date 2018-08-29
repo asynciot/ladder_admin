@@ -1,7 +1,7 @@
 <template lang="jade">
 div.layout-content-main
 	div.form
-		Form(ref='form',:model="query",label-position="left",:label-width="80")
+		Form(ref='form',:model="query",label-position="left",:label-width="100")
 			Row(:gutter="16")
 				Col(span="6")
 					Form-item(label="姓名：")
@@ -54,7 +54,7 @@ export default {
 				{
 					title: '操作',
 					key: 'companyName',
-					width: 180,
+					width: 200,
 					align: 'center',
 					render: (h, params) => {
 						return h('div', [

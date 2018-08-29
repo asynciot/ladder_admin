@@ -3,25 +3,25 @@ div.layout-content-main
 	Form(ref="form",:model="form",:rules="rules",:label-width="100")
 		Row(:gutter="18")
 			Col(span="10",offset="2")
-				Form-item(label="单位名称",prop="companyName")
-					Input(v-model="form.companyName",placeholder="请输入物业单位名称")					
+				Form-item(label="单位名称",prop="name")
+					Input(v-model="form.name",placeholder="请输入物业单位名称")					
 				Form-item(label="所在区域",prop="location",data-toggle="distpicker")
 					Row(:gutter="18")
 						Col(span="6" style="padding-right:10px")
-							Select(placeholder="请选择",v-model="query.province")
-								Option(v-for="item in locations",:key="item.name",:value="item.name")|{{item.name}}
+							Select(placeholder="请选择",v-model="form.province")
+								Option(v-for="item in region",:key="item.name",:value="item.value")|{{item.value}}
 						Col(span="6" style="padding-right:10px")
-							Select(placeholder="请选择",v-model="query.city")
-								Option(v-for="item in locations",:key="item.name",:value="item.name")|{{item.name}}
+							Select(placeholder="请选择",v-model="form.city")
+								Option(v-for="item in cityList",:key="item.name1",:value="item.value")|{{item.value}}
 						Col(span="6" style="padding-right:10px")
-								Select(placeholder="请选择",v-model="query.district")
-									Option(v-for="item in locations",:key="item.name",:value="item.name")|{{item.name}}
-				Form-item(label="单位负责人",prop="nicname")
-					Input(v-model="form.nicname",placeholder="请输入单位负责人")
+								Select(placeholder="请选择",v-model="form.district")
+									Option(v-for="item in districtList",:key="item.name2",:value="item.value")|{{item.value}}
+				Form-item(label="单位负责人",prop="contactor")
+					Input(v-model="form.contactor",placeholder="请输入单位负责人")
 				Form-item(label="负责人电话",prop="mobile")
 					Input(v-model="form.mobile",placeholder="请输入负责人电话",:maxlength="11")
-				Form-item(label="单位位置",prop="siteName")
-					Input(v-model="form.siteName",type="textarea",:rows="5",placeholder="请填写单位位置")
+				Form-item(label="单位位置",prop="address")
+					Input(v-model="form.address",type="textarea",:rows="5",placeholder="请填写单位位置")
 		Row.mb-20
 			Col(span="14",offset="2")
 				Form-item.tc
@@ -30,30 +30,33 @@ div.layout-content-main
 </template>
 
 <script>
+import region from '@/views/region.json'
 export default {
   data() {
     return {
-		query: {
-			location: null
-		},
-		locations: [],
-		loading:false,
-      form: {
-        companyName: '',
-		nicname:'',
-        mobile: '',
-		siteName:'',
-		location:''
-      },
+			region: region,
+			cityList: [],
+			districtList: [],
+			loading:false,
+			form: {
+				name:'',
+				// type: 4,
+				province: '',
+				city: '',
+				district: '',
+				address:'',
+				contactor:'',
+				mobile:'',
+			},
       rules: {
-        companyName: [{
+        name: [{
             required: true,
 						type: 'string',
             message: '请填写物业单位名称',
             trigger: 'blur'
           }
         ],
-				nicname: [{
+				contactor: [{
             required: false,
 						type: 'string',
             message: '请填写单位负责人',
@@ -78,30 +81,47 @@ export default {
       },
     }
   },
+	watch: {
+    'form.province': function(val){
+			let index = this.region.findIndex(item=>item.value==val)
+			if(index > -1){
+				this.cityList = this.region[index].children
+				this.form.city = ''
+				this.form.district = ''
+			}
+    },
+		'form.city': function(val){
+			let index = this.cityList.findIndex(item=>item.value==val)
+			if(index > -1){
+				this.districtList = this.cityList[index].children
+				this.form.district = ''
+			}
+    },
+  },
   methods: {
     create(name) {
 			this.loading = true
 			this.$refs[name].validate(async (valid) => {
-        if (valid) {
+				if (valid) {
 					let res = null
 					if(this.$route.params.id){
 						res = await this.$api.updateCompany(this.form)
 					}else {
 						res = await this.$api.addCompany(this.form)
 					}
-		      // this.$store.dispatch('newKitchen', this.form).then(res => {
+					// this.$store.dispatch('newKitchen', this.form).then(res => {
 					this.loading = false
 					if (res.code == 0) {
 						this.$refs[name].resetFields();
 						this.$Notice.success({
 							title: '成功',
-							desc: '成功添加维保单位！'
+							desc: '成功添加物业单位！'
 						})
 					}else{
 						this.loading = false
 						this.$Notice.error({
 							title: '错误',
-							desc: '添加维保单位失败！'
+							desc: '添加物业单位失败！'
 						})
 					}
 					// })
@@ -112,7 +132,7 @@ export default {
 						desc: '请检查表单是否完整！'
 					})
 				}
-			})
+			})				
     },
     reset(name) {
       this.$refs[name].resetFields();

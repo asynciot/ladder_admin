@@ -3,19 +3,19 @@ div.layout-content-main
 	Form(ref="form",:model="form",:rules="rules",:label-width="100")
 		Row(:gutter="18")
 			Col(span="10",offset="2")
-				Form-item(label="单位名称",prop="companyName")
-					Input(v-model="form.companyName",placeholder="请输入安装单位名称")
+				Form-item(label="单位名称",prop="name")
+					Input(v-model="form.name",placeholder="请输入安装单位名称")
 				Form-item(label="所在区域",prop="location",data-toggle="distpicker")
 					Row(:gutter="18")
 						Col(span="6" style="padding-right:10px")
-							Select(placeholder="请选择",v-model="query.province")
-								Option(v-for="item in locations",:key="item.name",:value="item.name")|{{item.name}}
+							Select(placeholder="请选择",v-model="form.province")
+								Option(v-for="item in region",:key="item.name",:value="item.value")|{{item.value}}
 						Col(span="6" style="padding-right:10px")
-							Select(placeholder="请选择",v-model="query.city")
-								Option(v-for="item in locations",:key="item.name",:value="item.name")|{{item.name}}
+							Select(placeholder="请选择",v-model="form.city")
+								Option(v-for="item in cityList",:key="item.name1",:value="item.value")|{{item.value}}
 						Col(span="6" style="padding-right:10px")
-								Select(placeholder="请选择",v-model="query.district")
-									Option(v-for="item in locations",:key="item.name",:value="item.name")|{{item.name}}						
+								Select(placeholder="请选择",v-model="form.district")
+									Option(v-for="item in districtList",:key="item.name2",:value="item.value")|{{item.value}}				
 				Form-item(label="单位负责人",prop="nicname")
 					Input(v-model="form.nicname",placeholder="请输入单位负责人")
 				Form-item(label="负责人电话",prop="mobile")
@@ -30,23 +30,26 @@ div.layout-content-main
 </template>
 
 <script>
+import region from '@/views/region.json'
 export default {
   data() {
     return {
-		query: {
-			location: null
-		},
-		locations: [],
-		loading:false,
-      form: {
-        companyName: '',
-		nicname:'',
-        mobile: '',
-		siteName:'',
-		location:''
-      },
+			region: region,
+			cityList: [],
+			districtList: [],
+			loading:false,
+			form: {
+				name:'',
+				// type: 4,
+				province: '',
+				city: '',
+				district: '',
+				address:'',
+				contactor:'',
+				mobile:'',
+			},
       rules: {
-        companyName: [{
+        name: [{
             required: true,
 						type: 'string',
             message: '请填写安装单位名称',
@@ -78,6 +81,23 @@ export default {
       },
     }
   },
+	watch: {
+		'form.province': function(val){
+			let index = this.region.findIndex(item=>item.value==val)
+			if(index > -1){
+				this.cityList = this.region[index].children
+				this.form.city = ''
+				this.form.district = ''
+			}
+		},
+		'form.city': function(val){
+			let index = this.cityList.findIndex(item=>item.value==val)
+			if(index > -1){
+				this.districtList = this.cityList[index].children
+				this.form.district = ''
+			}
+		},
+	},
   methods: {
     create(name) {
 			this.loading = true

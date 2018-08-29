@@ -1,11 +1,11 @@
 <template lang="jade">
 div.layout-content-main
 	div.form
-		Form(ref='form',:model="query",label-position="left",:label-width="80")
+		Form(ref='form',:model="query",label-position="left",:label-width="100")
 			Row(:gutter="16")
 				Col(span="6")
 					Form-item(label="班组名称：")
-						Input(v-model="query.groupName",placeholder="请输入班组名称")
+						Input(v-model="query.name",placeholder="请输入班组名称")
 				Col(span="6")
 					Form-item(label="手机号码：")
 						Input(v-model="query.mobile",placeholder="请输入手机号码")
@@ -33,11 +33,11 @@ export default {
 // 				},
 				{
 					title: '维保班组',
-					key: 'groupName',
+					key: 'name',
 				},
 				{
 					title: '负责人',
-					key: 'nicname',
+					key: 'contactor',
 				},
 				{
 					title: '联系方式',
@@ -49,12 +49,16 @@ export default {
 				},
 				{
 					title: '维保单位',
-					key: 'companyName',
+					key: 'maintenanceCompanyName',
+				},
+				{
+					title: '详细地址',
+					key: 'address',
 				},
 				{
 					title: '操作',
 					key: 'companyName',
-					width: 180,
+					width: 200,
 					align: 'center',
 					render: (h, params) => {
 						return h('div', [
