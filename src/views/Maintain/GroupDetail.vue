@@ -3,16 +3,16 @@ div.layout-content-main
 	Form(ref="form",:model="form",:rules="rules",:label-width="100")
 		Row(:gutter="16")
 			Col(span="10",offset="2")
-				Form-item(label="班组名称",prop="groupName")
-					Input(v-model="form.groupName",placeholder="请输入班组名称")
-				Form-item(label="班组负责人",prop="nicname")
-					Input(v-model="form.nicname",placeholder="请输入班组负责人")
+				Form-item(label="班组名称",prop="name")
+					Input(v-model="form.name",placeholder="请输入班组名称")
+				Form-item(label="班组负责人",prop="contactor")
+					Input(v-model="form.contactor",placeholder="请输入班组负责人")
 				Form-item(label="负责人电话",prop="mobile")
 					Input(v-model="form.mobile",placeholder="请输入负责人电话",:maxlength="11")
-				Form-item(label="维保单位",prop="companyName")
-					Input(v-model="form.companyName",placeholder="请输入维保单位名称")
-				Form-item(label="维保站点",prop="siteName")
-					Input(v-model="form.siteName",type="textarea",:rows="5",placeholder="请填写维保站点")
+				Form-item(label="维保单位",prop="maintenanceCompanyId")
+					Input(v-model="form.maintenanceCompanyId",placeholder="请输入维保单位名称")
+				Form-item(label="维保站点",prop="address")
+					Input(v-model="form.address",type="textarea",:rows="5",placeholder="请填写维保站点")
 					<!-- select() -->
 					<!-- option(v-for="item in siteList" :value="item.id" v-text="item.name") -->
 		Row.mb-20
@@ -28,21 +28,21 @@ export default {
     return {
 			loading:false,
       form: {
-        groupName: '',
-				nicname:'',
+        name: '',
+				contactor:'',
         mobile: '',
-				siteName:'',
-				companyName:''
+				address:'',
+				maintenanceCompanyId:''
       },
       rules: {
-        groupName: [{
+        name: [{
             required: true,
 						type: 'string',
             message: '请填写班组名称',
             trigger: 'blur'
           }
         ],
-				nicname: [{
+				contactor: [{
             required: false,
 						type: 'string',
             message: '请填写班组负责人',
@@ -57,14 +57,14 @@ export default {
             trigger: 'blur'
           }
         ],
-				siteName: [{
+				address: [{
             required: true,
 						type: 'string',
             message: '请填写维保站点',
             trigger: 'blur'
           }
         ],
-				companyName: [{
+				maintenanceCompanyId: [{
 						required: true,
 						type: 'string',
 						message: '请填写维保单位',

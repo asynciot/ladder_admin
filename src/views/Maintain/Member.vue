@@ -6,8 +6,8 @@ div.layout-content-main
 				Form-item(label="用户名",prop="username")
 					p(v-if="")
 					Input(v-model="form.username",placeholder="请输入用户名")
-				Form-item(label="用户姓名",prop="nicname")
-					Input(v-model="form.nicname",placeholder="请填写用户姓名")
+				Form-item(label="用户姓名",prop="contactor")
+					Input(v-model="form.contactor",placeholder="请填写用户姓名")
 				Form-item(label="性别",prop="nicname")
 					Radio-group(v-model="form.sex")
 						Radio(label="0")|男
