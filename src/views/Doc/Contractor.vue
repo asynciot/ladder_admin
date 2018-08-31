@@ -103,10 +103,7 @@ export default {
 								props: {
 									type: 'error',
 									size: 'small'
-								},
-								params: {
-									id: params.row.id
-								},					
+								},			
 								on: {
 									click: () => {
 										this.deleteRow(params)	

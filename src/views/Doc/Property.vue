@@ -109,9 +109,6 @@ export default {
 										this.$Modal.confirm({
 											title: '警告!',
 											content: '<p>是否删除此项 ？</p>',
-											params: {
-												id: params.row.id
-											},
 											onOk: () => {
 												this.deleteRow(params)											
 											},
