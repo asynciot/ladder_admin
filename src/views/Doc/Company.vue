@@ -107,8 +107,12 @@ export default {
 									type: 'error',
 									size: 'small'
 								},
+								params: {
+									id: params.row.id
+								},
 								on: {
 									click: () => {
+										this.deleteRow(params)	
 									}
 								}
 							}, '删除')
@@ -129,6 +133,15 @@ export default {
 		this.getList()
 	},
 	methods: {
+		async deleteRow(params) {		
+			let res = await this.$api.removeCompany({id:params.row.id})
+			this.$emit('on-custom-comp');
+			if (0 === res.data.code) {
+				this.$Message.info('操作成功');
+			}else {
+				this.$Message.info('操作失败');
+			}
+		},
 		async getList() {
 			this.loading = true
 			let res = await this.$api.company(this.options)

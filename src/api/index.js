@@ -56,7 +56,7 @@ export default {
 	updatePeople:(data)=>{
 		return MaintenanceApi.update({key1:'member'},data)
 	},
-	reomvePeople:(data)=>{
+	removePeople:(data)=>{
     return MaintenanceApi.remove(Object.assign({key1:'member'},data))
   },
 	team:(data)=>{
@@ -68,7 +68,7 @@ export default {
 	updateTeam:(data)=>{
 		return MaintenanceApi.update({key1:'group'},data)
 	},
-	reomveTeam:(data)=>{
+	removeTeam:(data)=>{
     return MaintenanceApi.remove(Object.assign({key1:'group'},data))
   },
 	company:(data)=>{
@@ -80,7 +80,7 @@ export default {
 	updateCompany:(data)=>{
 		return DocApi.update({key1:'company'},data)
 	},
-	reomveCompany:(data)=>{
+	removeCompany:(data)=>{
 		return DocApi.remove(Object.assign({key1:'company'},data))
 	},
 }
