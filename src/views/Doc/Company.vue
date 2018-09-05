@@ -109,7 +109,15 @@ export default {
 								},
 								on: {
 									click: () => {
-										this.deleteRow(params)	
+										this.$Modal.confirm({
+											title: '警告!',
+											content: '<p>是否删除此项 ？</p>',
+											onOk: () => {
+												this.deleteRow(params)											
+											},
+											onCancel: () => {
+											}
+										})	
 									}
 								}
 							}, '删除')

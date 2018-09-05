@@ -29,6 +29,11 @@ export default {
 	password:(data)=>{
 		return AccountApi.save({key1:'password'},data)
 	},
+	//role
+	role:(data)=>{
+		return AccountApi.query(Object.assign({key1:'authority'},data))
+	},
+	//device
 	devices: (data) => {
 		return DeviceApi.query(Object.assign({key1: 'location'}, data))
 	},
@@ -47,6 +52,7 @@ export default {
 	staticts: (data)=> {
 		return rootApi.query(Object.assign({key1:'mointors', key2: 'statistic'},data))
 	},
+	//maintain
 	people:(data)=>{
 		return MaintenanceApi.query(Object.assign({key1:'member'},data))
 	},
@@ -59,6 +65,7 @@ export default {
 	removePeople:(data)=>{
     return MaintenanceApi.remove(Object.assign({key1:'member'},data))
   },
+	//doc
 	team:(data)=>{
 		return MaintenanceApi.query(Object.assign({key1:'group'},data))
 	},
@@ -82,5 +89,8 @@ export default {
 	},
 	removeCompany:(data)=>{
 		return DocApi.remove(Object.assign({key1:'company'},data))
+	},
+	site:(data)=>{
+		return MaintenanceApi.query(Object.assign({key1:'site'},data))
 	},
 }

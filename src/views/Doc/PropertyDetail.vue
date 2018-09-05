@@ -40,7 +40,7 @@ export default {
 			loading:false,
 			form: {
 				name:'',
-				// type: 4,
+				type: 3,
 				province: '',
 				city: '',
 				district: '',
@@ -71,7 +71,7 @@ export default {
             trigger: 'blur'
           }
         ],
-				siteName: [{
+				address: [{
             required: false,
 						type: 'string',
             message: '请填写单位位置',

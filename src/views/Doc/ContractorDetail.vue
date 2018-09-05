@@ -3,7 +3,7 @@ div.layout-content-main
 	Form(ref="form",:model="form",:rules="rules",:label-width="100")
 		Row(:gutter="18")
 			Col(span="10",offset="2")
-				Form-item(label="单位名称",prop="name")
+				Form-item(label="安装单位名称",prop="name")
 					Input(v-model="form.name",placeholder="请输入安装单位名称")
 				Form-item(label="所在区域",prop="location",data-toggle="distpicker")
 					Row(:gutter="18")
@@ -16,12 +16,12 @@ div.layout-content-main
 						Col(span="6" style="padding-right:10px")
 								Select(placeholder="请选择",v-model="form.district")
 									Option(v-for="item in districtList",:key="item.name2",:value="item.value")|{{item.value}}				
-				Form-item(label="单位负责人",prop="nicname")
-					Input(v-model="form.nicname",placeholder="请输入单位负责人")
+				Form-item(label="单位负责人",prop="contactor")
+					Input(v-model="form.contactor",placeholder="请输入单位负责人")
 				Form-item(label="负责人电话",prop="mobile")
 					Input(v-model="form.mobile",placeholder="请输入负责人电话",:maxlength="11")
-				Form-item(label="单位位置",prop="siteName")
-					Input(v-model="form.siteName",type="textarea",:rows="5",placeholder="请填写单位位置")
+				Form-item(label="安装单位位置",prop="address")
+					Input(v-model="form.address",type="textarea",:rows="5",placeholder="请填写安装单位位置")
 		Row.mb-20
 			Col(span="14",offset="2")
 				Form-item.tc
@@ -40,7 +40,7 @@ export default {
 			loading:false,
 			form: {
 				name:'',
-				// type: 4,
+				type: 1,
 				province: '',
 				city: '',
 				district: '',
@@ -56,7 +56,7 @@ export default {
             trigger: 'blur'
           }
         ],
-				nicname: [{
+				contactor: [{
             required: false,
 						type: 'string',
             message: '请填写单位负责人',
@@ -71,7 +71,7 @@ export default {
             trigger: 'blur'
           }
         ],
-				siteName: [{
+				address: [{
             required: false,
 						type: 'string',
             message: '请填写单位位置',

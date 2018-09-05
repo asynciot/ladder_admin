@@ -9,8 +9,8 @@ div.layout-content-main
 					Input(v-model="form.contactor",placeholder="请输入班组负责人")
 				Form-item(label="负责人电话",prop="mobile")
 					Input(v-model="form.mobile",placeholder="请输入负责人电话",:maxlength="11")
-				Form-item(label="维保单位",prop="maintenanceCompanyId")
-					Input(v-model="form.maintenanceCompanyId",placeholder="请输入维保单位名称")
+				Form-item(label="维保单位",prop="maintenanceCompanyName")
+					Input(v-model="form.maintenanceCompanyName",placeholder="请输入维保单位名称")
 				Form-item(label="维保站点",prop="address")
 					Input(v-model="form.address",type="textarea",:rows="5",placeholder="请填写维保站点")
 					<!-- select() -->
@@ -24,77 +24,99 @@ div.layout-content-main
 
 <script>
 export default {
-  data() {
-    return {
+	data() {
+		return {
 			loading:false,
-      form: {
-        name: '',
+			form: {
+				name: '',
 				contactor:'',
-        mobile: '',
+				mobile: '',
 				address:'',
-				maintenanceCompanyId:''
-      },
-      rules: {
-        name: [{
-            required: true,
-						type: 'string',
-            message: '请填写班组名称',
-            trigger: 'blur'
-          }
-        ],
+				maintenanceCompanyName:''
+			},
+			rules: {
+				name: [{
+					required: true,
+					type: 'string',
+					message: '请填写班组名称',
+					trigger: 'blur'
+				}],
 				contactor: [{
-            required: false,
-						type: 'string',
-            message: '请填写班组负责人',
-            trigger: 'blur'
-          }
-        ],
+				required: false,
+				type: 'string',
+				message: '请填写班组负责人',
+				trigger: 'blur'
+				}],
 				mobile: [{
-            required: false,
-						type: 'string',
-						pattern:/^1(3|4|5|7|8)\d{9}$/,
-	          message: '请填写正确的号码',
-            trigger: 'blur'
-          }
-        ],
+					required: false,
+					type: 'string',
+					pattern:/^1(3|4|5|7|8)\d{9}$/,
+					message: '请填写正确的号码',
+					trigger: 'blur'
+				}],
 				address: [{
-            required: true,
-						type: 'string',
-            message: '请填写维保站点',
-            trigger: 'blur'
-          }
-        ],
-				maintenanceCompanyId: [{
-						required: true,
-						type: 'string',
-						message: '请填写维保单位',
-						trigger: 'blur'
-					}
-				],
-      },
-    }
-  },
-  methods: {
-    create(name) {
+					required: true,
+					type: 'string',
+					message: '请填写维保站点',
+					trigger: 'blur'
+				}],
+				maintenanceCompanyName: [{
+					required: true,
+					type: 'string',
+					message: '请填写维保单位',
+					trigger: 'blur'
+				}],
+			},
+		}
+	},
+	methods: {
+		async getData() {
+			let res = await this.$api.team({
+				id: this.$route.params.id
+			})
+			this.form = res.data.data.list[0]
+		},
+		getOption() {
+			this.$api.site({
+				page: 1,
+				num: 100
+			}).then(res => {
+				this.siteList = res.data.data.list
+			})
+			this.$api.company({
+				type: 2,
+				page: 1,
+				num: 100
+			}).then(res => {
+				this.maintenanceList = res.data.data.list
+			})
+		},
+		create(name) {
 			this.loading = true
-			this.$refs[name].validate((valid) => {
-        if (valid) {
-		      this.$store.dispatch('newKitchen', this.form).then(res => {
+			this.$refs[name].validate(async(valid) => {
+				if (valid) {
+					let res = null
+					if(this.$route.params.id) {
+						res = await this.$api.updateTeam(this.form)
+					} else {
+						res = await this.$api.addTeam(this.form)
+					}	
+					// this.$store.dispatch('newKitchen', this.form).then(res => {
+					this.loading = false
+					if (res.data.code == 0) {
+					  this.$refs[name].resetFields();
+					  this.$Notice.success({
+						title: '成功',
+						desc: '成功添加群组！'
+					  })
+					}else{
 						this.loading = false
-		        if (res.code == 0) {
-		          this.$refs[name].resetFields();
-		          this.$Notice.success({
-		            title: '成功',
-		            desc: '成功添加群组！'
-		          })
-		        }else{
-							this.loading = false
-							this.$Notice.error({
-								title: '错误',
-								desc: '添加群组失败！'
-							})
-						}
-					})
+						this.$Notice.error({
+							title: '错误',
+							desc: '添加群组失败！'
+						})
+					}
+					// })
 				}else{
 					this.loading = false
 					this.$Notice.error({
@@ -103,11 +125,11 @@ export default {
 					})
 				}
 			})
-    },
-    reset(name) {
-      this.$refs[name].resetFields();	
-    }
-  }
+		},
+		reset(name) {
+			this.$refs[name].resetFields();	
+		},		
+	}
 }
 </script>
 

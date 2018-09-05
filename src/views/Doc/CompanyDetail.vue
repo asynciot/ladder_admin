@@ -16,8 +16,8 @@ div.layout-content-main
 						Col(span="6" style="padding-right:10px")
 								Select(placeholder="请选择",v-model="form.district")
 									Option(v-for="item in districtList",:key="item.name2",:value="item.value")|{{item.value}}
-				Form-item(label="单位负责人",prop="nicname")
-					Input(v-model="form.nicname",placeholder="请输入单位负责人")
+				Form-item(label="单位负责人",prop="contactor")
+					Input(v-model="form.contactor",placeholder="请输入单位负责人")
 				Form-item(label="负责人电话",prop="mobile")
 					Input(v-model="form.mobile",placeholder="请输入负责人电话",:maxlength="11")
 				Form-item(label="维保单位位置",prop="address")
@@ -40,7 +40,7 @@ export default {
 			loading:false,
 			form: {
 				name:'',
-				// type: 4,
+				type: 2,
 				province: '',
 				city: '',
 				district: '',
@@ -56,7 +56,7 @@ export default {
             trigger: 'blur'
           }
         ],
-				nicname: [{
+				contactor: [{
             required: false,
 						type: 'string',
             message: '请填写单位负责人',

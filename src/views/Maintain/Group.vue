@@ -107,6 +107,15 @@ export default {
 								},
 								on: {
 									click: () => {
+										this.$Modal.confirm({
+											title: '警告!',
+											content: '<p>是否删除此项 ？</p>',
+											onOk: () => {
+												this.deleteRow(params)											
+											},
+											onCancel: () => {
+											}
+										})	
 									}
 								}
 							}, '删除')
@@ -127,14 +136,27 @@ export default {
 		this.getList()
 	},
 	methods: {
+		async deleteRow(params) {		
+				let res = await this.$api.removeTeam({id:params.row.id})
+				this.$emit('on-custom-comp');
+				if (0 === res.data.code) {
+					this.$Message.info('操作成功');
+				}else {
+					this.$Message.info('操作失败');
+				}
+		},
+		pageChange(val) {
+			this.options.page = val
+			this.getList()
+		},
 		async getList() {
+			this.loading = true
+			let res = await this.$api.team(this.options)
 			this.loading = false
-// 			let res = await this.$api.team(this.options)
-// 			this.loading = false
-// 			if (0 === res.data.code) {
-// 				this.list = res.data.data.list
-// 				this.options.total = res.data.data.totalNumber
-// 			}
+			if (0 === res.data.code) {
+				this.list = res.data.data.list
+				this.options.total = res.data.data.totalNumber
+			}
 		}
 	}
 }
