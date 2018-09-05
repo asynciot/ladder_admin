@@ -1,7 +1,7 @@
 import { stringify } from 'qs';
 import {
 	root,
-  AccountApi,
+	AccountApi,
 	DeviceApi,
 	rootApi,
 	MaintenanceApi,

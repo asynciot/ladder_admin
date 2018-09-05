@@ -126,28 +126,28 @@ export default {
 					if(res.data.code == 0) {
 						this.form.id = res.data.id;
 						res = await this.$api.update(this.form)
+						if(res.data.code == 0){
+							res = await this.$api.addPeople({
+								userId: this.form.id,
+								groupId: this.form.groupId,
+							})
 							if(res.data.code == 0){
-								res = await this.$api.addPeople({
-									userId: this.form.id,
-									groupId: this.form.groupId,
+								this.$refs[name].resetFields();
+								this.$Notice.success({
+									title: '成功',
+									desc: '成功添加维保人员！',
+									onClose: () => {
+										this.$router.back()
+									}
 								})
-								if(res.data.code == 0){
-									this.$refs[name].resetFields();
-									this.$Notice.success({
-										title: '成功',
-										desc: '成功添加维保人员！',
-										onClose: () => {
-											this.$router.back()
-										}
-									})
-								}else {
-									this.loading = false
-									this.$Notice.error({
-										title: '错误',
-										desc: '添加维保人员失败！'
-									})
-								}
-							}	
+							}else {
+								this.loading = false
+								this.$Notice.error({
+									title: '错误',
+									desc: '添加维保人员失败！'
+								})
+							}
+						}	
 					} 
 				} else {
 					this.loading = false

@@ -10,7 +10,7 @@ div.layout-content-main
 					Form-item(label="手机号码：")
 						Input(v-model="query.mobile",placeholder="请输入手机号码")
 				Col(span="6")
-					Button.mr-10(type="primary",icon="search",:loading="loading",@click="options.page=1,getList()")|搜索
+					Button.mr-10(type="primary",icon="search",:loading="loading",@click="options.page=1,search()")|搜索
 					router-link.mr-10(:to="{ name: 'maintainPropertyNew'}")
 						Button(type="success",icon="plus",:loading="loading")|添加物业单位
 	Table(:loading="loading",:stripe="true",:columns="column",:data="list",stripe)
@@ -156,7 +156,17 @@ export default {
 				this.list = res.data.data.list
 				this.options.total = res.data.data.totalNumber
 			}
+		},
+		async search() {
+			this.loading = true
+			let res = await this.$api.company(this.query)
+			this.loading = false
+			if (0 === res.data.code) {
+				this.list = res.data.data.list
+				this.options.total = res.data.data.totalNumber
+			}
 		}
+		
 	}
 }
 </script>

@@ -40,7 +40,7 @@ export default {
 			loading:false,
 			form: {
 				name:'',
-				type: 1,
+				type: 0,
 				province: '',
 				city: '',
 				district: '',
