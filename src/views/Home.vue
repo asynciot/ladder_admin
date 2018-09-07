@@ -128,6 +128,9 @@ export default {
         },{
 					name: 'maintainGroup',
 					label: '维保群组'
+				},{
+					name: 'maintainSite',
+					label: '维保站点'
 				},
 				],
 			},{

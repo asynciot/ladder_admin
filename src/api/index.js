@@ -93,4 +93,13 @@ export default {
 	site:(data)=>{
 		return MaintenanceApi.query(Object.assign({key1:'site'},data))
 	},
+	addSite:(data)=>{
+		return MaintenanceApi.save({key1:'site'},data)
+	},
+	updateSite:(data)=>{
+		return MaintenanceApi.update({key1:'site'},data)
+	},
+	reomveSite:(data)=>{
+		return MaintenanceApi.remove(Object.assign({key1:'site'},data))
+	},
 }

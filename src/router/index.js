@@ -10,6 +10,8 @@ const Maintain = resolve => require(['@/views/Maintain/Index'], resolve)
 const Member = resolve => require(['@/views/Maintain/Member'], resolve)
 const Group = resolve => require(['@/views/Maintain/Group'], resolve)
 const GroupDetail = resolve => require(['@/views/Maintain/GroupDetail'], resolve)
+const Site = resolve => require(['@/views/Maintain/Site'], resolve)
+const SiteDetail = resolve => require(['@/views/Maintain/SiteDetail'], resolve)
 
 const Contractor = resolve => require(['@/views/Doc/Contractor'], resolve)
 const ContractorDetail = resolve => require(['@/views/Doc/ContractorDetail'], resolve)
@@ -19,6 +21,8 @@ const UseDep = resolve => require(['@/views/Doc/UseDep'], resolve)
 const UseDepDetail = resolve => require(['@/views/Doc/UseDepDetail'], resolve)
 const Property = resolve => require(['@/views/Doc/Property'], resolve)
 const PropertyDetail = resolve => require(['@/views/Doc/PropertyDetail'], resolve)
+
+
 
 Vue.use(Router)
 
@@ -78,6 +82,24 @@ export default new Router({
 					meta:{name:'添加维保群组'},
 					component: GroupDetail
 				},
+				{
+					path: '/maintain/site',
+					name: 'maintainSite',
+					meta:{name:'维保站点管理'},
+					component: Site
+				},
+				{
+					path: '/maintain/site/new',
+					name: 'maintainSiteNew',
+					meta:{name:'添加维保站点'},
+					component: SiteDetail
+				},
+				{
+					path: '/maintain/site/edit/:id',
+					name: 'editSite',
+					meta:{name:'编辑维保站点'},
+					component: SiteDetail
+				},				
 				{
 					path: '/doc/company',
 					name: 'maintainCompany',
@@ -149,7 +171,7 @@ export default new Router({
 					name: 'editProperty',
 					meta:{name:'编辑物业单位'},
 					component: PropertyDetail
-				},
+				},			
       ],
     },
 		{ path: '*', redirect: '/' }
