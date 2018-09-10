@@ -128,6 +128,7 @@ export default {
 			list: [],
 			options: {
 				name:'',
+				type: 3,
 				page: 1,
 				num: 15,
 				total: 0

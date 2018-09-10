@@ -32,8 +32,8 @@ div.layout-content-main
 <script>
 import region from '@/views/region.json'
 export default {
-  data() {
-    return {
+	data() {
+		return {
 			region: region,
 			cityList: [],
 			districtList: [],
@@ -48,39 +48,35 @@ export default {
 				contactor:'',
 				mobile:'',
 			},
-      rules: {
-        name: [{
-            required: true,
-						type: 'string',
-            message: '请填写使用单位名称',
-            trigger: 'blur'
-          }
-        ],
+			rules: {
+				name: [{
+					required: true,
+					type: 'string',
+					message: '请填写使用单位名称',
+					trigger: 'blur'
+				}],
 				contactor: [{
-            required: false,
-						type: 'string',
-            message: '请填写单位负责人',
-            trigger: 'blur'
-          }
-        ],
+					required: false,
+					type: 'string',
+					message: '请填写单位负责人',
+					trigger: 'blur'
+				}],
 				mobile: [{
-            required: false,
-						type: 'string',
-						pattern:/^1(3|4|5|7|8)\d{9}$/,
-	          message: '请填写正确的号码',
-            trigger: 'blur'
-          }
-        ],
+					required: false,
+					type: 'string',
+					pattern:/^1(3|4|5|7|8)\d{9}$/,
+					message: '请填写正确的号码',
+					trigger: 'blur'
+				}],
 				address: [{
-            required: false,
-						type: 'string',
-            message: '请填写单位位置',
-            trigger: 'blur'
-          }
-        ],
-      },
-    }
-  },
+					required: false,
+					type: 'string',
+					message: '请填写单位位置',
+					trigger: 'blur'
+				}],
+			},
+		}
+	},
 	watch: {
 		'form.province': function(val){
 			let index = this.region.findIndex(item=>item.value==val)
@@ -98,18 +94,18 @@ export default {
 			}
 		},
 	},
-  methods: {
-    create(name) {
+	methods: {
+		create(name) {
 			this.loading = true
 			this.$refs[name].validate(async (valid) => {
-        if (valid) {
+				if (valid) {
 					let res = null
 					if(this.$route.params.id){
 						res = await this.$api.updateCompany(this.form)
 					}else {
 						res = await this.$api.addCompany(this.form)
 					}
-		      // this.$store.dispatch('newKitchen', this.form).then(res => {
+					// this.$store.dispatch('newKitchen', this.form).then(res => {
 					this.loading = false
 					if (res.code == 0) {
 						this.$refs[name].resetFields();
@@ -133,11 +129,11 @@ export default {
 					})
 				}
 			})
-    },
-    reset(name) {
-      this.$refs[name].resetFields();
-    }
-  }
+		},
+		reset(name) {
+			this.$refs[name].resetFields();
+		}
+	}
 }
 </script>
 

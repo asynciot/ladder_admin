@@ -32,8 +32,8 @@ div.layout-content-main
 <script>
 import region from '@/views/region.json'
 export default {
-  data() {
-    return {
+	data() {
+		return {
 			region: region,
 			cityList: [],
 			districtList: [],
@@ -48,39 +48,35 @@ export default {
 				contactor:'',
 				mobile:'',
 			},
-      rules: {
-        name: [{
-            required: true,
-						type: 'string',
-            message: '请填写维保单位名称',
-            trigger: 'blur'
-          }
-        ],
+			rules: {
+				name: [{
+					required: true,
+					type: 'string',
+					message: '请填写维保单位名称',
+					trigger: 'blur'
+				}],
 				contactor: [{
-            required: false,
-						type: 'string',
-            message: '请填写单位负责人',
-            trigger: 'blur'
-          }
-        ],
+					required: false,
+					type: 'string',
+					message: '请填写单位负责人',
+					trigger: 'blur'
+				}],
 				mobile: [{
-            required: false,
-						type: 'string',
-						pattern:/^1(3|4|5|7|8)\d{9}$/,
-	          message: '请填写正确的号码',
-            trigger: 'blur'
-          }
-        ],
+					required: false,
+					type: 'string',
+					pattern:/^1(3|4|5|7|8)\d{9}$/,
+					message: '请填写正确的号码',
+					trigger: 'blur'
+				}],
 				address: [{
-            required: false,
-						type: 'string',
-            message: '请填写维保单位位置',
-            trigger: 'blur'
-          }
-        ],
-      },	
-    }
-  },
+					required: false,
+					type: 'string',
+					message: '请填写维保单位位置',
+					trigger: 'blur'
+				}],
+			},	
+		}
+	},	
 	watch: {
 		'form.province': function(val){
 			let index = this.region.findIndex(item=>item.value==val)
@@ -99,35 +95,37 @@ export default {
 		},
 	},
   methods: {
+		async getData(){
+			let res = await this.$api.company({ id: this.$route.params.id})
+			this.form = res.data.data.list[0]
+		},		
     create(name) {
-			this.loading = true
-			this.$refs[name].validate(async (valid) => {
-        if (valid) {
-					let res = await this.$api.addCompany(this.form)
-		      // this.$store.dispatch('newKitchen', this.form).then(res => {
-					this.loading = false
-					if (res.code == 0) {
-						this.$refs[name].resetFields();
-						this.$Notice.success({
-							title: '成功',
-							desc: '成功添加维保单位！'
-						})
-					}else{
-						this.loading = false
-						this.$Notice.error({
-							title: '错误',
-							desc: '添加维保单位失败！'
-						})
-					}
-					// })
+		this.loading = true
+		this.$refs[name].validate(async (valid) => {
+			if (valid) {
+				let res = await this.$api.addCompany(this.form)
+				this.loading = false
+				if (res.code == 0) {
+					this.$refs[name].resetFields();
+					this.$Notice.success({
+						title: '成功',
+						desc: '成功添加维保单位！'
+					})
 				}else{
 					this.loading = false
 					this.$Notice.error({
 						title: '错误',
-						desc: '请检查表单是否完整！'
+						desc: '添加维保单位失败！'
 					})
 				}
-			})
+			}else{
+				this.loading = false
+				this.$Notice.error({
+					title: '错误',
+					desc: '请检查表单是否完整！'
+				})
+			}
+		})
     },
     reset(name) {
       this.$refs[name].resetFields();

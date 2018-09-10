@@ -2,7 +2,7 @@
 div.layout-content-main
 	div.form
 		Form(ref='form',:model="query",label-position="left",:label-width="120")
-			Row(:gutter="16")
+			Row(:gutter="12")
 				Col(span="6")
 					Form-item(label="电梯工号：")
 						Input(v-model="query.name",placeholder="请输入电梯工号")

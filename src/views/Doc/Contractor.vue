@@ -26,7 +26,7 @@ export default {
 				mobile: '',
 				nicname: '',
 				name:'',
-				id:''
+				id:'',
 			},
 			column: [
 				{
@@ -125,6 +125,7 @@ export default {
 			list: [],
 			options: {
 				name:'',
+				type: 0,
 				page: 1,
 				num: 15,
 				total: 0
@@ -159,7 +160,7 @@ export default {
 			this.loading = false
 			if (0 === res.data.code) {
 				this.list = res.data.data.list
-				this.options.total = res.data.data.totalNumber
+				// this.options.total = res.data.data.totalNumber
 			}
 		}
 	}

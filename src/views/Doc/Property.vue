@@ -125,6 +125,7 @@ export default {
 			list: [],
 			options: {
 				name:'',
+				type: 2,
 				page: 1,
 				num: 15,
 				total: 0
