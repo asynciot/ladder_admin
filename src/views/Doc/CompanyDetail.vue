@@ -1,6 +1,6 @@
 <template lang="jade">
 div.layout-content-main
-	Form(ref="form",:model="form",:rules="rules",:label-width="100")
+	Form(ref="form",:model="form",:rules="rules",:label-width="120")
 		Row(:gutter="18")
 			Col(span="10",offset="2")
 				Form-item(label="维保单位名称",prop="name")

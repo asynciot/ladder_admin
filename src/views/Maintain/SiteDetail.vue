@@ -1,20 +1,20 @@
 <template lang="jade">
 div.layout-content-main
-	Form(ref="form",:model="form",:rules="rules",:label-width="100")
+	Form(ref="form",:model="form",:rules="rules",:label-width="120")
 		Row(:gutter="16")
 			Col(span="10",offset="2")
 				Form-item(label="维保站点名称",prop="name")
 					Input(v-model="form.name",placeholder="请输入维保站点名称")
+				Form-item(label="维保单位",prop="CompanyName")
+					select(placeholder="请选择",v-model="form.maintenanceCompanyName" style="width:100px")
+						option(v-for="item in maintenanceList",:key="item.name",:value="item.value")|{{item.value}}
 				Form-item(label="负责人",prop="contactor")
 					Input(v-model="form.contactor",placeholder="请输入班组负责人")
 				Form-item(label="负责人电话",prop="mobile")
 					Input(v-model="form.mobile",placeholder="请输入负责人电话",:maxlength="11")
-				Form-item(label="维保单位",prop="maintenanceCompanyName")
-					Input(v-model="form.maintenanceCompanyName",placeholder="请输入维保单位名称")
-				Form-item(label="维保站点",prop="address")
-					Input(v-model="form.address",type="textarea",:rows="5",placeholder="请填写维保站点")
-					<!-- select() -->
-					<!-- option(v-for="item in siteList" :value="item.id" v-text="item.name") -->
+				
+				Form-item(label="详细地址",prop="address")
+					Input(v-model="form.address",type="textarea",:rows="5",placeholder="请填写详细地址")				
 		Row.mb-20
 			Col(span="14",offset="2")
 				Form-item.tc
@@ -33,7 +33,7 @@ export default {
 				mobile: '',
 				address:'',
 				maintenanceCompanyName:''
-			},
+			},			
 			rules: {
 				name: [{
 					required: true,
@@ -57,16 +57,17 @@ export default {
 				address: [{
 					required: true,
 					type: 'string',
-					message: '请填写维保站点',
+					message: '请填写详细地址',
 					trigger: 'blur'
 				}],
 				maintenanceCompanyName: [{
 					required: true,
 					type: 'string',
-					message: '请填写维保单位',
+					message: '请选择维保单位',
 					trigger: 'blur'
 				}],
 			},
+			maintenanceList:[]
 		}
 	},
 	methods: {
@@ -101,22 +102,20 @@ export default {
 					} else {
 						res = await this.$api.addSite(this.form)
 					}	
-					// this.$store.dispatch('newKitchen', this.form).then(res => {
 					this.loading = false
 					if (res.data.code == 0) {
 					  this.$refs[name].resetFields();
 					  this.$Notice.success({
 						title: '成功',
-						desc: '成功添加群组！'
+						desc: '成功添加站点！'
 					  })
 					}else{
 						this.loading = false
 						this.$Notice.error({
 							title: '错误',
-							desc: '添加群组失败！'
+							desc: '添加站点失败！'
 						})
 					}
-					// })
 				}else{
 					this.loading = false
 					this.$Notice.error({
