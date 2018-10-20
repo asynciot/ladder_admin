@@ -4,21 +4,19 @@ div.layout-content-main
 </template>
 
 <script>
-	import unit from './Maintain/Unit'
-	import site from './Maintain/Site'
-	import group from './Maintain/Group'
-	import member from './Maintain/Member'
+	import setting from './Setting'
+	import print from './Print'
+
 export default {
 	data() {
 		return {
-			currentTab: 'unit'
+			currentTab: 'setting'
 		};	
 	},
 	components: { 
-		unit,
-		site,
-		group,
-		member
+		setting,
+		print,
+
  },
  watch: {
 		'currentTab':function(val){

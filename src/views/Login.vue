@@ -47,7 +47,7 @@ export default {
           },
           {
             type: 'string',
-            min: 6,
+            min: 3,
             message: '密码长度不能小于6位',
             trigger: 'blur'
           }
@@ -68,7 +68,7 @@ export default {
               duration: 0.5,
               onClose: () => {
 								this.$router.push({
-									name: 'menu'
+									name: 'home'
 								})
               }
             })

@@ -5,9 +5,6 @@ div.layout-content-main
 			Col(span="10",offset="2")
 				Form-item(label="维保站点名称",prop="name")
 					Input(v-model="form.name",placeholder="请输入维保站点名称")
-				Form-item(label="维保单位",prop="CompanyName")
-					select(placeholder="请选择",v-model="form.maintenanceCompanyName" style="width:100px")
-						option(v-for="item in maintenanceList",:key="item.name",:value="item.value")|{{item.value}}
 				Form-item(label="负责人",prop="contactor")
 					Input(v-model="form.contactor",placeholder="请输入班组负责人")
 				Form-item(label="负责人电话",prop="mobile")
@@ -55,13 +52,13 @@ export default {
 					trigger: 'blur'
 				}],
 				address: [{
-					required: true,
+					required: false,
 					type: 'string',
 					message: '请填写详细地址',
 					trigger: 'blur'
 				}],
 				maintenanceCompanyName: [{
-					required: true,
+					required: false,
 					type: 'string',
 					message: '请选择维保单位',
 					trigger: 'blur'

@@ -1,19 +1,25 @@
 <template lang="jade">
 div.layout-content-main
-	div.form
-		Form(ref='form',:model="query",label-position="left",:label-width="100")
-			Row(:gutter="16")
-				Col(span="6")
-					Form-item(label="单位名称：")
-						Input(v-model="query.name",placeholder="请输入安装单位名")
-				Col(span="6")
-					Form-item(label="手机号码：")
-						Input(v-model="query.mobile",placeholder="请输入手机号码")
-				Col(span="6")
-					Button.mr-10(type="primary",icon="search",:loading="loading",@click="options.page=1,search()")|搜索
-					router-link.mr-10(:to="{ name: 'maintainContractorNew'}")
-						Button(type="success",icon="plus",:loading="loading")|添加安装单位
+
+	Tabs(value="name1",:animated="false",@on-click="Onchange")
+			TabPane(label="维保单位",name="Unit")						
+			TabPane(label="维保站点",name="Site")
+			TabPane(label="维保群组",name="Group")			
+			TabPane(label="维保人员",name="Member")
+	Form(ref='form',:model="query",label-position="left",:label-width="100")
+		Row(:gutter="12")
+			Col(span="6")
+				Form-item(label="单位名称：")
+					Input(v-model="query.name",placeholder="请输入维保单位名")
+			Col(span="6")
+				Form-item(label="手机号码：")
+					Input(v-model="query.mobile",placeholder="请输入手机号码")
+			Col(span="6")
+				Button.mr-10(type="primary",icon="search",:loading="loading",@click="options.page=1,search()")|搜索
+				router-link.mr-10(:to="{ name: 'maintainUnitNew'}")
+					Button(type="success",icon="plus",:loading="loading")|添加维保单位					
 	Table(:loading="loading",:stripe="true",:columns="column",:data="list",stripe)
+	<Page style="padding-right: 38%;" class="pagination" show-elevator :total="options.total" :page-size="options.num" :current="options.page" @on-change="pageChange" show-total></Page>
 </template>
 
 <script>
@@ -26,7 +32,7 @@ export default {
 				mobile: '',
 				nicname: '',
 				name:'',
-				id:'',
+				id:''
 			},
 			column: [
 				{
@@ -53,7 +59,10 @@ export default {
 // 					title: '维保班组',
 // 					key: 'groupName',
 // 				},
-
+// 				{
+// 					title: '维保站点',
+// 					key: 'siteName',
+// 				},
 				{
 					title: '操作',
 					key: 'companyName',
@@ -72,7 +81,7 @@ export default {
 								on: {
 									click: () => {
 										// this.$router.push({
-										// 	name: 'infoContractor',
+										// 	name: 'infoMaterial',
 										// 	params: {
 										// 		id: params.row.id
 										// 	}
@@ -91,7 +100,7 @@ export default {
 								on: {
 									click: () => {
 										this.$router.push({
-											name: 'editContractor',
+											name: 'editUnit',
 											params: {
 												id: params.row.id
 											}
@@ -103,7 +112,7 @@ export default {
 								props: {
 									type: 'error',
 									size: 'small'
-								},			
+								},
 								on: {
 									click: () => {
 										this.$Modal.confirm({
@@ -125,25 +134,25 @@ export default {
 			list: [],
 			options: {
 				name:'',
-				type: 0,
+				type: 1,
 				page: 1,
 				num: 15,
 				total: 0
-			}
-		}
+			},
+		}		
 	},
 	created() {
 		this.getList()
 	},
 	methods: {
 		async deleteRow(params) {		
-				let res = await this.$api.removeCompany({id:params.row.id})
-				this.$emit('on-custom-comp');
-				if (0 === res.data.code) {
-					this.$Message.info('操作成功');
-				}else {
-					this.$Message.info('操作失败');
-				}
+			let res = await this.$api.removeCompany({id:params.row.id})
+			this.$emit('on-custom-comp');
+			if (0 === res.data.code) {
+				this.$Message.info('操作成功');
+			}else {
+				this.$Message.info('操作失败');
+			}
 		},
 		async getList() {
 			this.loading = true
@@ -163,8 +172,13 @@ export default {
 			this.loading = false
 			if (0 === res.data.code) {
 				this.list = res.data.data.list
-				// this.options.total = res.data.data.totalNumber
+				this.options.total = res.data.data.totalNumber
 			}
+		},
+		Onchange: function(val) {
+			this.$router.push({
+				name: 'maintain'+val,
+			})
 		}
 	}
 }

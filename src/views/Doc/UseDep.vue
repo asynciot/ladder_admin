@@ -151,9 +151,13 @@ export default {
 		async getList() {
 			this.loading = true
 			let res = await this.$api.company(this.options)
+			console.log(res)
 			this.loading = false
 			if (0 === res.data.code) {
 				this.list = res.data.data.list
+				for(var i=0;i<this.list.length;i++){
+					this.list[i].address = this.list[i].province+this.list[i].city+this.list[i].district+this.list[i].address
+				}
 				this.options.total = res.data.data.totalNumber
 			}
 		},

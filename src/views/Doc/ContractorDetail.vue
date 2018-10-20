@@ -7,13 +7,13 @@ div.layout-content-main
 					Input(v-model="form.name",placeholder="请输入安装单位名称")
 				Form-item(label="所在区域",prop="location",data-toggle="distpicker")
 					Row(:gutter="18")
-						Col(span="6" style="padding-right:10px")
+						Col(span="6" style="padding-right:5px")
 							Select(placeholder="请选择",v-model="form.province")
-								Option(v-for="item in region",:key="item.name",:value="item.value")|{{item.value}}
-						Col(span="6" style="padding-right:10px")
+								Option(v-for="item in region",:key="item.province",:value="item.value")|{{item.value}}
+						Col(span="6" style="padding-right:5px")
 							Select(placeholder="请选择",v-model="form.city")
-								Option(v-for="item in cityList",:key="item.name1",:value="item.value")|{{item.value}}
-						Col(span="6" style="padding-right:10px")
+								Option(v-for="item in cityList",:key="item.city",:value="item.value")|{{item.value}}
+						Col(span="6" style="padding-right:5px")
 								Select(placeholder="请选择",v-model="form.district")
 									Option(v-for="item in districtList",:key="item.name2",:value="item.value")|{{item.value}}				
 				Form-item(label="单位负责人",prop="contactor")
@@ -26,7 +26,7 @@ div.layout-content-main
 			Col(span="14",offset="2")
 				Form-item.tc
 					Button.mr-10(icon="close",@click="reset('form')")|取消
-					Button(type="success",icon="plus",@click="create('form')",:loading="loading")|创建
+					Button(type="success",icon="plus",@click="create('form')",:loading="loading")|提交
 </template>
 
 <script>
@@ -77,24 +77,33 @@ export default {
 		},
     }
   },
+	created(){
+		if(this.$route.params.id){
+			this.getData()
+		}
+	},
 	watch: {
 		'form.province': function(val){
 			let index = this.region.findIndex(item=>item.value==val)
 			if(index > -1){
 				this.cityList = this.region[index].children
-				this.form.city = ''
-				this.form.district = ''
+				this.form.city = this.list.city
+				this.form.district = this.list.district
 			}
 		},
 		'form.city': function(val){
 			let index = this.cityList.findIndex(item=>item.value==val)
 			if(index > -1){
 				this.districtList = this.cityList[index].children
-				this.form.district = ''
+				this.form.district = this.list.district
 			}
 		},
 	},
 	methods: {
+		async getData(){
+			let res = await this.$api.company({ id: this.$route.params.id})
+			this.form = res.data.data.list[0]
+		},
 		create(name) {
 				this.loading = true
 				this.$refs[name].validate(async (valid) => {
@@ -107,7 +116,7 @@ export default {
 						}
 				  // this.$store.dispatch('newKitchen', this.form).then(res => {
 						this.loading = false
-						if (res.code == 0) {
+						if (res.data.code == 0) {
 							this.$refs[name].resetFields();
 							this.$Notice.success({
 								title: '成功',

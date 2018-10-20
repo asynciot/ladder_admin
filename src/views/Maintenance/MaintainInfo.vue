@@ -1,18 +1,18 @@
 <template lang="jade">
 div.layout-content-main
 	div.form
-		Form(ref='form',:model="query",label-position="left",:label-width="100")
-			Row(:gutter="16")
+		Form(ref='form',:model="query",label-position="left",:label-width="72")
+			Row(:gutter="20")
 				Col(span="6")
-					Form-item(label="单位名称：")
-						Input(v-model="query.name",placeholder="请输入安装单位名")
+					Form-item(label="工单编号：")
+						Input(v-model="query.id",placeholder="请输入工单编号")
 				Col(span="6")
-					Form-item(label="手机号码：")
-						Input(v-model="query.mobile",placeholder="请输入手机号码")
+					Form-item(label="电梯型号：",)
+						Input(v-model="query.deviceid",placeholder="请输入电梯型号")
 				Col(span="6")
 					Button.mr-10(type="primary",icon="search",:loading="loading",@click="options.page=1,search()")|搜索
 					router-link.mr-10(:to="{ name: 'maintainContractorNew'}")
-						Button(type="success",icon="plus",:loading="loading")|添加安装单位
+						Button(type="success",icon="plus",:loading="loading")|添加工单
 	Table(:loading="loading",:stripe="true",:columns="column",:data="list",stripe)
 </template>
 
@@ -30,30 +30,25 @@ export default {
 			},
 			column: [
 				{
-					title: '单位名称',
-					key: 'name',
+					title: '工单编号',
+					key: 'id',
 				},
 				{
-					title: '单位编号',
-					key: 'id',
+					title: '型号',
+					key: 'deviceid',
 				},
 				{
 					title: '详细地址',
 					key: 'address',
 				},
 				{
-					title: '电梯数',
-					key: 'nicname',
+					title: '错误码',
+					key: '',
 				},
 				{
-					title: '联系方式',
-					key: 'mobile',
+					title: '创建时间',
+					key: 'time',
 				},
-// 				{
-// 					title: '维保班组',
-// 					key: 'groupName',
-// 				},
-
 				{
 					title: '操作',
 					key: 'companyName',

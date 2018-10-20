@@ -4,21 +4,23 @@ div.layout-content-main
 </template>
 
 <script>
-	import unit from './Maintain/Unit'
-	import site from './Maintain/Site'
-	import group from './Maintain/Group'
-	import member from './Maintain/Member'
+import followlist from "./Info/FollowList"
+import userinfo from "./Info/UserInfo"
+import upkeeplist from "./Info/UpkeepList"
+import maintainlist from "./Info/MaintainList"
+import assesslist from "./Info/AssessList"
 export default {
 	data() {
 		return {
-			currentTab: 'unit'
+			currentTab: 'userinfo'
 		};	
 	},
 	components: { 
-		unit,
-		site,
-		group,
-		member
+		userinfo,
+		followlist,
+		maintainlist,
+		upkeeplist,
+		assesslist,
  },
  watch: {
 		'currentTab':function(val){

@@ -1,19 +1,24 @@
 <template lang="jade">
-div.layout-content-main
-	div.form
-		Form(ref='form',:model="query",label-position="left",:label-width="100")
-			Row(:gutter="16")
-				Col(span="6")
-					Form-item(label="姓名：")
-						Input(v-model="query.name",placeholder="请输入姓名")
-				Col(span="6")
-					Form-item(label="手机号码：")
-						Input(v-model="query.mobile",placeholder="请输入手机号码")
-				Col(span="6")
-					Button.mr-10(type="primary",icon="search",:loading="loading",@click="options.page=1,search()")|搜索
-					router-link(:to="{ name: 'maintainMemberNew'}")
-						Button.mr-10(type="success",icon="plus",:loading="loading")|添加人员
+div.layout-content-main 	
+	Tabs(value="name1",:animated="false",@on-click="Onchange" )
+		TabPane(label="维保单位",name="Unit")		
+		TabPane(label="维保站点",name="Site")		
+		TabPane(label="维保群组",name="Group")			
+		TabPane(label="维保人员",name="Member")
+	Form(ref='form',:model="query",label-position="left",:label-width="120")
+		Row(:gutter="12")
+			Col(span="6")
+				Form-item(label="电梯工号：")
+					Input(v-model="query.name",placeholder="请输入电梯工号")
+			Col(span="6")
+				Form-item(label="具体位置别名：")
+					Input(v-model="query.maintenanceCompanyName",placeholder="请输入具体位置别名")
+			Col(span="6")
+				Button.mr-10(type="primary",icon="search",:loading="loading",@click="options.page=1,search()")|搜索
+				router-link(:to="{ name: 'maintainSiteNew'}")
+					Button.mr-10(type="success",icon="plus",:loading="loading")|添加维保站点				
 	Table(:loading="loading",:stripe="true",:columns="column",:data="list",stripe)
+	<Page style="padding-right: 38%;" class="pagination" show-elevator :total="options.total" :page-size="options.num" :current="options.page" @on-change="pageChange" show-total></Page>
 </template>
 
 <script>
@@ -23,33 +28,34 @@ export default {
 			loading: true,
 			query: {
 				username: '',
-				mobile: '',
-				name: ''
+				maintenanceCompanyName: '',
+				nicname: '',
+				mobile:'',
 			},
 			column: [
+// 				{
+// 					title: '人员账号',
+// 					key: 'username',
+// 				},
 				{
-					title: '人员账号',
-					key: 'username',
-				},
-				{
-					title: '人员姓名',
+					title: '维保站点名称',
 					key: 'name',
 				},
 				{
-					title: '手机号码',
+					title: '负责人',
+					key: 'contactor',
+				},
+				{
+					title: '联系方式',
 					key: 'mobile',
 				},
 				{
-					title: '维保班组',
-					key: 'groupName',
-				},
-				{
-					title: '维保站点',
-					key: 'siteName',
-				},
-				{
 					title: '维保单位',
-					key: 'companyName',
+					key: 'maintenanceCompanyName',
+				},
+				{
+					title: '详细地址',
+					key: 'address',
 				},
 				{
 					title: '操作',
@@ -87,12 +93,12 @@ export default {
 								},
 								on: {
 									click: () => {
-										// this.$router.push({
-										// 	name: 'editMaterial',
-										// 	params: {
-										// 		id: params.row.id
-										// 	}
-										// })
+										this.$router.push({
+											name: 'editSite',
+											params: {
+												id: params.row.id
+											}
+										})
 									}
 								}
 							}, '编辑'),
@@ -121,7 +127,9 @@ export default {
 			],
 			list: [],
 			options: {
-				name:'',
+				ladderNumber:'',
+				alias:'',
+				address:'',
 				page: 1,
 				num: 15,
 				total: 0
@@ -133,7 +141,7 @@ export default {
 	},
 	methods: {
 		async deleteRow(params) {		
-				let res = await this.$api.removePeople({id:params.row.id})
+				let res = await this.$api.reomveSite({id:params.row.id})
 				this.$emit('on-custom-comp');
 				if (0 === res.data.code) {
 					this.$Message.info('操作成功');
@@ -147,7 +155,7 @@ export default {
 		},
 		async getList() {
 			this.loading = true
-			let res = await this.$api.people(this.options)
+			let res = await this.$api.site(this.options)
 			this.loading = false
 			if (0 === res.data.code) {
 				this.list = res.data.data.list
@@ -156,13 +164,18 @@ export default {
 		},
 		async search() {
 			this.loading = true
-			let res = await this.$api.people(this.query)
+			let res = await this.$api.site(this.query)
 			this.loading = false
 			if (0 === res.data.code) {
 				this.list = res.data.data.list
 				this.options.total = res.data.data.totalNumber
 			}
-		}		
+		},
+		Onchange: function(val) {
+			this.$router.push({
+				name: 'maintain'+val,
+			})
+		}
 	}
 }
 </script>
