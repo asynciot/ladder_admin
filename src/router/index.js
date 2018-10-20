@@ -58,13 +58,13 @@ export default new Router({
 			meta:{name:'登录'},
       component: Login
     },{
-      path: '/home',
+      path: '/',
       name: 'home',
 			meta:{name:'首页'},
       component: Home,
       children: [
 				{
-					path: '/',
+					path: '/home',
 					name: 'index',
 					meta:{name:'主页'},
 					component: Index

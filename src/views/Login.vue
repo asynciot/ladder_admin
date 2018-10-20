@@ -68,7 +68,7 @@ export default {
               duration: 0.5,
               onClose: () => {
 								this.$router.push({
-									name: 'home'
+									name: 'index'
 								})
               }
             })

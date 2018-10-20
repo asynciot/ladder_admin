@@ -1,7 +1,7 @@
 <template lang="jade">
 div.layout-content-main
 	div.form
-		Row(:gutter="40" style="padding-bottom:20px")
+		Row(:gutter="30" style="padding-bottom:5%")
 			Col(span="12")
 				Card()
 					div(class="box-header with-border" align="center")今日新增故障电梯
@@ -10,7 +10,7 @@ div.layout-content-main
 				Card()
 					div(class="box-header" align="center" )|故障中电梯数量：{{info.count}}
 						Table(:stripe="true",:columns="column",:data="list",stripe)
-		Row(:gutter="40")
+		Row(:gutter="30" style="padding-bottom:5%")
 			Col(span="12")
 				Card()
 					div(class="box-header with-border" align="center")今日维修电梯数量：{{info.count}}
@@ -19,7 +19,7 @@ div.layout-content-main
 				Card()
 					div(class="box-header" align="center" )|历史维修电梯总数：{{info.count}}
 						Table(:stripe="true",:columns="column",:data="list",stripe)
-		Row(:gutter="40")
+		Row(:gutter="30" style="padding-bottom:5%")
 			Col(span="12")
 				Card()
 					div(class="box-header with-border" align="center")过期维保电梯
@@ -28,7 +28,7 @@ div.layout-content-main
 				Card()
 					div(class="box-header" align="center" )|维保即将到期电梯
 						Table(:stripe="true",:columns="column",:data="list",stripe)
-		Row(:gutter="40")
+		Row(:gutter="30" style="padding-bottom:5%")
 			Col(span="12")
 				Card()
 					div(class="box-header with-border" align="center")过期未检电梯
