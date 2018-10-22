@@ -1,11 +1,11 @@
 <template lang="jade">
 div.layout-content-main
 	Tabs(value="name1",:animated="false",@on-click="Onchange")
-		TabPane(label="基本信息",name="userinfo")		
-		TabPane(label="我的关注",name="followlist")
-		TabPane(label="我的维修",name="maintainlist")
-		TabPane(label="我的保养",name="upkeeplist")				
-		TabPane(label="我的评估",name="assesslist")
+		TabPane(label="基本信息",name="userInfo")		
+		TabPane(label="我的关注",name="followList")
+		TabPane(label="我的维修",name="maintainList")
+		TabPane(label="我的保养",name="upkeepList")				
+		TabPane(label="我的评估",name="assessList")
 	div.form(padding-top="100")
 		Form(ref='form',:model="query",label-position="left",:label-width="100")
 			Row(:gutter="12")

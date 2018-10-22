@@ -4,23 +4,19 @@ div.layout-content-main
 </template>
 
 <script>
-import followList from "./Info/FollowList"
-import userInfo from "./Info/UserInfo"
-import upkeepList from "./Info/UpkeepList"
-import maintainList from "./Info/MaintainList"
-import assessList from "./Info/AssessList"
+	import assessReport from './Report'
+	import assessPrint from './Print'
+	import assessHistory from './History'
 export default {
 	data() {
 		return {
-			currentTab: 'userInfo'
+			currentTab: 'assessHistory'
 		};	
 	},
 	components: { 
-		userInfo,
-		followList,
-		maintainList,
-		upkeepList,
-		assessList,
+		assessHistory,
+		assessPrint,
+		assessReport,
  },
  watch: {
 		'currentTab':function(val){

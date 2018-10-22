@@ -1,4 +1,4 @@
-export const ladderApi = (process.env.NODE_ENV === 'production') ? 'http://localhost:9000' : 'http://localhost:9000'
+export const ladderApi = (process.env.NODE_ENV === 'production') ? 'http://ladder.asynciot.com' : 'http://ladder.asynciot.com'
 export const api = (process.env.NODE_ENV === 'production') ? 'http://ladder.asynciot.com:9000' : 'http://ladder.asynciot.com:9000'
 export const formatDate=(time, format)=> {
 	if (!time) {

@@ -5,8 +5,8 @@ Vue.use(VueResource)
 
 // HTTP相关
 let API_ROOT = (process.env.NODE_ENV == 'production')
-			? 'http://localhost:9000'
-			:'http://localhost:9000'
+			? 'http://ladder.asynciot.com'
+			:'http://ladder.asynciot.com'
 Vue.http.options.root = API_ROOT
 Vue.http.options.crossOrigin = true;
 Vue.http.options.credentials = true ;

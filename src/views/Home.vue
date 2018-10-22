@@ -4,7 +4,7 @@
 			<Sider  hide-trigger collapsible :collapsed-width="78" v-model="isCollapsed" >
 				<Menu :class="menuitemClasses" theme="dark" width="auto" @on-select="go" :active-name="active">
 					<div class="layout-logo-left"  v-on:click="gethome()">
-						菜单 
+						首页 
 					</div>
 					<template v-for="item in menu" v-if="!item.sub" >
 						<Menu-item :key="item.name" :name="item.name" >
@@ -134,15 +134,15 @@
 								label: '故障信息',
 							},
 							{
-								name: 'maintaininfo',
+								name: 'maintainInfo',
 								label: '维修信息',
 							},
 							{
-								name: 'upkeepinfo',
+								name: 'upkeepInfo',
 								label: '保养信息',
 							},
 							{
-								name: 'faultrank',
+								name: 'faultRank',
 								label: '故障等级',
 							}
 						],
@@ -176,15 +176,15 @@
 								label: '设备信息',
 							},
 							{
-								name: 'assess',
+								name: 'assessIndex',
 								label: '评估管理',
 							},
 							{
-								name: 'settingindex',
+								name: 'settingIndex',
 								label: '出厂设置',
 							},
 							{
-								name: 'check',
+								name: 'checkIndex',
 								label: '检验记录',
 							}
 						],
@@ -194,7 +194,7 @@
 						icon: 'ios-settings',
 						label: '系统管理',
 						sub: [{
-								name: 'usermanage',
+								name: 'userManage',
 								label: '用户管理',
 							},
 							{
@@ -247,7 +247,7 @@
 					case 4:
 						let resp = await this.$api.user({})
 						this.$router.push({
-							name: 'userinfo'
+							name: 'userInfo'
 						})
 				}
 			},

@@ -1,9 +1,9 @@
 <template lang="jade">
 div.layout-content-main
 	Tabs(value="name1",:animated="false",@on-click="Onchange")
-		TabPane(label="历史记录",name="assess")		
-		TabPane(label="打印工单",name="assess")
-		TabPane(label="评估报告",name="assess")
+		TabPane(label="历史记录",name="checkHistory")		
+		TabPane(label="打印工单",name="checkPrint")
+		TabPane(label="评估报告",name="checkReport")
 	div.form(padding-top="100")
 		Form(ref='form',:model="query",label-position="left",:label-width="100")
 			Row(:gutter="12")

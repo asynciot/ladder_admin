@@ -36,12 +36,18 @@ const UseDepDetail = resolve => require(['@/views/Doc/UseDepDetail'], resolve)
 const Property = resolve => require(['@/views/Doc/Property'], resolve)
 const PropertyDetail = resolve => require(['@/views/Doc/PropertyDetail'], resolve)
 
-const File = resolve => require(['@/views/Event/File'], resolve)
-const Assess = resolve => require(['@/views/Event/Assess'], resolve)
+const FileIndex = resolve => require(['@/views/Event/File/Index'], resolve)
+const AssessIndex = resolve => require(['@/views/Event/Assess/Index'], resolve)
+const AssessHistory = resolve => require(['@/views/Event/Assess/History'], resolve)
+const AssessPrint = resolve => require(['@/views/Event/Assess/Print'], resolve)
+const AssessReport = resolve => require(['@/views/Event/Assess/Report'], resolve)
 const SettingIndex = resolve => require(['@/views/Event/Setting/Index'], resolve)
 const Setting = resolve => require(['@/views/Event/Setting/Setting'], resolve)
 const Print = resolve => require(['@/views/Event/Setting/Print'], resolve)
-const Check = resolve => require(['@/views/Event/Check'], resolve)
+const CheckIndex = resolve => require(['@/views/Event/Check/Index'], resolve)
+const CheckHistory = resolve => require(['@/views/Event/Check/History'], resolve)
+const CheckPrint = resolve => require(['@/views/Event/Check/Print'], resolve)
+const CheckReport = resolve => require(['@/views/Event/Check/Report'], resolve)
 
 const UserManage = resolve => require(['@/views/System/UserManage'], resolve)
 const Inform = resolve => require(['@/views/System/Inform'], resolve)
@@ -77,27 +83,27 @@ export default new Router({
 					component: User,
 				},{
 					path:'/user/info',
-					name: 'userinfo',
+					name: 'userInfo',
 					meta:{name:'个人信息'},
 					component: UserInfo
 				},{
 					path:'/user/followlist',
-					name: 'followlist',
+					name: 'followList',
 					meta:{name:'关注列表'},
 					component: FollowList
 				},{
 					path:'/user/maintainlist',
-					name: 'maintainlist',
+					name: 'maintainList',
 					meta:{name:'维修列表'},
 					component: MaintainList
 				},{
 					path:'/user/upkeeplist',
-					name: 'upkeeplist',
+					name: 'upkeepList',
 					meta:{name:'保养列表'},
 					component: UpkeepList
 				},{
 					path:'/user/assesslist',
-					name: 'assesslist',
+					name: 'assessList',
 					meta:{name:'评估列表'},
 					component: AssessList
 				},
@@ -127,17 +133,17 @@ export default new Router({
 					component: Fault
 				},{
 					path: '/doc/maintain/maintaininfo',
-					name: 'maintaininfo',
+					name: 'maintainInfo',
 					meta:{name:'维修信息'},
 					component: MaintainInfo
 				},{
 					path: '/doc/maintain/upkeepinfo',
-					name: 'upkeepinfo',
+					name: 'upkeepInfo',
 					meta:{name:'保养信息'},
 					component: UpkeepInfo
 				},{
 					path: '/doc/maintain/faultrank',
-					name: 'faultrank',
+					name: 'faultRank',
 					meta:{name:'故障等级'},
 					component: FaultRank
 				},												
@@ -255,15 +261,30 @@ export default new Router({
 					path: '/evnet/file',
 					name: 'elevatorFiles',
 					meta:{name:'电梯档案'},
-					component: File
+					component: FileIndex
 				},{
 					path: '/evnet/assess',
-					name: 'assess',
+					name: 'assessIndex',
 					meta:{name:'评估管理'},
-					component: Assess
+					component: AssessIndex
+				},{
+					path: '/evnet/assess/history',
+					name: 'assessHistory',
+					meta:{name:'历史记录'},
+					component: AssessHistory
+				},{
+					path: '/evnet/assess/print',
+					name: 'assessPrint',
+					meta:{name:'打印工单'},
+					component: AssessPrint
+				},{
+					path: '/evnet/assess/report',
+					name: 'assessReport',
+					meta:{name:'评估报告'},
+					component: AssessReport
 				},{
 					path: '/evnet/setting',
-					name: 'settingindex',
+					name: 'settingIndex',
 					meta:{name:'出厂设置'},
 					component: SettingIndex
 				},{
@@ -278,14 +299,29 @@ export default new Router({
 					component: Print
 				},{
 					path: '/evnet/check',
-					name: 'check',
+					name: 'checkIndex',
 					meta:{name:'检验记录'},
-					component: Check
+					component: CheckIndex
+				},{
+					path: '/evnet/check/history',
+					name: 'checkHistory',
+					meta:{name:'历史记录'},
+					component: CheckHistory
+				},{
+					path: '/evnet/check/print',
+					name: 'checkPrint',
+					meta:{name:'打印工单'},
+					component: CheckPrint
+				},{
+					path: '/evnet/check/report',
+					name: 'checkReport',
+					meta:{name:'评估报告'},
+					component: CheckReport
 				},
 				//系统管理
 				{
 					path: '/system/usermanage',
-					name: 'usermanage',
+					name: 'userManage',
 					meta:{name:'用户管理'},
 					component: UserManage
 				},{
