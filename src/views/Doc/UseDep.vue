@@ -151,7 +151,6 @@ export default {
 		async getList() {
 			this.loading = true
 			let res = await this.$api.company(this.options)
-			console.log(res)
 			this.loading = false
 			if (0 === res.data.code) {
 				this.list = res.data.data.list

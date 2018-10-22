@@ -6,6 +6,7 @@ div.layout-content-main
 	div.form(padding-top="100")
 	<Table class="mb-10" :columns="columns" :data="data" ></Table>
 	<Page style="padding-right: 38%;" class="pagination" show-elevator :total="options.total" :page-size="options.num" :current="options.page" @on-change="pageChange" show-total></Page>
+	<div id="capture"></div>
 	div(id="printer")
 		<img :src="dataUrl">
 		<p v-text="id"></p>
@@ -14,6 +15,7 @@ div.layout-content-main
 
 <script>
 	// import html2canvas from 'html2canvas'
+	import QRCode from 'qrcodejs2'
 	export default {
 		data() {
 			const type = {
@@ -86,10 +88,8 @@ div.layout-content-main
 			},
 			async getList() {
 				this.loading = true
-				let res = await this.$http.get(
-					`${window.location.origin}/devices?page=${this.options.page}&num=${this.options.num}`)
+				let res = await this.$http.get(`http://ladder.asynciot.com:9004/devices?page=${this.options.page}&num=${this.options.num}`)
 				this.loading = false
-
 				if (res.data.code === 0) {
 					this.data = res.data.data.list
 					this.options.total = res.data.data.totalNumber

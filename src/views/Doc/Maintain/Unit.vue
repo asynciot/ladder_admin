@@ -19,7 +19,7 @@ div.layout-content-main
 				router-link.mr-10(:to="{ name: 'maintainUnitNew'}")
 					Button(type="success",icon="plus",:loading="loading")|添加维保单位					
 	Table(:loading="loading",:stripe="true",:columns="column",:data="list",stripe)
-	<Page style="padding-right: 38%;" class="pagination" show-elevator :total="options.total" :page-size="options.num" :current="options.page" @on-change="pageChange" show-total></Page>
+	Page(style="padding-right: 38%;" class="pagination" show-elevator :total="options.total" ,:page-size="options.num" ,:current="options.page" ,@on-change="pageChange()" show-total )
 </template>
 
 <script>

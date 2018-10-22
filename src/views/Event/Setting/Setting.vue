@@ -5,7 +5,7 @@ div.layout-content-main
 		TabPane(label="打印",name="print")
 	div.form(padding-top="100")
 	<Table class="mb-10" :columns="columns" :data="data" ></Table>
-	<Page style="padding-right: 38%;" class="pagination" show-elevator :total="options.total" :page-size="options.num" :current="options.page" @on-change="pageChange" show-total></Page>
+	Page(style="padding-right: 38%;" class="pagination" show-elevator :total="options.total" ,:page-size="options.num" ,:current="options.page" ,@on-change="pageChange" show-total)
 </Row>
 </template>
 
@@ -129,7 +129,7 @@ export default {
     async getList() {
       this.loading = true
 
-      let res = await this.$http.get(`${window.location.origin}/devices?page=${this.options.page}&num=${this.options.num}`)
+      let res = await this.$http.get(`http://ladder.asynciot.com:9005/devices?page=${this.options.page}&num=${this.options.num}`)
       this.loading = false
 
       if (res.data.code === 0) {
@@ -143,7 +143,7 @@ export default {
       }
     },
     async burn(item) {
-      let res = await this.$http.put(`${window.location.origin}/devices?id=${item.id}`, {
+      let res = await this.$http.put(`${window.location.origin}:9005/devices?id=${item.id}`, {
         id: item.id
       })
       if (res.data.code === 0) {
@@ -170,7 +170,7 @@ export default {
       }, 5000)
     },
     async clear(item) {
-      let res = await this.$http.put(`${window.location.origin}/devices/reset?id=${item.id}`, {
+      let res = await this.$http.put(`http://ladder.asynciot.com:9005/devices/reset?id=${item.id}`, {
         id: item.id
       })
       if (res.data.code === 0) {

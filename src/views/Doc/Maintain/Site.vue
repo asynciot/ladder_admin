@@ -18,7 +18,7 @@ div.layout-content-main
 				router-link(:to="{ name: 'maintainSiteNew'}")
 					Button.mr-10(type="success",icon="plus",:loading="loading")|添加维保站点				
 	Table(:loading="loading",:stripe="true",:columns="column",:data="list",stripe)
-	<Page style="padding-right: 38%;" class="pagination" show-elevator :total="options.total" :page-size="options.num" :current="options.page" @on-change="pageChange" show-total></Page>
+	Page(style="padding-right: 38%;" class="pagination" show-elevator :total="options.total" ,:page-size="options.num" ,:current="options.page" ,@on-change="pageChange()" show-total )
 </template>
 
 <script>
