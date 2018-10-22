@@ -103,9 +103,7 @@ export default {
 		async getData(){
 			//let res = await this.$api.company(this.options)
 			let res = await this.$api.company({ id: this.$route.params.id})
-			console.log(res)
-			this.form = res.data.data.list[0]
-			
+			this.form = res.data.data.list[0]			
 		},
 		create(name) {
 			this.loading = true

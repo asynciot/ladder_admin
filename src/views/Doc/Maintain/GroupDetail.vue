@@ -63,12 +63,6 @@ export default {
 					message: '请填写维保站点',
 					trigger: 'blur'
 				}],
-				maintenanceCompanyName: [{
-					required: false,
-					type: 'string',
-					message: '请填写维保单位',
-					trigger: 'blur'
-				}],
 			},
 		}
 	},
@@ -89,15 +83,17 @@ export default {
 			this.$api.site({page: 1,num: 100}).then(res => {
 					this.siteList = res.data.data.list
 			})
-			this.$api.company({type: 2,page: 1,num: 100}).then(res => {
-				this.maintenanceList = res.data.data.list
-			})
 		},
 		submit(name) {
 			this.loading = true
 			this.$refs[name].validate(async(valid) => {
 				if (valid) {
-					let res = await this.$api.addTeam(this.form)
+					let res = null
+					if(this.$route.params.id) {
+						res = await this.$api.updateTeam(this.form)
+					} else {
+						res = await this.$api.addTeam(this.form)
+					}	
 					this.loading = false
 					if (res.data.code == 0) {
 					  this.$refs[name].resetFields();

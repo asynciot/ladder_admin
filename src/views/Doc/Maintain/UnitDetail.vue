@@ -108,7 +108,12 @@ export default {
 			this.loading = true
 			this.$refs[name].validate(async (valid) => {
 				if (valid) {
-					let res = await this.$api.addCompany(this.form)
+					let res = null
+					if(this.$route.params.id){
+						res = await this.$api.updateCompany(this.form)
+					}else {
+						res = await this.$api.addCompany(this.form)
+					}
 					this.loading = false
 					if (res.data.code == 0) {
 						this.$refs[name].resetFields();

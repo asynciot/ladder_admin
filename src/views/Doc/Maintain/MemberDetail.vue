@@ -18,8 +18,10 @@ div.layout-content-main
 					Input(type="password",v-model="form.password",placeholder="请输入密码")
 				Form-item(label="重复密码",prop="password")
 					Input(type="password",v-model="form.confirm",placeholder="请重复输入")
-				Form-item(label="维保群组",prop="groupName")
-					Cascader(:data="groupName",:load-data="loadGroup")
+				Form-item(label="维保群组",prop="groupId")
+					<!-- Cascader(:data="groupId",:load-data="loadGroup") -->
+					Select(placeholder="请选择",v-model="form.groupId" )
+						Option(v-for="item in groupList",:key="item.id",:value="item.id" v-text="item.name")|{{item.value}}
 				Form-item.tc
 					Button.mr-10(icon="close",@click="reset('form')")|取消
 					Button(type="success",icon="plus",@click="create('form')",:loading="loading")|创建
@@ -39,6 +41,7 @@ export default {
 		};
 		return {
 			loading: false,
+			groupList:[],
 			groupName: [{
 				value: '1',
 				label: '默认单位',
@@ -90,33 +93,52 @@ export default {
 					required: true,
 					trigger: 'blur'
 				}],
+				groupId: [{
+					required: true,
+					type: 'string',
+					message: '请选择维保群组',
+					trigger: 'blur'
+				}],
 			},
 		}
 	},
+	created(){
+		if(this.$route.params.id){
+			this.getData()
+		}
+		this.getOption()
+	},
 	methods: {
-		async loadGroup(item, callback) {
-			item.loading = true
-			setTimeout(() => {
-				item.children = [{
-					value: '2',
-					label: '默认群组'
-				}]
-				item.loading = false
-				callback();
-			}, 1000)
-		},
+// 		async loadGroup(item, callback) {
+// 			item.loading = true
+// 			setTimeout(() => {
+// 				item.children = [{
+// 					value: '2',
+// 					label: '默认群组'
+// 				}]
+// 				item.loading = false
+// 				callback();
+// 			}, 1000)
+// 		},
 		async getData() {
 			let res = await this.$api.people({
 				id: this.$route.params.id
 			})
 			this.form = res.data.data.list[0]
 		},
+		getOption() {
+			this.$api.team({
+				page: 1,
+				num: 100
+			}).then(res => {
+				this.groupList = res.data.data.list
+			})
+		},
 		create(name) {
 			this.loading = true
 			this.$refs[name].validate(async(valid) => {
 				if(valid) {
 					let res = null
-					// let res = await this.$api.register(this.form)
 					if(this.$route.params.id) {
 						res = await this.$api.update(this.form)
 					} else {

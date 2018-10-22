@@ -5,6 +5,11 @@ div.layout-content-main
 			Col(span="10",offset="2")
 				Form-item(label="维保站点名称",prop="name")
 					Input(v-model="form.name",placeholder="请输入维保站点名称")
+				Form-item(label="维保单位",prop="id",data-toggle="distpicker")
+					Row(:gutter="18")
+						Col(span="6" style="padding-right:5px")
+							Select(placeholder="请选择",v-model="form.maintenanceCompanyId" )
+								Option(v-for="item in maintenanceList",:key="item.id",:value="item.id" v-text="item.name")|{{item.value}}
 				Form-item(label="负责人",prop="contactor")
 					Input(v-model="form.contactor",placeholder="请输入班组负责人")
 				Form-item(label="负责人电话",prop="mobile")
@@ -24,12 +29,13 @@ export default {
 	data() {
 		return {
 			loading:false,
+			maintenanceList:[],
 			form: {
 				name: '',
 				contactor:'',
 				mobile: '',
 				address:'',
-				maintenanceCompanyName:''
+				maintenanceCompanyId:''
 			},			
 			rules: {
 				name: [{
@@ -57,15 +63,20 @@ export default {
 					message: '请填写详细地址',
 					trigger: 'blur'
 				}],
-				maintenanceCompanyName: [{
+				maintenanceCompanyId: [{
 					required: false,
 					type: 'string',
 					message: '请选择维保单位',
 					trigger: 'blur'
 				}],
 			},
-			maintenanceList:[]
 		}
+	},
+	created(){
+		if(this.$route.params.id){
+			this.getData()
+		}
+		this.getOption()
 	},
 	methods: {
 		async getData() {
@@ -75,14 +86,8 @@ export default {
 			this.form = res.data.data.list[0]
 		},
 		getOption() {
-			this.$api.site({
-				page: 1,
-				num: 100
-			}).then(res => {
-				this.siteList = res.data.data.list
-			})
 			this.$api.company({
-				type: 2,
+				type: 1,
 				page: 1,
 				num: 100
 			}).then(res => {
